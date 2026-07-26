@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Community Book Sharing & Impact Portal</title>
+  <title>ReBook Community | Pass the Book, Not the Trash</title>
   <style>
     :root {
       --primary: #2d6a4f;
@@ -16,6 +16,8 @@
       --border-color: #e9ecef;
       --badge-available: #2a9d8f;
       --badge-circulating: #e76f51;
+      --genz-purple: #6c5ce7;
+      --genz-bg: #f3f0ff;
     }
 
     * {
@@ -62,22 +64,94 @@
       font-style: italic;
     }
 
-    /* CONTAINER & HEADINGS */
+    /* MAIN CONTAINER */
     .container {
       max-width: 1050px;
       margin: 2rem auto 0 auto;
       padding: 0 1.5rem;
     }
 
+    /* HERO & GEN Z ETHOS SECTION */
+    .hero-banner {
+      background-color: var(--genz-bg);
+      border: 2px solid #dcd6f7;
+      border-radius: 16px;
+      padding: 2.5rem 2rem;
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-banner .tagline {
+      display: inline-block;
+      background-color: var(--genz-purple);
+      color: #ffffff;
+      font-size: 0.85rem;
+      font-weight: 800;
+      padding: 0.35rem 1rem;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 1rem;
+    }
+
+    .hero-banner h1 {
+      font-size: 2.2rem;
+      color: #2d3436;
+      font-weight: 900;
+      margin-bottom: 0.75rem;
+    }
+
+    .hero-banner p {
+      font-size: 1.1rem;
+      color: #4a4a4a;
+      max-width: 750px;
+      margin: 0 auto 1.5rem auto;
+    }
+
+    .hero-actions {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s ease;
+    }
+
+    .btn-primary {
+      background-color: var(--primary);
+      color: #ffffff;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-hover);
+    }
+
+    .btn-secondary {
+      background-color: #ffffff;
+      color: var(--genz-purple);
+      border: 1.5px solid var(--genz-purple);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--genz-purple);
+      color: #ffffff;
+    }
+
+    /* SECTION HEADINGS */
     .section-title {
       font-size: 1.6rem;
       color: var(--primary);
       margin-bottom: 0.5rem;
       margin-top: 2.5rem;
-    }
-
-    .section-title:first-of-type {
-      margin-top: 1rem;
     }
 
     .section-desc {
@@ -168,7 +242,7 @@
     .progress-bar-fill {
       background-color: var(--accent);
       height: 100%;
-      width: 0%; /* Initial state for 0 / 25 goal */
+      width: 16%; /* Illustrative progress toward goal */
       transition: width 0.4s ease;
     }
 
@@ -266,7 +340,36 @@
       font-weight: 600;
     }
 
-    /* 5. CIRCULATED ACTIVITY LOG TABLE */
+    /* 5. COMMUNITY PRINCIPLES / MANIFESTO */
+    .manifesto-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .manifesto-card {
+      background-color: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.5rem;
+    }
+
+    .manifesto-card h3 {
+      color: var(--primary);
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .manifesto-card p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    /* 6. CIRCULATED ACTIVITY LOG TABLE */
     .table-container {
       background-color: var(--card-bg);
       border: 1px solid var(--border-color);
@@ -297,7 +400,7 @@
       border-bottom: none;
     }
 
-    /* 6. GREEN CANOPY UN SDG CALLOUT */
+    /* 7. GREEN CANOPY UN SDG CALLOUT */
     .sdg-card {
       background-color: #ffffff;
       border-left: 5px solid var(--accent);
@@ -334,8 +437,21 @@
 
   <div class="container">
     
+    <!-- GEN Z HERO BANNER & ETHOS -->
+    <div class="hero-banner">
+      <span class="tagline">♻️ PASS THE BOOK, NOT THE TRASH</span>
+      <h1>Read. Reuse. Reforest.</h1>
+      <p>
+        Physical books shouldn't sit gathering dust on shelves or end up in landfills. Join our peer-to-peer circulation movement—rehome your read books, discover new stories, and plant trees as a community.
+      </p>
+      <div class="hero-actions">
+        <a href="#shelf" class="btn btn-primary">Explore Community Bookshelf</a>
+        <a href="#principles" class="btn btn-secondary">How ReBook Works</a>
+      </div>
+    </div>
+
     <!-- SECTION 1: IMPACT METRICS DASHBOARD -->
-    <h1 class="section-title">Community & Environmental Impact Dashboard</h1>
+    <h2 class="section-title">Community & Environmental Impact Dashboard</h2>
     <p class="section-desc">Track our real-time community engagement, book sharing activity, and environmental goals at a glance.</p>
 
     <div class="metrics-grid">
@@ -372,7 +488,7 @@
       <div class="metric-card">
         <div>
           <div class="metric-header"><span>🌳</span> Trees Planted Goal</div>
-          <div class="metric-value">0 <span style="font-size: 1rem; color: #6c757d;">/ 25</span></div>
+          <div class="metric-value">4 <span style="font-size: 1rem; color: #6c757d;">/ 25</span></div>
         </div>
         <div class="metric-context">
           Reforestation progress based on community reading milestones (1 tree per 1,000 pages read).
@@ -384,18 +500,39 @@
     <div class="goal-card">
       <div class="goal-header">
         <span class="goal-title">🌱 Target Goal: Plant 25 Community Trees</span>
-        <span class="goal-stats">0 of 25 Trees Planted (0%)</span>
+        <span class="goal-stats">4 of 25 Trees Planted (16%)</span>
       </div>
       <div class="progress-bar-bg">
-        <div class="progress-bar-fill" id="goal-progress"></div>
+        <div class="progress-bar-fill"></div>
       </div>
-      <p class="goal-note">Every 1,000 pages read and logged across our 4 community books funds 1 tree planted through verified reforestation partners.</p>
+      <p class="goal-note">Every 1,000 pages read and logged across our community books funds 1 tree planted through verified reforestation partners.</p>
     </div>
 
-    <!-- SECTION 3: COMMUNITY BOOKSHELF -->
-    <div class="shelf-controls">
+    <!-- SECTION 3: COMMUNITY PRINCIPLES -->
+    <h2 class="section-title" id="principles">Our Core Principles</h2>
+    <p class="section-desc">Simple guidelines that keep our book-sharing eco-system thriving.</p>
+
+    <div class="manifesto-grid">
+      <div class="manifesto-card">
+        <h3>📖 Keep Books Moving</h3>
+        <p>Once you finish reading a book, pass it along to a friend, drop it at a local hub, or list it back on the shelf within 30 days.</p>
+      </div>
+
+      <div class="manifesto-card">
+        <h3>🤝 Zero Obligation</h3>
+        <p>Borrowing, donating, or acknowledging our project is entirely optional. Explore and engage at whatever level feels right for you.</p>
+      </div>
+
+      <div class="manifesto-card">
+        <h3>🌍 Measurable Eco-Impact</h3>
+        <p>By reusing physical copies instead of buying single-use prints, we collectively reduce pulp production and save water.</p>
+      </div>
+    </div>
+
+    <!-- SECTION 4: COMMUNITY BOOKSHELF -->
+    <div class="shelf-controls" id="shelf">
       <div>
-        <h2 class="section-title" style="margin: 0;">Community Bookshelf Shelf</h2>
+        <h2 class="section-title" style="margin: 0;">Community Bookshelf</h2>
         <p class="section-desc" style="margin: 0;">Explore active titles currently in our community library.</p>
       </div>
       <div class="filter-buttons">
@@ -451,7 +588,7 @@
       </div>
     </div>
 
-    <!-- SECTION 4: RECENT CIRCULATION LOG -->
+    <!-- SECTION 5: RECENT CIRCULATION LOG -->
     <h2 class="section-title">Recent Circulation Activity</h2>
     <p class="section-desc">Live log of book handoffs and community exchanges.</p>
 
@@ -494,7 +631,7 @@
       </table>
     </div>
 
-    <!-- SECTION 5: GREEN CANOPY PROMISE (UN SDG ALIGNMENT) -->
+    <!-- SECTION 6: GREEN CANOPY PROMISE (UN SDG ALIGNMENT) -->
     <div class="sdg-card">
       <h3>🌿 The Green Canopy Promise</h3>
       <p>
