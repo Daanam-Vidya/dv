@@ -6,11 +6,11 @@
   <meta name="theme-color" content="#0d0f17">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <title>RE:READ — Community Portal & Digital Library</title>
+  <title>RE:READ Community Portal</title>
   
   <style>
     /* ==========================================================================
-       1. CSS VARIABLES & CORE DESIGN SYSTEM
+       1. CORE DESIGN SYSTEM & DARK MODE GLASSMORPHISM
        ========================================================================== */
     :root {
       --bg-dark: #0b0d14;
@@ -40,9 +40,7 @@
       --bottom-nav-height: 65px;
     }
 
-    /* ==========================================================================
-       2. BASE RESET & MOBILE APP FIXES
-       ========================================================================== */
+    /* Reset & Touch Optimizations */
     * {
       box-sizing: border-box;
       margin: 0;
@@ -78,24 +76,17 @@
       text-decoration: none;
     }
 
-    /* Custom Scrollbar */
+    /* Scrollbar */
     ::-webkit-scrollbar {
       width: 8px;
       height: 8px;
     }
-    ::-webkit-scrollbar-track {
-      background: var(--bg-dark);
-    }
-    ::-webkit-scrollbar-thumb {
-      background: rgba(255, 255, 255, 0.15);
-      border-radius: 4px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background: var(--accent-violet);
-    }
+    ::-webkit-scrollbar-track { background: var(--bg-dark); }
+    ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.15); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--accent-violet); }
 
     /* ==========================================================================
-       3. APP HEADER (STICKY BLUR HEADER)
+       2. APP HEADER & NAVIGATION BAR
        ========================================================================== */
     .app-header {
       position: fixed;
@@ -170,7 +161,7 @@
     }
 
     /* ==========================================================================
-       4. BUTTONS & UI COMPONENTS
+       3. BUTTONS & BADGES
        ========================================================================== */
     .btn {
       display: inline-flex;
@@ -185,6 +176,7 @@
       cursor: pointer;
       transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
       outline: none;
+      min-height: 44px; /* Touch target size */
     }
 
     .btn-primary {
@@ -198,9 +190,7 @@
       box-shadow: 0 6px 24px rgba(139, 92, 246, 0.5);
     }
 
-    .btn-primary:active {
-      transform: translateY(0);
-    }
+    .btn-primary:active { transform: translateY(0); }
 
     .btn-emerald {
       background: linear-gradient(135deg, var(--accent-emerald), #047857);
@@ -250,7 +240,7 @@
     }
 
     /* ==========================================================================
-       5. MAIN CONTAINER & BENTO GRID
+       4. CONTAINER & BENTO DASHBOARD GRID
        ========================================================================== */
     .container {
       max-width: 1240px;
@@ -283,7 +273,7 @@
       transform: translateY(-2px);
     }
 
-    /* Hero Bento Span */
+    /* Hero Bento Card */
     .hero-card {
       grid-column: span 8;
       display: flex;
@@ -325,24 +315,16 @@
       opacity: 0.85;
     }
 
-    /* Animated Floating Graphic */
-    .floating-book {
-      animation: float 6s ease-in-out infinite;
-    }
-    .orbit-ring {
-      transform-origin: center;
-      animation: spin 20s linear infinite;
-    }
+    .floating-book { animation: float 6s ease-in-out infinite; }
+    .orbit-ring { transform-origin: center; animation: spin 20s linear infinite; }
 
     @keyframes float {
       0%, 100% { transform: translateY(0) rotate(0deg); }
       50% { transform: translateY(-12px) rotate(2deg); }
     }
-    @keyframes spin {
-      100% { transform: rotate(360deg); }
-    }
+    @keyframes spin { 100% { transform: rotate(360deg); } }
 
-    /* Stats Bento Span */
+    /* Live Stats Card */
     .stats-card {
       grid-column: span 4;
       display: flex;
@@ -355,9 +337,7 @@
       padding: 16px 0;
       border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     }
-    .stat-box:last-child {
-      border-bottom: none;
-    }
+    .stat-box:last-child { border-bottom: none; }
 
     .stat-number {
       font-size: 2.25rem;
@@ -379,27 +359,19 @@
       font-weight: 600;
     }
 
-    /* SDG Goal Bento Card */
-    .sdg-card {
-      grid-column: span 4;
-      border-left: 4px solid var(--accent-emerald);
-    }
-
-    .impact-card {
-      grid-column: span 4;
-      border-left: 4px solid var(--accent-pink);
-    }
-
-    .action-card {
-      grid-column: span 4;
-      border-left: 4px solid var(--accent-violet);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+    /* SDG, Impact & Request Cards */
+    .sdg-card { grid-column: span 4; border-left: 4px solid var(--accent-emerald); }
+    .impact-card { grid-column: span 4; border-left: 4px solid var(--accent-pink); }
+    .action-card { 
+      grid-column: span 4; 
+      border-left: 4px solid var(--accent-violet); 
+      display: flex; 
+      flex-direction: column; 
+      justify-content: space-between; 
     }
 
     /* ==========================================================================
-       6. DIGITAL LIBRARY & CATALOG SECTION
+       5. DIGITAL LIBRARY CATALOG SECTION
        ========================================================================== */
     .section-header {
       display: flex;
@@ -520,7 +492,7 @@
     }
 
     /* ==========================================================================
-       7. LIVE CIRCULATION LOG TABLE
+       6. LIVE CIRCULATION LOG TABLE
        ========================================================================== */
     .log-container {
       background: var(--bg-card);
@@ -559,14 +531,8 @@
       color: var(--text-muted);
     }
 
-    .custom-table tr:last-child td {
-      border-bottom: none;
-    }
-
-    .custom-table tr:hover td {
-      background: rgba(255, 255, 255, 0.02);
-      color: var(--text-main);
-    }
+    .custom-table tr:last-child td { border-bottom: none; }
+    .custom-table tr:hover td { background: rgba(255, 255, 255, 0.02); color: var(--text-main); }
 
     .status-pill {
       display: inline-flex;
@@ -582,7 +548,7 @@
     .status-pending { background: rgba(245, 158, 11, 0.15); color: #fbbf24; }
 
     /* ==========================================================================
-       8. MOBILE APP BOTTOM TAB NAVIGATION
+       7. INCREMENTAL ENHANCEMENT: MOBILE APP BOTTOM TAB NAVIGATION BAR
        ========================================================================== */
     .bottom-tab-bar {
       display: none; /* Hidden on Desktop */
@@ -617,18 +583,11 @@
       justify-content: center;
     }
 
-    .tab-item.active {
-      color: var(--accent-violet);
-    }
-
-    .tab-item svg {
-      width: 22px;
-      height: 22px;
-      fill: currentColor;
-    }
+    .tab-item.active { color: var(--accent-violet); }
+    .tab-item svg { width: 22px; height: 22px; fill: currentColor; }
 
     /* ==========================================================================
-       9. UNIVERSAL EMAIL FORM MODAL (MOBILE & DESKTOP)
+       8. INCREMENTAL ENHANCEMENT: UNIVERSAL EMAIL FORM MODAL (MOBILE + DESKTOP)
        ========================================================================== */
     .modal-overlay {
       display: none;
@@ -641,7 +600,7 @@
       backdrop-filter: var(--glass-blur);
       -webkit-backdrop-filter: var(--glass-blur);
       z-index: 2000;
-      align-items: flex-end; /* Bottom sheet layout on mobile */
+      align-items: flex-end; /* Slides up like an app sheet on mobile */
       justify-content: center;
       opacity: 0;
       transition: opacity 0.25s ease;
@@ -666,9 +625,7 @@
       overflow-y: auto;
     }
 
-    .modal-overlay.active .modal-card {
-      transform: translateY(0);
-    }
+    .modal-overlay.active .modal-card { transform: translateY(0); }
 
     .modal-header {
       display: flex;
@@ -677,10 +634,7 @@
       margin-bottom: 20px;
     }
 
-    .modal-title {
-      font-size: 1.35rem;
-      font-weight: 800;
-    }
+    .modal-title { font-size: 1.35rem; font-weight: 800; }
 
     .modal-close {
       background: rgba(255, 255, 255, 0.08);
@@ -696,14 +650,9 @@
       justify-content: center;
     }
 
-    .modal-close:hover {
-      background: rgba(255, 255, 255, 0.15);
-      color: var(--text-main);
-    }
+    .modal-close:hover { background: rgba(255, 255, 255, 0.15); color: var(--text-main); }
 
-    .form-group {
-      margin-bottom: 18px;
-    }
+    .form-group { margin-bottom: 18px; }
 
     .form-label {
       display: block;
@@ -735,9 +684,7 @@
       resize: vertical;
     }
 
-    /* ==========================================================================
-       10. RESPONSIVE BREAKPOINTS
-       ========================================================================== */
+    /* Responsive adjustments */
     @media (max-width: 992px) {
       .hero-card { grid-column: span 12; }
       .stats-card { grid-column: span 12; }
@@ -745,39 +692,27 @@
     }
 
     @media (max-width: 640px) {
-      :root {
-        --header-height: 60px;
-      }
+      :root { --header-height: 60px; }
       .desktop-nav { display: none; }
       .bottom-tab-bar { display: flex; }
-      
       .hero-title { font-size: 2rem; }
       .bento-grid { gap: 12px; }
       .bento-card { padding: 18px; }
-      
       .sdg-card, .impact-card, .action-card { grid-column: span 12; }
       .hero-graphic { display: none; }
-
-      /* Desktop center modal switch */
-      .modal-overlay {
-        align-items: flex-end;
-      }
+      .modal-overlay { align-items: flex-end; }
     }
 
     @media (min-width: 641px) {
-      .modal-overlay {
-        align-items: center; /* Center modal on desktop screens */
-      }
-      .modal-card {
-        border-radius: 24px;
-      }
+      .modal-overlay { align-items: center; } /* Centered modal on desktop */
+      .modal-card { border-radius: 24px; }
     }
   </style>
 </head>
 <body>
 
   <!-- ==========================================================================
-       11. HEADER BAR
+       9. APP HEADER
        ========================================================================== -->
   <header class="app-header">
     <div class="brand">
@@ -803,7 +738,7 @@
   </header>
 
   <!-- ==========================================================================
-       12. MAIN CONTENT (BENTO GRID & PORTAL BODY)
+       10. MAIN CONTENT CONTAINER
        ========================================================================== -->
   <main class="container" id="overview">
     
@@ -892,7 +827,7 @@
     </div>
 
     <!-- ==========================================================================
-         13. CATALOG / DIGITAL LIBRARY
+         11. CATALOG / DIGITAL LIBRARY
          ========================================================================== -->
     <div class="section-header" id="catalog">
       <div>
@@ -910,7 +845,6 @@
 
     <div class="catalog-grid" id="catalogGrid">
       
-      <!-- Book Item 1 -->
       <div class="book-card" data-category="tech">
         <div class="book-cover-placeholder">
           <svg viewBox="0 0 24 24"><path d="M4 6h16v12H4z"/></svg>
@@ -924,7 +858,6 @@
         </div>
       </div>
 
-      <!-- Book Item 2 -->
       <div class="book-card" data-category="env">
         <div class="book-cover-placeholder">
           <svg viewBox="0 0 24 24"><path d="M12 2L2 22h20z"/></svg>
@@ -938,7 +871,6 @@
         </div>
       </div>
 
-      <!-- Book Item 3 -->
       <div class="book-card" data-category="tech">
         <div class="book-cover-placeholder">
           <svg viewBox="0 0 24 24"><path d="M20 4H4v16h16z"/></svg>
@@ -952,7 +884,6 @@
         </div>
       </div>
 
-      <!-- Book Item 4 -->
       <div class="book-card" data-category="lit">
         <div class="book-cover-placeholder">
           <svg viewBox="0 0 24 24"><path d="M12 2l10 18H2z"/></svg>
@@ -969,7 +900,7 @@
     </div>
 
     <!-- ==========================================================================
-         14. LIVE CIRCULATION LOG
+         12. LIVE CIRCULATION LOG
          ========================================================================== -->
     <div class="section-header" id="log">
       <div>
@@ -1027,7 +958,7 @@
   </main>
 
   <!-- ==========================================================================
-       15. MOBILE BOTTOM TAB NAVIGATION
+       13. MOBILE BOTTOM TAB NAVIGATION
        ========================================================================== -->
   <nav class="bottom-tab-bar">
     <button class="tab-item active" onclick="scrollToSection('overview')">
@@ -1049,7 +980,7 @@
   </nav>
 
   <!-- ==========================================================================
-       16. UNIVERSAL EMAIL FORM MODAL (WORKS ON MOBILE & DESKTOP)
+       14. UNIVERSAL EMAIL FORM MODAL (MOBILE & DESKTOP)
        ========================================================================== -->
   <div class="modal-overlay" id="emailModal" onclick="handleOverlayClick(event)">
     <div class="modal-card">
@@ -1087,33 +1018,30 @@
   </div>
 
   <!-- ==========================================================================
-       17. JAVASCRIPT CONTROLLERS
+       15. JAVASCRIPT CONTROLLERS
        ========================================================================== -->
   <script>
-    // Universal destination email address
+    // Universal recipient email address
     const PORTAL_EMAIL = "community@reread-portal.org";
 
-    // Open Modal and populate context
     function openEmailModal(defaultSubject = "General Inquiry") {
       document.getElementById('emailSubject').value = defaultSubject;
       document.getElementById('emailModal').classList.add('active');
-      document.body.style.overflow = 'hidden'; // Lock background scrolling
+      document.body.style.overflow = 'hidden';
     }
 
-    // Close Modal
     function closeEmailModal() {
       document.getElementById('emailModal').classList.remove('active');
       document.body.style.overflow = '';
     }
 
-    // Close on backdrop tap/click
     function handleOverlayClick(event) {
       if (event.target.classList.contains('modal-overlay')) {
         closeEmailModal();
       }
     }
 
-    // Universal Form Submission Handler across Smartphones & Desktop
+    // Direct Universal Email Trigger (Smartphones + Desktop)
     function submitEmailForm(event) {
       event.preventDefault();
 
@@ -1130,14 +1058,13 @@
         `---\nSent via RE:READ Community Portal`
       );
 
-      // Triggers native mail client on iOS, Android, macOS, and Windows
+      // Launches default native email application on any desktop or mobile OS
       window.location.href = `mailto:${PORTAL_EMAIL}?subject=${formattedSubject}&body=${formattedBody}`;
 
       closeEmailModal();
       document.getElementById('emailForm').reset();
     }
 
-    // Catalog Filtering Logic
     function filterCatalog(category, element) {
       const chips = document.querySelectorAll('.filter-chip');
       chips.forEach(chip => chip.classList.remove('active'));
@@ -1153,16 +1080,16 @@
       });
     }
 
-    // Navigation scroll helper for mobile tabs
     function scrollToSection(id) {
       const el = document.getElementById(id);
       if (el) {
         el.scrollIntoView({ behavior: 'smooth' });
       }
-      // Update tab active states
       const tabs = document.querySelectorAll('.tab-item');
       tabs.forEach(tab => tab.classList.remove('active'));
-      event.currentTarget.classList.add('active');
+      if (event && event.currentTarget) {
+        event.currentTarget.classList.add('active');
+      }
     }
   </script>
 </body>
