@@ -43,7 +43,7 @@
       background-attachment: fixed;
     }
 
-    /* 1. TOP NOTIFICATION BADGE */
+    /* TOP NOTIFICATION BADGE */
     .top-badge-banner {
       background: linear-gradient(90deg, #059669 0%, #7d2ae8 100%);
       color: #ffffff;
@@ -132,7 +132,7 @@
       padding: 0 1.5rem;
     }
 
-    /* GEN Z HERO BANNER */
+    /* GEN Z HERO BANNER WITH ANIMATED IMAGE */
     .genz-hero {
       background: rgba(30, 41, 59, 0.6);
       backdrop-filter: blur(16px);
@@ -155,6 +155,57 @@
       height: 200%;
       background: radial-gradient(circle, rgba(139, 92, 246, 0.1) 0%, transparent 60%);
       pointer-events: none;
+    }
+
+    /* CREATIVE ANIMATED ILLUSTRATION */
+    .hero-graphic-container {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 1.2rem auto;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .floating-book {
+      font-size: 3.5rem;
+      z-index: 2;
+      animation: floatBook 3s ease-in-out infinite;
+      filter: drop-shadow(0 0 15px rgba(16, 185, 129, 0.6));
+    }
+
+    .orbit-ring {
+      position: absolute;
+      width: 110px;
+      height: 45px;
+      border: 2px dashed rgba(236, 72, 153, 0.6);
+      border-radius: 50%;
+      animation: rotateOrbit 6s linear infinite;
+      transform: rotate(-20deg);
+    }
+
+    .orbiting-planet {
+      position: absolute;
+      font-size: 1.2rem;
+      top: -10px;
+      left: 15px;
+      animation: pulsePlanet 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes floatBook {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-10px) rotate(-3deg); }
+    }
+
+    @keyframes rotateOrbit {
+      0% { transform: rotate(-20deg) rotateZ(0deg); }
+      100% { transform: rotate(-20deg) rotateZ(360deg); }
+    }
+
+    @keyframes pulsePlanet {
+      0% { transform: scale(0.9); }
+      100% { transform: scale(1.15); }
     }
 
     .genz-tag {
@@ -182,15 +233,24 @@
     }
 
     .genz-hero p {
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       color: var(--text-muted);
       max-width: 780px;
-      margin: 0 auto 2rem auto;
+      margin: 0 auto 1.5rem auto;
       line-height: 1.7;
     }
 
     .genz-hero p strong {
       color: var(--mint-green);
+    }
+
+    .hero-founder-tag {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 800;
+      color: var(--mint-green);
+      font-style: italic;
+      margin-bottom: 1.8rem;
     }
 
     .genz-actions {
@@ -253,7 +313,7 @@
       margin-bottom: 1.5rem;
     }
 
-    /* 2. WIDGET 1: MISSION (FRONT & CENTER) */
+    /* WIDGET 1: MISSION */
     .mission-widget {
       background: rgba(30, 41, 59, 0.7);
       backdrop-filter: blur(12px);
@@ -356,9 +416,9 @@
     .progress-bar-fill {
       background: linear-gradient(90deg, #10b981 0%, #a7f3d0 100%);
       height: 100%;
-      width: 16%;
+      width: 0%; /* Dynamic width via JavaScript */
       border-radius: 999px;
-      transition: width 0.6s ease;
+      transition: width 0.8s ease;
     }
 
     .goal-footnote {
@@ -366,7 +426,7 @@
       color: var(--text-muted);
     }
 
-    /* 3. WIDGET 2: DASHBOARD METRICS */
+    /* WIDGET 2: DASHBOARD METRICS */
     .metrics-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
@@ -411,7 +471,7 @@
       padding-top: 0.75rem;
     }
 
-    /* 4. WIDGET 3: BOOKSHELF */
+    /* WIDGET 3: BOOKSHELF */
     .shelf-header {
       display: flex;
       justify-content: space-between;
@@ -449,7 +509,7 @@
 
     .books-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
       gap: 1.5rem;
       margin-bottom: 3rem;
     }
@@ -481,8 +541,20 @@
 
     .book-author {
       font-size: 0.85rem;
+      color: var(--mint-green);
+      font-weight: 700;
+      margin-bottom: 0.8rem;
+    }
+
+    .book-overview {
+      font-size: 0.82rem;
       color: var(--text-muted);
+      line-height: 1.5;
       margin-bottom: 1.2rem;
+      background: rgba(15, 23, 42, 0.4);
+      padding: 0.75rem;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     .book-footer {
@@ -512,7 +584,7 @@
       font-weight: 700;
     }
 
-    /* 5. WIDGET 4: ACTIVITY LOG TABLE */
+    /* WIDGET 4: ACTIVITY LOG TABLE */
     .table-card {
       background: rgba(30, 41, 59, 0.7);
       backdrop-filter: blur(12px);
@@ -569,7 +641,7 @@
 </head>
 <body>
 
-  <!-- 1. TOP NOTIFICATION BADGE -->
+  <!-- TOP NOTIFICATION BADGE -->
   <div class="top-badge-banner">
     🌟 <strong>Love what we're doing?</strong> To show your support for this initiative, 
     <a id="support-btn" role="button">click here</a> — a simple click lets us know you're with us!
@@ -591,13 +663,22 @@
 
   <div class="main-container">
 
-    <!-- GEN Z HERO BANNER -->
+    <!-- GEN Z HERO BANNER WITH ANIMATED GRAPHIC -->
     <div class="genz-hero">
+      <div class="hero-graphic-container">
+        <div class="orbit-ring">
+          <span class="orbiting-planet">🪐</span>
+        </div>
+        <div class="floating-book">📖</div>
+      </div>
+
       <span class="genz-tag">♻️ Pass the Book, Not the Trash</span>
       <h1>Read, Share, Reforest.</h1>
       <p>
         <strong>RE:READ Community</strong> is designed with a dual purpose: directly preserving trees by giving physical books endless life, while helping readers rebuild deep focus, form tangible reading habits, and step away from constant digital glare for a meaningful screen detox.
       </p>
+      <span class="hero-founder-tag">— Arijit K., Founder, RE:READ Community</span>
+
       <div class="genz-actions">
         <a href="#shelf" class="btn btn-green">Explore Bookshelf 📖</a>
         <a href="#mission" class="btn btn-outline">Our Mission 🌿</a>
@@ -636,16 +717,16 @@
         </div>
       </div>
 
-      <!-- REFORESTATION GOAL CARD -->
+      <!-- REFORESTATION GOAL CARD WITH AUTOMATED MATH -->
       <div class="goal-container">
         <div class="goal-top">
-          <span class="goal-title">🌱 Goal Milestone: Plant 25 Community Trees</span>
-          <span class="goal-percentage">4 of 25 Trees Planted (16%)</span>
+          <span class="goal-title">🌱 Goal Milestone: Conserve 25 Community Trees</span>
+          <span class="goal-percentage" id="goal-percentage-text">Calculating...</span>
         </div>
         <div class="progress-bar-bg">
-          <div class="progress-bar-fill"></div>
+          <div class="progress-bar-fill" id="goal-progress-bar"></div>
         </div>
-        <p class="goal-footnote">1,000 pages read across all shared titles funds 1 tree planted through verified global reforestation partners.</p>
+        <p class="goal-footnote" id="goal-footnote-text">Calculated automatically: 1 tree yields 25 books.</p>
       </div>
     </div>
 
@@ -681,14 +762,14 @@
         <div class="metric-card">
           <div>
             <div class="metric-head"><span>📚</span> Books in Circulation</div>
-            <div class="metric-num" id="books-count" data-target="4">0</div>
+            <div class="metric-num" id="books-count" data-target="4">4</div>
           </div>
           <div class="metric-desc">
             Active physical books currently passing between community readers.
           </div>
         </div>
 
-        <!-- Trees Conserved (Exact Math: 4 books / 25 per tree = 0.16) -->
+        <!-- Trees Conserved (Exact Dynamic Calculation: 4 / 25 = 0.16) -->
         <div class="metric-card">
           <div>
             <div class="metric-head"><span>🌲</span> Trees Conserved</div>
@@ -701,7 +782,7 @@
       </div>
     </div>
 
-    <!-- WIDGET 3: BOOKSHELF -->
+    <!-- WIDGET 3: BOOKSHELF WITH OVERVIEWS -->
     <div id="shelf">
       <div class="shelf-header">
         <div>
@@ -716,10 +797,14 @@
       </div>
 
       <div class="books-grid">
+        <!-- Book 1 -->
         <div class="book-card" data-status="circulating">
           <div>
             <div class="book-title">Good Power</div>
             <div class="book-author">by Ginni Rometty</div>
+            <div class="book-overview">
+              Former IBM CEO shares a powerful leadership blueprint on using "good power" to transform organizations, drive ethical impact, and navigate complex change without losing integrity.
+            </div>
           </div>
           <div class="book-footer">
             <span class="badge badge-circulating">In Circulation</span>
@@ -727,10 +812,14 @@
           </div>
         </div>
 
+        <!-- Book 2 -->
         <div class="book-card" data-status="circulating">
           <div>
             <div class="book-title">Can't Hurt Me</div>
             <div class="book-author">by David Goggins</div>
+          </div>
+          <div class="book-overview">
+            Navy SEAL veteran reveals how master mind control, overcome extreme adversity, push past mental limits, and tap into the "40% Rule" to unlock unyielding human potential.
           </div>
           <div class="book-footer">
             <span class="badge badge-circulating">In Circulation</span>
@@ -738,10 +827,14 @@
           </div>
         </div>
 
+        <!-- Book 3 -->
         <div class="book-card" data-status="circulating">
           <div>
             <div class="book-title">Hit Refresh</div>
             <div class="book-author">by Satya Nadella</div>
+          </div>
+          <div class="book-overview">
+            Microsoft’s CEO explores individual and corporate transformation, emphasizing empathy, cloud innovation, and tech ethics as core drivers to revitalize tech culture.
           </div>
           <div class="book-footer">
             <span class="badge badge-circulating">In Circulation</span>
@@ -749,10 +842,14 @@
           </div>
         </div>
 
+        <!-- Book 4 -->
         <div class="book-card" data-status="circulating">
           <div>
             <div class="book-title">Your Next Five Moves</div>
             <div class="book-author">by Patrick Bet-David</div>
+          </div>
+          <div class="book-overview">
+            A practical strategic playbook for entrepreneurs and leaders to master critical thinking, anticipate industry shifts, manage team dynamics, and scale business operations like a grandmaster.
           </div>
           <div class="book-footer">
             <span class="badge badge-circulating">In Circulation</span>
@@ -771,25 +868,25 @@
         <table>
           <thead>
             <tr>
-              <th>Name of Book</th>
+              <th>Name of Book & Author</th>
               <th>Status</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td><strong>Good Power</strong></td>
+              <td><strong>Good Power</strong> <br><span style="font-size: 0.8rem; color: #94a3b8;">by Ginni Rometty</span></td>
               <td><span class="badge badge-circulating">Donated to next reader</span></td>
             </tr>
             <tr>
-              <td><strong>Can't Hurt Me</strong></td>
+              <td><strong>Can't Hurt Me</strong> <br><span style="font-size: 0.8rem; color: #94a3b8;">by David Goggins</span></td>
               <td><span class="badge badge-circulating">Donated to next reader</span></td>
             </tr>
             <tr>
-              <td><strong>Hit Refresh</strong></td>
+              <td><strong>Hit Refresh</strong> <br><span style="font-size: 0.8rem; color: #94a3b8;">by Satya Nadella</span></td>
               <td><span class="badge badge-circulating">Donated to next reader</span></td>
             </tr>
             <tr>
-              <td><strong>Your Next Five Moves</strong></td>
+              <td><strong>Your Next Five Moves</strong> <br><span style="font-size: 0.8rem; color: #94a3b8;">by Patrick Bet-David</span></td>
               <td><span class="badge badge-circulating">Donated to next reader</span></td>
             </tr>
           </tbody>
@@ -807,15 +904,39 @@
 
   </div>
 
-  <!-- INTERACTIVE LOGIC & ANIMATED COUNTERS -->
+  <!-- INTERACTIVE LOGIC, AUTOMATED MATH & ANIMATED COUNTERS -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      // 1. Visitor Count Logic
+      // 1. Dynamic Math Calculation for Trees Conserved and Milestone %
+      const activeBooksInCirculation = 4;
+      const booksPerTree = 25;
+      const targetTreeGoal = 25;
+
+      // Calculate exact trees conserved (4 / 25 = 0.16)
+      const treesConserved = activeBooksInCirculation / booksPerTree;
+      
+      // Calculate overall progress percentage towards 25 trees goal (0.16 / 25 * 100 = 0.64%)
+      const goalPercentage = (treesConserved / targetTreeGoal) * 100;
+
+      // Update Trees Conserved Metric target
+      const treesElement = document.getElementById("trees-conserved");
+      treesElement.setAttribute("data-target", treesConserved);
+
+      // Update Reforestation Goal Milestone UI dynamically
+      const goalPercentageText = document.getElementById("goal-percentage-text");
+      const goalProgressBar = document.getElementById("goal-progress-bar");
+      const goalFootnoteText = document.getElementById("goal-footnote-text");
+
+      goalPercentageText.textContent = `${treesConserved.toFixed(2)} of ${targetTreeGoal} Trees Conserved (${goalPercentage.toFixed(2)}%)`;
+      goalProgressBar.style.width = `${Math.max(goalPercentage, 2)}%`; // minimum 2% for visual visibility
+      goalFootnoteText.innerHTML = `Automated Math: <strong>${activeBooksInCirculation} active books</strong> in circulation ÷ 25 books/tree = <strong>${treesConserved.toFixed(2)} trees conserved</strong>.`;
+
+      // 2. Visitor Count Logic
       let visitors = parseInt(localStorage.getItem("reread_visitors") || "0", 10) + 1;
       localStorage.setItem("reread_visitors", visitors);
       document.getElementById("visitor-count").setAttribute("data-target", visitors);
 
-      // 2. Community Supporters Counter Logic
+      // 3. Community Supporters Counter Logic
       const supportBtn = document.getElementById("support-btn");
       let supporters = parseInt(localStorage.getItem("reread_supporters") || "0", 10);
       document.getElementById("support-count").setAttribute("data-target", supporters);
@@ -825,12 +946,10 @@
         supporters += 1;
         localStorage.setItem("reread_supporters", supporters);
         
-        // Update data attribute and re-animate counter
         const supportDisplay = document.getElementById("support-count");
         supportDisplay.setAttribute("data-target", supporters);
         animateCounter(supportDisplay, supporters);
 
-        // Visual click confirmation
         supportBtn.textContent = "Thank you for supporting!";
         setTimeout(() => {
           supportBtn.textContent = "click here";
@@ -841,7 +960,7 @@
       triggerCounters();
     });
 
-    // 3. Smooth Counter Rolling Animation (Handles integers & decimals)
+    // 4. Smooth Counter Rolling Animation (Integers & Decimals)
     function animateCounter(element, target, decimals = 0) {
       let start = 0;
       const duration = 1200; 
@@ -874,7 +993,7 @@
       });
     }
 
-    // 4. Bookshelf Filter Function
+    // 5. Bookshelf Filter Function
     function filterBooks(category) {
       const cards = document.querySelectorAll('.book-card');
       const buttons = document.querySelectorAll('.filter-btn');
