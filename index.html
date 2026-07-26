@@ -3,41 +3,42 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ReBook Community | Pass the Book, Not the Trash</title>
+  <title>ReBook Community Portal</title>
   <style>
     :root {
-      --primary: #2d6a4f;
-      --primary-hover: #1b4332;
-      --accent: #52b788;
-      --bg-light: #f8f9fa;
+      --primary-green: #2d6a4f;
+      --dark-green: #1b4332;
+      --mint-green: #52b788;
+      --light-green: #d8f3dc;
+      --genz-purple: #6c5ce7;
+      --genz-bg: #f8f7ff;
+      --bg-main: #fafafa;
       --card-bg: #ffffff;
-      --text-dark: #212529;
+      --text-main: #1d2d44;
       --text-muted: #6c757d;
-      --border-color: #e9ecef;
+      --border-color: #e2e8f0;
       --badge-available: #2a9d8f;
       --badge-circulating: #e76f51;
-      --genz-purple: #6c5ce7;
-      --genz-bg: #f3f0ff;
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     }
 
     body {
-      background-color: var(--bg-light);
-      color: var(--text-dark);
+      background-color: var(--bg-main);
+      color: var(--text-main);
       line-height: 1.6;
-      padding-bottom: 4rem;
+      padding-bottom: 5rem;
     }
 
-    /* 1. TOP NOTIFICATION BADGE */
+    /* 1. TOP NOTIFICATION BADGE (IMPROVED: Low-Pressure Acknowledgment) */
     .top-badge-banner {
-      background-color: #d8f3dc;
-      color: #1b4332;
+      background-color: var(--light-green);
+      color: var(--dark-green);
       border-bottom: 1px solid #b7e4c7;
       text-align: center;
       padding: 0.85rem 1rem;
@@ -45,7 +46,7 @@
     }
 
     .top-badge-banner a {
-      color: var(--primary);
+      color: var(--primary-green);
       font-weight: 700;
       text-decoration: underline;
       cursor: pointer;
@@ -53,62 +54,104 @@
     }
 
     .top-badge-banner a:hover {
-      color: var(--primary-hover);
+      color: var(--dark-green);
     }
 
     .top-badge-banner .subtext {
       display: block;
       font-size: 0.85rem;
-      color: #2d6a4f;
+      color: var(--primary-green);
       margin-top: 0.25rem;
       font-style: italic;
     }
 
-    /* MAIN CONTAINER */
-    .container {
-      max-width: 1050px;
-      margin: 2rem auto 0 auto;
+    /* NAVIGATION HEADER */
+    .navbar {
+      background-color: var(--card-bg);
+      border-bottom: 1px solid var(--border-color);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .brand-logo {
+      font-size: 1.4rem;
+      font-weight: 900;
+      color: var(--primary-green);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-main);
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary-green);
+    }
+
+    /* MAIN CONTENT CONTAINER */
+    .main-container {
+      max-width: 1100px;
+      margin: 2.5rem auto 0 auto;
       padding: 0 1.5rem;
     }
 
-    /* HERO & GEN Z ETHOS SECTION */
-    .hero-banner {
+    /* ORIGINAL HERO / GEN Z CALLOUT */
+    .genz-hero {
       background-color: var(--genz-bg);
-      border: 2px solid #dcd6f7;
+      border: 2px dashed var(--genz-purple);
       border-radius: 16px;
       padding: 2.5rem 2rem;
       text-align: center;
-      margin-bottom: 2.5rem;
+      margin-bottom: 3rem;
+      position: relative;
     }
 
-    .hero-banner .tagline {
-      display: inline-block;
+    .genz-tag {
       background-color: var(--genz-purple);
       color: #ffffff;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       font-weight: 800;
-      padding: 0.35rem 1rem;
+      padding: 0.3rem 0.8rem;
       border-radius: 20px;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 1rem;
-    }
-
-    .hero-banner h1 {
-      font-size: 2.2rem;
-      color: #2d3436;
-      font-weight: 900;
+      letter-spacing: 0.8px;
+      display: inline-block;
       margin-bottom: 0.75rem;
     }
 
-    .hero-banner p {
-      font-size: 1.1rem;
-      color: #4a4a4a;
-      max-width: 750px;
+    .genz-hero h1 {
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: #2b2d42;
+      margin-bottom: 0.75rem;
+    }
+
+    .genz-hero p {
+      font-size: 1.05rem;
+      color: #4a5568;
+      max-width: 720px;
       margin: 0 auto 1.5rem auto;
     }
 
-    .hero-actions {
+    .genz-actions {
       display: flex;
       justify-content: center;
       gap: 1rem;
@@ -116,104 +159,103 @@
     }
 
     .btn {
-      padding: 0.75rem 1.5rem;
+      padding: 0.7rem 1.4rem;
       border-radius: 8px;
       font-weight: 700;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       text-decoration: none;
       cursor: pointer;
       border: none;
       transition: all 0.2s ease;
     }
 
-    .btn-primary {
-      background-color: var(--primary);
+    .btn-green {
+      background-color: var(--primary-green);
       color: #ffffff;
     }
 
-    .btn-primary:hover {
-      background-color: var(--primary-hover);
+    .btn-green:hover {
+      background-color: var(--dark-green);
     }
 
-    .btn-secondary {
-      background-color: #ffffff;
+    .btn-outline {
+      background-color: transparent;
       color: var(--genz-purple);
-      border: 1.5px solid var(--genz-purple);
+      border: 2px solid var(--genz-purple);
     }
 
-    .btn-secondary:hover {
+    .btn-outline:hover {
       background-color: var(--genz-purple);
       color: #ffffff;
     }
 
-    /* SECTION HEADINGS */
+    /* SECTION HEADERS */
     .section-title {
       font-size: 1.6rem;
-      color: var(--primary);
-      margin-bottom: 0.5rem;
-      margin-top: 2.5rem;
+      color: var(--primary-green);
+      margin-bottom: 0.4rem;
     }
 
-    .section-desc {
+    .section-sub {
       color: var(--text-muted);
-      margin-bottom: 1.5rem;
       font-size: 0.95rem;
+      margin-bottom: 1.5rem;
     }
 
-    /* 2. METRICS GRID */
+    /* 2. IMPROVED INTERACTIVE METRIC DASHBOARD */
     .metrics-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
       gap: 1.25rem;
-      margin-bottom: 2rem;
+      margin-bottom: 2.5rem;
     }
 
     .metric-card {
       background-color: var(--card-bg);
       border: 1px solid var(--border-color);
       border-radius: 12px;
-      padding: 1.25rem;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.03);
+      padding: 1.4rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
     }
 
-    .metric-header {
+    .metric-head {
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: var(--text-dark);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-main);
       margin-bottom: 0.5rem;
     }
 
-    .metric-value {
-      font-size: 2rem;
+    .metric-num {
+      font-size: 2.2rem;
       font-weight: 800;
-      color: var(--primary);
+      color: var(--primary-green);
       margin-bottom: 0.5rem;
     }
 
-    .metric-context {
-      font-size: 0.8rem;
+    .metric-desc {
+      font-size: 0.82rem;
       color: var(--text-muted);
       border-top: 1px solid var(--border-color);
-      padding-top: 0.5rem;
+      padding-top: 0.6rem;
     }
 
-    /* 3. GOAL & PROGRESS BAR */
-    .goal-card {
+    /* 3. REFORESTATION GOAL CARD */
+    .goal-container {
       background-color: var(--card-bg);
       border: 1px solid var(--border-color);
       border-radius: 12px;
       padding: 1.5rem;
-      margin-bottom: 2.5rem;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.03);
+      margin-bottom: 3rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
     }
 
-    .goal-header {
+    .goal-top {
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -222,111 +264,112 @@
 
     .goal-title {
       font-weight: 700;
-      color: var(--primary);
+      color: var(--primary-green);
+      font-size: 1.05rem;
     }
 
-    .goal-stats {
-      font-weight: 600;
-      font-size: 0.9rem;
+    .goal-percentage {
+      font-weight: 700;
       color: var(--text-muted);
+      font-size: 0.9rem;
     }
 
     .progress-bar-bg {
-      background-color: #e9ecef;
-      border-radius: 8px;
-      height: 16px;
+      background-color: #edf2f7;
+      border-radius: 10px;
+      height: 14px;
       overflow: hidden;
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.6rem;
     }
 
     .progress-bar-fill {
-      background-color: var(--accent);
+      background-color: var(--mint-green);
       height: 100%;
-      width: 16%; /* Illustrative progress toward goal */
+      width: 16%; /* Goal status: 4 / 25 */
       transition: width 0.4s ease;
     }
 
-    .goal-note {
+    .goal-footnote {
       font-size: 0.85rem;
       color: var(--text-muted);
     }
 
-    /* 4. BOOK SHELF & FILTERS */
-    .shelf-controls {
+    /* 4. ORIGINAL BOOKSHELF & FILTERS */
+    .shelf-header {
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1rem;
+      align-items: flex-end;
+      margin-bottom: 1.25rem;
       flex-wrap: wrap;
       gap: 1rem;
     }
 
-    .filter-buttons {
+    .filter-group {
       display: flex;
       gap: 0.5rem;
     }
 
     .filter-btn {
-      background-color: #e9ecef;
+      background-color: #edf2f7;
       border: none;
-      padding: 0.4rem 0.9rem;
+      padding: 0.4rem 1rem;
       border-radius: 20px;
       font-size: 0.85rem;
-      cursor: pointer;
       font-weight: 600;
-      color: var(--text-dark);
+      color: var(--text-main);
+      cursor: pointer;
       transition: all 0.2s ease;
     }
 
     .filter-btn.active, .filter-btn:hover {
-      background-color: var(--primary);
+      background-color: var(--primary-green);
       color: #ffffff;
     }
 
     .books-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 1.25rem;
-      margin-bottom: 2.5rem;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
     }
 
     .book-card {
       background-color: var(--card-bg);
       border: 1px solid var(--border-color);
-      border-radius: 10px;
+      border-radius: 12px;
       padding: 1.25rem;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
     }
 
     .book-title {
       font-size: 1.05rem;
       font-weight: 700;
-      color: var(--text-dark);
-      margin-bottom: 0.25rem;
+      color: var(--text-main);
+      margin-bottom: 0.2rem;
     }
 
     .book-author {
       font-size: 0.85rem;
       color: var(--text-muted);
-      margin-bottom: 1rem;
+      margin-bottom: 1.2rem;
     }
 
-    .book-meta {
+    .book-footer {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-top: auto;
       padding-top: 0.75rem;
       border-top: 1px solid var(--border-color);
     }
 
     .badge {
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       font-weight: 700;
       padding: 0.25rem 0.6rem;
-      border-radius: 12px;
+      border-radius: 10px;
       color: #ffffff;
       text-transform: uppercase;
     }
@@ -334,48 +377,20 @@
     .badge-available { background-color: var(--badge-available); }
     .badge-circulating { background-color: var(--badge-circulating); }
 
-    .readers-count {
+    .read-count {
       font-size: 0.8rem;
       color: var(--text-muted);
       font-weight: 600;
     }
 
-    /* 5. COMMUNITY PRINCIPLES / MANIFESTO */
-    .manifesto-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-      margin-bottom: 2.5rem;
-    }
-
-    .manifesto-card {
-      background-color: #ffffff;
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      padding: 1.5rem;
-    }
-
-    .manifesto-card h3 {
-      color: var(--primary);
-      font-size: 1.1rem;
-      margin-bottom: 0.5rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .manifesto-card p {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-    }
-
-    /* 6. CIRCULATED ACTIVITY LOG TABLE */
-    .table-container {
+    /* 5. CIRCULATION ACTIVITY TABLE */
+    .table-card {
       background-color: var(--card-bg);
       border: 1px solid var(--border-color);
-      border-radius: 10px;
+      border-radius: 12px;
       overflow-x: auto;
-      margin-bottom: 2.5rem;
+      margin-bottom: 3rem;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
     }
 
     table {
@@ -386,13 +401,13 @@
     }
 
     th, td {
-      padding: 0.85rem 1.25rem;
+      padding: 0.9rem 1.25rem;
       border-bottom: 1px solid var(--border-color);
     }
 
     th {
-      background-color: #f1f3f5;
-      color: var(--text-dark);
+      background-color: #f8fafc;
+      color: var(--text-main);
       font-weight: 700;
     }
 
@@ -400,33 +415,32 @@
       border-bottom: none;
     }
 
-    /* 7. GREEN CANOPY UN SDG CALLOUT */
-    .sdg-card {
+    /* 6. UN SDG CALLOUT */
+    .sdg-banner {
       background-color: #ffffff;
-      border-left: 5px solid var(--accent);
+      border-left: 5px solid var(--mint-green);
       border-top: 1px solid var(--border-color);
       border-right: 1px solid var(--border-color);
       border-bottom: 1px solid var(--border-color);
-      border-radius: 8px;
-      padding: 1.5rem 2rem;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+      border-radius: 10px;
+      padding: 1.5rem 1.75rem;
     }
 
-    .sdg-card h3 {
-      color: var(--primary);
+    .sdg-banner h3 {
+      color: var(--primary-green);
       font-size: 1.15rem;
       margin-bottom: 0.4rem;
     }
 
-    .sdg-card p {
-      color: #495057;
-      font-size: 0.9rem;
+    .sdg-banner p {
+      color: #4a5568;
+      font-size: 0.92rem;
     }
   </style>
 </head>
 <body>
 
-  <!-- TOP NOTIFICATION BADGE -->
+  <!-- 1. TOP NOTIFICATION BADGE -->
   <div class="top-badge-banner">
     🌟 <strong>Love what we're doing?</strong> To show your support for this initiative, 
     <a id="support-btn" role="button">click here</a> — a simple click lets us know you're with us!
@@ -435,235 +449,233 @@
     </span>
   </div>
 
-  <div class="container">
-    
-    <!-- GEN Z HERO BANNER & ETHOS -->
-    <div class="hero-banner">
-      <span class="tagline">♻️ PASS THE BOOK, NOT THE TRASH</span>
-      <h1>Read. Reuse. Reforest.</h1>
+  <!-- NAVIGATION HEADER -->
+  <nav class="navbar">
+    <a href="#" class="brand-logo">📚 ReBook Community</a>
+    <ul class="nav-links">
+      <li><a href="#dashboard">Dashboard</a></li>
+      <li><a href="#shelf">Bookshelf</a></li>
+      <li><a href="#activity">Activity Log</a></li>
+    </ul>
+  </nav>
+
+  <div class="main-container">
+
+    <!-- ORIGINAL GEN Z HERO BANNER -->
+    <div class="genz-hero">
+      <span class="genz-tag">♻️ Pass the Book, Not the Trash</span>
+      <h1>Read, Share, Reforest.</h1>
       <p>
-        Physical books shouldn't sit gathering dust on shelves or end up in landfills. Join our peer-to-peer circulation movement—rehome your read books, discover new stories, and plant trees as a community.
+        Physical books are meant to be read, not forgotten on shelves or thrown away. We are building a open peer-to-peer circulation network where every shared page turns into real-world environmental impact.
       </p>
-      <div class="hero-actions">
-        <a href="#shelf" class="btn btn-primary">Explore Community Bookshelf</a>
-        <a href="#principles" class="btn btn-secondary">How ReBook Works</a>
+      <div class="genz-actions">
+        <a href="#shelf" class="btn btn-green">Explore Bookshelf</a>
+        <a href="#dashboard" class="btn btn-outline">View Our Impact</a>
       </div>
     </div>
 
-    <!-- SECTION 1: IMPACT METRICS DASHBOARD -->
-    <h2 class="section-title">Community & Environmental Impact Dashboard</h2>
-    <p class="section-desc">Track our real-time community engagement, book sharing activity, and environmental goals at a glance.</p>
+    <!-- 2. IMPROVED INTERACTIVE METRIC DASHBOARD -->
+    <div id="dashboard">
+      <h2 class="section-title">Community & Environmental Impact Dashboard</h2>
+      <p class="section-sub">Real-time engagement, book movement, and sustainability tracking.</p>
 
-    <div class="metrics-grid">
-      <div class="metric-card">
-        <div>
-          <div class="metric-header"><span>👥</span> Website Visitors</div>
-          <div class="metric-value" id="visitor-count">0</div>
+      <div class="metrics-grid">
+        <!-- Visitor Count -->
+        <div class="metric-card">
+          <div>
+            <div class="metric-head"><span>👥</span> Website Visitors</div>
+            <div class="metric-num" id="visitor-count">0</div>
+          </div>
+          <div class="metric-desc">
+            Total visitors who explored our platform. <em>Increases dynamically per visit.</em>
+          </div>
         </div>
-        <div class="metric-context">
-          Total visitors who explored our platform. <em>Increases automatically with every visit.</em>
-        </div>
-      </div>
 
-      <div class="metric-card">
-        <div>
-          <div class="metric-header"><span>💚</span> Community Supporters</div>
-          <div class="metric-value" id="support-count">0</div>
+        <!-- Community Supporters (Driven by Top Badge Click) -->
+        <div class="metric-card">
+          <div>
+            <div class="metric-head"><span>💚</span> Community Supporters</div>
+            <div class="metric-num" id="support-count">0</div>
+          </div>
+          <div class="metric-desc">
+            Readers who clicked the top badge to acknowledge our mission. <em>No sign-up required.</em>
+          </div>
         </div>
-        <div class="metric-context">
-          Readers who clicked to acknowledge our mission. <em>Increases dynamically on click (no sign-up required).</em>
-        </div>
-      </div>
 
-      <div class="metric-card">
-        <div>
-          <div class="metric-header"><span>📚</span> Books in Circulation</div>
-          <div class="metric-value">4</div>
+        <!-- Books in Circulation -->
+        <div class="metric-card">
+          <div>
+            <div class="metric-head"><span>📚</span> Books in Circulation</div>
+            <div class="metric-num">4</div>
+          </div>
+          <div class="metric-desc">
+            Active physical books currently passing between community readers.
+          </div>
         </div>
-        <div class="metric-context">
-          Active physical books currently passing between readers in the community.
-        </div>
-      </div>
 
-      <div class="metric-card">
-        <div>
-          <div class="metric-header"><span>🌳</span> Trees Planted Goal</div>
-          <div class="metric-value">4 <span style="font-size: 1rem; color: #6c757d;">/ 25</span></div>
-        </div>
-        <div class="metric-context">
-          Reforestation progress based on community reading milestones (1 tree per 1,000 pages read).
+        <!-- Trees Planted Goal -->
+        <div class="metric-card">
+          <div>
+            <div class="metric-head"><span>🌳</span> Trees Planted Goal</div>
+            <div class="metric-num">4 <span style="font-size: 1.1rem; color: #6c757d;">/ 25</span></div>
+          </div>
+          <div class="metric-desc">
+            Trees funded based on community reading milestones (1 tree per 1,000 pages read).
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- SECTION 2: REFORESTATION GOAL TRACKER -->
-    <div class="goal-card">
-      <div class="goal-header">
-        <span class="goal-title">🌱 Target Goal: Plant 25 Community Trees</span>
-        <span class="goal-stats">4 of 25 Trees Planted (16%)</span>
+    <!-- 3. REFORESTATION GOAL CARD -->
+    <div class="goal-container">
+      <div class="goal-top">
+        <span class="goal-title">🌱 Goal Milestone: Plant 25 Community Trees</span>
+        <span class="goal-percentage">4 of 25 Trees Planted (16%)</span>
       </div>
       <div class="progress-bar-bg">
         <div class="progress-bar-fill"></div>
       </div>
-      <p class="goal-note">Every 1,000 pages read and logged across our community books funds 1 tree planted through verified reforestation partners.</p>
+      <p class="goal-footnote">1,000 pages read across all shared titles funds 1 tree planted through verified global reforestation partners.</p>
     </div>
 
-    <!-- SECTION 3: COMMUNITY PRINCIPLES -->
-    <h2 class="section-title" id="principles">Our Core Principles</h2>
-    <p class="section-desc">Simple guidelines that keep our book-sharing eco-system thriving.</p>
-
-    <div class="manifesto-grid">
-      <div class="manifesto-card">
-        <h3>📖 Keep Books Moving</h3>
-        <p>Once you finish reading a book, pass it along to a friend, drop it at a local hub, or list it back on the shelf within 30 days.</p>
-      </div>
-
-      <div class="manifesto-card">
-        <h3>🤝 Zero Obligation</h3>
-        <p>Borrowing, donating, or acknowledging our project is entirely optional. Explore and engage at whatever level feels right for you.</p>
-      </div>
-
-      <div class="manifesto-card">
-        <h3>🌍 Measurable Eco-Impact</h3>
-        <p>By reusing physical copies instead of buying single-use prints, we collectively reduce pulp production and save water.</p>
-      </div>
-    </div>
-
-    <!-- SECTION 4: COMMUNITY BOOKSHELF -->
-    <div class="shelf-controls" id="shelf">
-      <div>
-        <h2 class="section-title" style="margin: 0;">Community Bookshelf</h2>
-        <p class="section-desc" style="margin: 0;">Explore active titles currently in our community library.</p>
-      </div>
-      <div class="filter-buttons">
-        <button class="filter-btn active" onclick="filterBooks('all')">All (4)</button>
-        <button class="filter-btn" onclick="filterBooks('circulating')">In Circulation</button>
-        <button class="filter-btn" onclick="filterBooks('available')">Available</button>
-      </div>
-    </div>
-
-    <div class="books-grid" id="books-container">
-      <div class="book-card" data-status="circulating">
+    <!-- 4. ORIGINAL BOOKSHELF & FILTERS -->
+    <div id="shelf">
+      <div class="shelf-header">
         <div>
-          <div class="book-title">The Silent Patient</div>
-          <div class="book-author">by Alex Michaelides</div>
+          <h2 class="section-title" style="margin: 0;">Community Bookshelf</h2>
+          <p class="section-sub" style="margin: 0;">Browse active titles currently circulating in the community.</p>
         </div>
-        <div class="book-meta">
-          <span class="badge badge-circulating">In Circulation</span>
-          <span class="readers-count">3 Readers</span>
-        </div>
-      </div>
-
-      <div class="book-card" data-status="circulating">
-        <div>
-          <div class="book-title">Atomic Habits</div>
-          <div class="book-author">by James Clear</div>
-        </div>
-        <div class="book-meta">
-          <span class="badge badge-circulating">In Circulation</span>
-          <span class="readers-count">5 Readers</span>
+        <div class="filter-group">
+          <button class="filter-btn active" onclick="filterBooks('all')">All (4)</button>
+          <button class="filter-btn" onclick="filterBooks('circulating')">In Circulation</button>
+          <button class="filter-btn" onclick="filterBooks('available')">Available</button>
         </div>
       </div>
 
-      <div class="book-card" data-status="available">
-        <div>
-          <div class="book-title">Braiding Sweetgrass</div>
-          <div class="book-author">by Robin Wall Kimmerer</div>
+      <div class="books-grid">
+        <div class="book-card" data-status="circulating">
+          <div>
+            <div class="book-title">The Silent Patient</div>
+            <div class="book-author">by Alex Michaelides</div>
+          </div>
+          <div class="book-footer">
+            <span class="badge badge-circulating">In Circulation</span>
+            <span class="read-count">3 Readers</span>
+          </div>
         </div>
-        <div class="book-meta">
-          <span class="badge badge-available">Available</span>
-          <span class="readers-count">2 Readers</span>
-        </div>
-      </div>
 
-      <div class="book-card" data-status="circulating">
-        <div>
-          <div class="book-title">To Kill a Mockingbird</div>
-          <div class="book-author">by Harper Lee</div>
+        <div class="book-card" data-status="circulating">
+          <div>
+            <div class="book-title">Atomic Habits</div>
+            <div class="book-author">by James Clear</div>
+          </div>
+          <div class="book-footer">
+            <span class="badge badge-circulating">In Circulation</span>
+            <span class="read-count">5 Readers</span>
+          </div>
         </div>
-        <div class="book-meta">
-          <span class="badge badge-circulating">In Circulation</span>
-          <span class="readers-count">4 Readers</span>
+
+        <div class="book-card" data-status="available">
+          <div>
+            <div class="book-title">Braiding Sweetgrass</div>
+            <div class="book-author">by Robin Wall Kimmerer</div>
+          </div>
+          <div class="book-footer">
+            <span class="badge badge-available">Available</span>
+            <span class="read-count">2 Readers</span>
+          </div>
+        </div>
+
+        <div class="book-card" data-status="circulating">
+          <div>
+            <div class="book-title">To Kill a Mockingbird</div>
+            <div class="book-author">by Harper Lee</div>
+          </div>
+          <div class="book-footer">
+            <span class="badge badge-circulating">In Circulation</span>
+            <span class="read-count">4 Readers</span>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- SECTION 5: RECENT CIRCULATION LOG -->
-    <h2 class="section-title">Recent Circulation Activity</h2>
-    <p class="section-desc">Live log of book handoffs and community exchanges.</p>
+    <!-- 5. CIRCULATION ACTIVITY TABLE -->
+    <div id="activity">
+      <h2 class="section-title">Recent Circulation Activity</h2>
+      <p class="section-sub">Live log tracking book handoffs and community exchanges.</p>
 
-    <div class="table-container">
-      <table>
-        <thead>
-          <tr>
-            <th>Book Title</th>
-            <th>Last Handed To</th>
-            <th>Location</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>Atomic Habits</strong></td>
-            <td>Sarah M.</td>
-            <td>Community Hub North</td>
-            <td><span class="badge badge-circulating">Reading</span></td>
-          </tr>
-          <tr>
-            <td><strong>The Silent Patient</strong></td>
-            <td>David K.</td>
-            <td>Central Library Drop Box</td>
-            <td><span class="badge badge-circulating">Reading</span></td>
-          </tr>
-          <tr>
-            <td><strong>Braiding Sweetgrass</strong></td>
-            <td>Returned to Shelf</td>
-            <td>Community Hub South</td>
-            <td><span class="badge badge-available">Ready to Borrow</span></td>
-          </tr>
-          <tr>
-            <td><strong>To Kill a Mockingbird</strong></td>
-            <td>Elena R.</td>
-            <td>East Side Exchange Box</td>
-            <td><span class="badge badge-circulating">Reading</span></td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="table-card">
+        <table>
+          <thead>
+            <tr>
+              <th>Book Title</th>
+              <th>Last Handed To</th>
+              <th>Exchange Hub Location</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Atomic Habits</strong></td>
+              <td>Sarah M.</td>
+              <td>Community Hub North</td>
+              <td><span class="badge badge-circulating">Reading</span></td>
+            </tr>
+            <tr>
+              <td><strong>The Silent Patient</strong></td>
+              <td>David K.</td>
+              <td>Central Library Drop Box</td>
+              <td><span class="badge badge-circulating">Reading</span></td>
+            </tr>
+            <tr>
+              <td><strong>Braiding Sweetgrass</strong></td>
+              <td>Returned to Shelf</td>
+              <td>Community Hub South</td>
+              <td><span class="badge badge-available">Ready to Borrow</span></td>
+            </tr>
+            <tr>
+              <td><strong>To Kill a Mockingbird</strong></td>
+              <td>Elena R.</td>
+              <td>East Side Exchange Box</td>
+              <td><span class="badge badge-circulating">Reading</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
 
-    <!-- SECTION 6: GREEN CANOPY PROMISE (UN SDG ALIGNMENT) -->
-    <div class="sdg-card">
+    <!-- 6. GREEN CANOPY PROMISE (UN SDG ALIGNMENT) -->
+    <div class="sdg-banner">
       <h3>🌿 The Green Canopy Promise</h3>
       <p>
-        Aligned with <strong>United Nations Sustainable Development Goal 15 (Life on Land)</strong>. Every page shared and every book circulated helps reduce paper waste and supports verified reforestation projects across the globe.
+        Aligned with <strong>United Nations Sustainable Development Goal 15 (Life on Land)</strong>. Every page shared and every book recirculated helps reduce paper waste and supports verified reforestation projects across the globe.
       </p>
     </div>
 
   </div>
 
-  <!-- JAVASCRIPT FOR INTERACTIVITY & METRICS -->
+  <!-- INTERACTIVE LOGIC & METRIC COUNTERS -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      // 1. Automatic Visitor Count Logic
-      let currentVisitors = parseInt(localStorage.getItem("site_visitors") || "0", 10);
-      currentVisitors += 1;
-      localStorage.setItem("site_visitors", currentVisitors.toString());
-      document.getElementById("visitor-count").textContent = currentVisitors.toLocaleString();
+      // 1. Visitor Count Logic
+      let visitors = parseInt(localStorage.getItem("rebook_visitors") || "0", 10) + 1;
+      localStorage.setItem("rebook_visitors", visitors);
+      document.getElementById("visitor-count").textContent = visitors.toLocaleString();
 
-      // 2. Community Support Click Counter Logic
+      // 2. Community Supporters Counter Logic
       const supportBtn = document.getElementById("support-btn");
-      const supportCountDisplay = document.getElementById("support-count");
+      const supportDisplay = document.getElementById("support-count");
 
-      let currentSupport = parseInt(localStorage.getItem("community_supporters") || "0", 10);
-      supportCountDisplay.textContent = currentSupport.toLocaleString();
+      let supporters = parseInt(localStorage.getItem("rebook_supporters") || "0", 10);
+      supportDisplay.textContent = supporters.toLocaleString();
 
       supportBtn.addEventListener("click", (e) => {
         e.preventDefault();
-        currentSupport += 1;
-        localStorage.setItem("community_supporters", currentSupport.toString());
-        supportCountDisplay.textContent = currentSupport.toLocaleString();
+        supporters += 1;
+        localStorage.setItem("rebook_supporters", supporters);
+        supportDisplay.textContent = supporters.toLocaleString();
 
-        // Visual click acknowledgment feedback
+        // Brief visual click confirmation
         supportBtn.textContent = "Thank you for supporting!";
         setTimeout(() => {
           supportBtn.textContent = "click here";
@@ -672,7 +684,7 @@
     });
 
     // 3. Bookshelf Filter Function
-    function filterBooks(filter) {
+    function filterBooks(category) {
       const cards = document.querySelectorAll('.book-card');
       const buttons = document.querySelectorAll('.filter-btn');
 
@@ -680,7 +692,7 @@
       event.target.classList.add('active');
 
       cards.forEach(card => {
-        if (filter === 'all' || card.getAttribute('data-status') === filter) {
+        if (category === 'all' || card.getAttribute('data-status') === category) {
           card.style.display = 'flex';
         } else {
           card.style.display = 'none';
