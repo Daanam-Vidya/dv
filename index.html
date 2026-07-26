@@ -9,7 +9,7 @@
 <!-- Modern Gen Z Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400..800;1,400..800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400..800;1,400..800&family=Space+Grotesk:wght@500;700&family=Special+Elite&display=swap" rel="stylesheet">
 
 <style>
   :root {
@@ -236,6 +236,60 @@
     font-weight: 700;
   }
 
+  /* ---------- MISSION / GOALS ---------- */
+  .mission-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-bottom: 48px;
+  }
+
+  .mission-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 24px;
+  }
+
+  .mission-card h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.15rem;
+    margin: 0 0 8px;
+    color: var(--text-main);
+  }
+
+  .mission-card p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+  }
+
+  .goal-card {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(168, 85, 247, 0.1));
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 28px 32px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 48px;
+    flex-wrap: wrap;
+  }
+
+  .goal-fig {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 2rem;
+    color: var(--accent-emerald);
+  }
+
+  .goal-cap {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    flex: 1;
+    min-width: 260px;
+  }
+
   /* ---------- IMPACT GRID ---------- */
   .section-title {
     font-family: 'Space Grotesk', sans-serif;
@@ -244,6 +298,7 @@
     margin-bottom: 24px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 12px;
   }
 
@@ -251,7 +306,7 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 16px;
-    margin-bottom: 48px;
+    margin-bottom: 16px;
   }
 
   @media (max-width: 860px) { .impact-grid { grid-template-columns: repeat(2, 1fr); } }
@@ -275,6 +330,16 @@
   .impact-card .cap {
     font-size: 0.85rem;
     color: var(--text-muted);
+  }
+
+  .first-mile-note {
+    background: rgba(168, 85, 247, 0.08);
+    border-left: 4px solid var(--primary-violet);
+    padding: 16px 20px;
+    border-radius: var(--radius-sm);
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    margin-bottom: 48px;
   }
 
   /* ---------- CONTROLS & TABS ---------- */
@@ -347,7 +412,7 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 24px;
-    margin-bottom: 64px;
+    margin-bottom: 48px;
   }
 
   .card {
@@ -388,6 +453,23 @@
 
   .card:hover .cover-img { transform: scale(1.05); }
 
+  .cover-fallback {
+    position: absolute;
+    inset: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: linear-gradient(160deg, #1A202C, #0A0C10);
+  }
+
+  .cover-fallback .spine-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--text-main);
+  }
+
   .badge {
     position: absolute;
     top: 12px;
@@ -401,8 +483,54 @@
     z-index: 2;
   }
 
+  .badge-tag {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: var(--radius-full);
+    background: var(--primary-pink);
+    color: #FFF;
+    z-index: 2;
+  }
+
   .badge-avail { background: var(--accent-emerald); color: #000; }
   .badge-circ { background: var(--primary-violet); color: #FFF; }
+
+  .call-label {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    background: rgba(10, 12, 16, 0.85);
+    border: 1px solid var(--border-color);
+    color: var(--text-muted);
+    font-family: 'Special Elite', monospace;
+    font-size: 0.7rem;
+    padding: 2px 8px;
+    border-radius: var(--radius-sm);
+    z-index: 2;
+  }
+
+  .quickview-btn {
+    position: absolute;
+    inset: 0;
+    background: rgba(10, 12, 16, 0.7);
+    color: var(--text-main);
+    border: none;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    opacity: 0;
+    transition: var(--transition);
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .cover:hover .quickview-btn { opacity: 1; }
 
   .card-body {
     padding: 20px;
@@ -422,6 +550,12 @@
     font-size: 0.85rem;
     color: var(--primary-violet);
     font-weight: 600;
+  }
+
+  .card-publisher {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    font-style: italic;
     margin-bottom: 12px;
   }
 
@@ -432,7 +566,29 @@
     margin-bottom: 20px;
   }
 
-  /* REQUEST BUTTONS */
+  .donated-note {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px dashed var(--border-color);
+    padding: 10px;
+    border-radius: var(--radius-sm);
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    text-align: center;
+  }
+
+  .donated-impact {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(6, 186, 212, 0.08));
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 20px;
+    margin-bottom: 48px;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+  }
+
+  .donated-impact strong { color: var(--text-main); }
+
+  /* BUTTONS */
   .btn-group {
     display: flex;
     flex-direction: column;
@@ -490,13 +646,52 @@
     display: none;
   }
 
+  /* ---------- MODAL ---------- */
+  .modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(10, 12, 16, 0.8);
+    backdrop-filter: blur(4px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    z-index: 1000;
+  }
+
+  .modal-backdrop.open { display: flex; }
+
+  .modal {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    max-width: 520px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    padding: 28px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+
   /* ---------- COMMUNITY FEEDBACK ---------- */
   .feedback-section {
     background: var(--bg-card);
     border: 1px solid var(--border-color);
     border-radius: var(--radius-lg);
     padding: 36px;
-    margin-bottom: 64px;
+    margin-bottom: 48px;
   }
 
   .comments-grid {
@@ -521,7 +716,7 @@
   }
 
   .comment-card span {
-    font-size: 0.8rem;
+    font-size: 0.88rem;
     color: var(--primary-pink);
     font-weight: 700;
   }
@@ -541,6 +736,37 @@
     border-radius: var(--radius-sm);
     font-family: inherit;
     font-size: 0.88rem;
+  }
+
+  /* ---------- HOW IT WORKS ---------- */
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 48px;
+  }
+
+  @media (max-width: 768px) { .steps-grid { grid-template-columns: 1fr; } }
+
+  .step-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 20px;
+    border-left: 4px solid var(--accent-cyan);
+  }
+
+  .step-card strong {
+    font-family: 'Space Grotesk', sans-serif;
+    display: block;
+    margin-bottom: 6px;
+    font-size: 1.05rem;
+  }
+
+  .step-card p {
+    margin: 0;
+    font-size: 0.88rem;
+    color: var(--text-muted);
   }
 
   /* ---------- FOOTER ---------- */
@@ -569,7 +795,7 @@
         <span class="dot"></span> Gen-Z Circular Reading Club
       </div>
       <h1 class="title">RE:<span>READ</span></h1>
-      <p class="tagline">Zero-cost physical book exchange. Pass the knowledge, save the trees, keep stories alive.</p>
+      <p class="tagline">A curated, zero-cost lending collective circulating physical books across readers — zero fees, pure sustainability.</p>
     </div>
 
     <div class="hero-art">
@@ -583,28 +809,59 @@
   </header>
 
   <main>
-    <!-- STATS -->
+    <!-- STATS BAR -->
     <div class="stats-bar" id="stats-bar"></div>
 
     <!-- STATEMENT -->
     <section class="statement">
-      <p>"Circular reading isn't just about reusing paper. It's about building a sustainable culture around physical media."</p>
+      <p>"This started as a simple commitment to circular reading. Real change flourishes from small actions: one book, shared with one reader, at a time. The goal is not scale, but responsible reuse."</p>
       <cite>— Karthik Varadharajan</cite>
     </section>
 
-    <!-- ENVIRONMENTAL IMPACT METRICS (SPELLING CORRECTED: LITRES) -->
+    <!-- MISSION & PLEDGES -->
     <section>
-      <div class="section-title">⚡ Eco Metrics</div>
-      <div class="impact-grid" id="impact-grid"></div>
+      <div class="section-title">🌱 Core Principles</div>
+      <div class="mission-grid">
+        <div class="mission-card">
+          <h3>Circular Reuse</h3>
+          <p>Extending item lifespan to conserve natural resources and minimize waste.</p>
+        </div>
+        <div class="mission-card">
+          <h3>Mindful Reading</h3>
+          <p>Fostering deliberate, tactile engagement with literature over screen distraction.</p>
+        </div>
+        <div class="mission-card">
+          <h3>Privacy First</h3>
+          <p>Zero tracking, account setups, or data collection — just standard correspondence.</p>
+        </div>
+      </div>
     </section>
 
-    <!-- SHELF CONTROLS -->
+    <!-- 2-YEAR GOAL CARD -->
+    <div class="goal-card">
+      <div class="goal-fig">🌳 25 Trees</div>
+      <div class="goal-cap"><strong>2-Year Target:</strong> Conserve the paper equivalent of 25 mature trees over the next 2 years through active book recirculation. A clear, achievable milestone built step-by-step with every shared reading cycle.</div>
+    </div>
+
+    <!-- ECO METRICS (SPELLING CORRECTED: LITRES) -->
+    <section>
+      <div class="section-title">⚡ Environmental Impact Framework</div>
+      <div class="impact-grid" id="impact-grid"></div>
+      <div class="first-mile-note">
+        <strong>First-Mile Calculations:</strong> Metrics account exclusively for direct primary distributions from this shelf. As readers continuously pass titles onward, the effective ecological benefit multiplies further.
+      </div>
+    </section>
+
+    <!-- SHELF & CATALOG SECTION -->
     <section>
       <div class="shelf-header">
-        <div class="section-title" id="shelf-title">📚 Available Books</div>
+        <div class="section-title">
+          <span id="shelf-title">Currently on the shelf</span>
+          <span id="shelf-count" style="font-size:0.9rem; color:var(--text-muted); font-weight:normal;"></span>
+        </div>
         <div class="view-toggle" id="view-toggle">
-          <button type="button" class="view-btn active" data-view="available">Available</button>
-          <button type="button" class="view-btn" data-view="donated">In Circulation</button>
+          <button type="button" class="view-btn active" data-view="available">📚 Available Books</button>
+          <button type="button" class="view-btn" data-view="donated">🎁 Circulation History</button>
         </div>
       </div>
 
@@ -613,87 +870,206 @@
 
       <div class="shelf" id="shelf"></div>
       <div class="shelf" id="donated-shelf" style="display:none;"></div>
+
+      <div class="donated-impact" id="donated-impact" style="display:none;"></div>
     </section>
 
     <!-- COMMUNITY FEEDBACK -->
     <section class="feedback-section">
-      <div class="section-title">💬 Reader Vibes</div>
+      <div class="section-title">💬 Reader Feedback & Notes</div>
       <div class="comments-grid" id="comments-grid">
         <div class="comment-card">
-          <p>"Loved the aesthetic and how fast the book arrived. Already passing it to a friend!"</p>
-          <span>— Ananya R.</span>
+          <p>"Receiving 'Good Power' in zero-plastic packaging was such a pleasant surprise. The book is now with my colleague who is enjoying it equally!"</p>
+          <span>— Ananya R. (Verified Reader)</span>
         </div>
         <div class="comment-card">
-          <p>"Physical books hit completely different. Awesome eco initiative."</p>
-          <span>— Siddharth M.</span>
+          <p>"A wonderful initiative. Passing these physical volumes forward gives them so much more value than letting them sit on a shelf."</p>
+          <span>— Siddharth M. (Community Member)</span>
+        </div>
+        <div class="comment-card">
+          <p>"The request process was seamless and prompt. Loved the note inside the book about tree preservation metrics!"</p>
+          <span>— Priya V. (Verified Reader)</span>
         </div>
       </div>
 
       <form class="add-comment-form" id="feedback-form">
+        <h4 style="margin:0 0 8px; font-family:'Space Grotesk';">Leave a Note or Feedback</h4>
         <input type="text" id="comment-name" placeholder="Your Name" required>
-        <textarea id="comment-msg" rows="2" placeholder="Drop a thought or review..." required></textarea>
+        <textarea id="comment-msg" rows="3" placeholder="Share your thoughts on the book or circular reading initiative..." required></textarea>
         <button type="submit" class="btn-primary" style="width:fit-content;">Post Note</button>
       </form>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section>
+      <div class="section-title">📖 How to borrow</div>
+      <div class="steps-grid">
+        <div class="step-card">
+          <strong>1. Select a Title</strong>
+          <p>Explore available catalog items and review their descriptions.</p>
+        </div>
+        <div class="step-card">
+          <strong>2. Request via Email</strong>
+          <p>Click "Request Book" to launch a pre-formatted message with delivery details.</p>
+        </div>
+        <div class="step-card">
+          <strong>3. Receive & Share</strong>
+          <p>The book is sent directly at no charge. Read and pass it forward when completed.</p>
+        </div>
+      </div>
     </section>
   </main>
 
   <footer>
     <div class="contact-box">
-      <h3 style="font-family:'Space Grotesk'; font-size:1.5rem; margin:0 0 8px;">Got questions or books to drop?</h3>
-      <p style="color:var(--text-muted); margin:0 0 20px;">Connect directly via your preferred mail client.</p>
+      <h3 style="font-family:'Space Grotesk'; font-size:1.5rem; margin:0 0 8px;">Questions or contributions?</h3>
+      <p style="color:var(--text-muted); margin:0 0 20px;">Inquiries, recommendations, or general contact are processed directly via standard mail.</p>
       <div style="display:flex; justify-content:center; gap:12px; flex-wrap:wrap;">
-        <button class="btn-primary" onclick="smartEmailOpen('Vidya Daanam Inquiry', 'Hi Karthik,\n\n')">Direct Contact</button>
-        <button class="btn-secondary" onclick="openWebMail('gmail', 'Vidya Daanam Inquiry', 'Hi Karthik,\n\n')">Gmail Web</button>
-        <button class="btn-secondary" onclick="openWebMail('outlook', 'Vidya Daanam Inquiry', 'Hi Karthik,\n\n')">Outlook Web</button>
+        <button class="btn-primary" onclick="smartEmailOpen('RE:READ Inquiry', 'Hi Karthik,\n\n')">Write to Karthik</button>
+        <button class="btn-secondary" onclick="openWebMail('gmail', 'RE:READ Inquiry', 'Hi Karthik,\n\n')">Open in Gmail</button>
+        <button class="btn-secondary" onclick="openWebMail('outlook', 'RE:READ Inquiry', 'Hi Karthik,\n\n')">Open in Outlook</button>
       </div>
     </div>
-    <p style="color:var(--text-muted); font-size:0.85rem;">RE:READ Collective • Curated by Karthik Varadharajan</p>
+    <p style="color:var(--text-muted); font-size:0.85rem;">Curated by Karthik Varadharajan — advancing circular literacy one volume at a time.</p>
   </footer>
 
+</div>
+
+<!-- QUICK VIEW MODAL -->
+<div class="modal-backdrop" id="modal-backdrop">
+  <div class="modal" id="modal-content"></div>
 </div>
 
 <script>
   const OWNER_EMAIL = "vksuccess777@outlook.com";
 
-  /* DATA STRUCTURES */
+  /* ALL ORIGINAL CIRCULATED / DONATED BOOKS RESTORED */
   const donatedBooks = [
-    { title: "Good Power", author: "Ginni Rometty", desc: "Leadership and responsible power in a modern tech-driven world.", coverUrl: "https://covers.openlibrary.org/b/isbn/9781647823221-M.jpg", category: "Leadership" },
-    { title: "Can't Hurt Me", author: "David Goggins", desc: "Master your mind and defy the odds.", coverUrl: "https://covers.openlibrary.org/b/isbn/9781544512280-M.jpg", category: "Mindset" },
-    { title: "Hit Refresh", author: "Satya Nadella", desc: "Transforming culture and technology evolution.", coverUrl: "https://covers.openlibrary.org/b/isbn/9780062652416-M.jpg", category: "Tech" },
-    { title: "Your Next Five Moves", author: "Patrick Bet-David", desc: "Mastering the art of strategic business thinking.", coverUrl: "https://covers.openlibrary.org/b/isbn/9781982154806-M.jpg", category: "Strategy" }
+    {
+      title: "Good Power",
+      author: "Ginni Rometty",
+      publisher: "Leading Positive Change in Our Lives, Work, and World",
+      coverUrl: "https://covers.openlibrary.org/b/isbn/9781647823221-M.jpg",
+      call: "658 · ROM",
+      category: "Leadership & Change",
+      desc: "Former IBM CEO Ginni Rometty's memoir-with-purpose on using power responsibly — practical lessons on leading change in a career, a company, and a community."
+    },
+    {
+      title: "Can't Hurt Me",
+      author: "David Goggins",
+      publisher: "Master Your Mind and Defy the Odds",
+      coverUrl: "https://covers.openlibrary.org/b/isbn/9781544512280-M.jpg",
+      call: "155 · GOG",
+      category: "Mindset & Resilience",
+      desc: "A raw account of turning setbacks into fuel — part memoir, part mental-toughness manual from a former Navy SEAL."
+    },
+    {
+      title: "Hit Refresh",
+      author: "Satya Nadella",
+      publisher: "The Quest to Rediscover Microsoft's Soul",
+      coverUrl: "https://covers.openlibrary.org/b/isbn/9780062652416-M.jpg",
+      call: "338 · NAD",
+      category: "Tech & Innovation",
+      desc: "Microsoft's CEO on transforming organizational culture, focusing on empathy, leadership, and technology evolution."
+    },
+    {
+      title: "Your Next Five Moves",
+      author: "Patrick Bet-David",
+      publisher: "Master the Art of Business Strategy",
+      coverUrl: "https://covers.openlibrary.org/b/isbn/9781982154806-M.jpg",
+      call: "650 · BET",
+      category: "Strategy & Growth",
+      desc: "A strategic methodology for personal and professional growth — practical frameworks for forward planning."
+    }
   ];
 
+  /* ALL ORIGINAL AVAILABLE BOOKS RESTORED */
   const books = [
-    { title: "Shortcuts in Mathematics", author: "Clive Stevens", desc: "Mental arithmetic shortcuts and quick calculations.", coverUrl: "https://covers.openlibrary.org/b/isbn/9781845600075-M.jpg", category: "Maths" },
-    { title: "Think Like a Maths Genius", author: "Arthur Benjamin", desc: "Calculate in your head faster than ever.", coverUrl: "https://covers.openlibrary.org/b/isbn/9780285637955-M.jpg", category: "Maths" },
-    { title: "Chanakya in You", author: "Radhakrishnan Pillai", desc: "Classical strategic principles applied to modern growth.", coverUrl: "https://covers.openlibrary.org/b/isbn/9788184956818-M.jpg", category: "Growth" },
-    { title: "The AI Driven Leader", author: "Geoff Woods", desc: "Executive leadership in automated technology spaces.", coverUrl: "https://covers.openlibrary.org/b/isbn/9781637633281-M.jpg", category: "Tech" },
-    { title: "Nature Cure for Children", author: "Dr. H.K. Bakhru", desc: "Holistic health and natural wellness principles.", coverUrl: "https://covers.openlibrary.org/b/isbn/9788172248239-M.jpg", category: "Health" },
-    { title: "The Complete Panchatantra", author: "Gratian Vas", desc: "Timeless tales of strategy, ethics, and leadership.", coverUrl: "https://covers.openlibrary.org/b/isbn/9788182522206-M.jpg", category: "Classics" }
+    {
+      title: "Shortcuts in Mathematics",
+      author: "Clive Stevens",
+      publisher: "Sun Shine Publication",
+      coverUrl: "https://covers.openlibrary.org/b/isbn/9781845600075-M.jpg",
+      call: "510 · STE",
+      category: "Mind & Maths",
+      desc: "A pragmatic manual for mental arithmetic and mental calculation shortcuts — percentages, square roots, and division techniques."
+    },
+    {
+      title: "Think Like a Maths Genius",
+      author: "Arthur Benjamin",
+      publisher: "The Art of Calculating in Your Head",
+      coverUrl: "https://covers.openlibrary.org/b/isbn/9780285637955-M.jpg",
+      call: "153 · BEN",
+      category: "Mind & Maths",
+      badge: "Popular",
+      desc: "A guide on breaking complex mathematics into easy, intuitive mental processes, building calculation confidence."
+    },
+    {
+      title: "Chanakya in You",
+      author: "Radhakrishnan Pillai",
+      publisher: "Jaico Publishing House",
+      coverUrl: "https://covers.openlibrary.org/b/isbn/9788184956818-M.jpg",
+      call: "181 · PIL",
+      category: "Life & Growth",
+      desc: "Translating classical strategic principles into modern organizational leadership and personal decision-making frameworks."
+    },
+    {
+      title: "The AI Driven Leader",
+      author: "Geoff Woods",
+      publisher: "Main Street Books",
+      coverUrl: "https://covers.openlibrary.org/b/isbn/9781637633281-M.jpg",
+      call: "658 · WOO",
+      category: "Leadership & Strategy",
+      badge: "New Arrival",
+      desc: "A framework for practical executive leadership in automated technology environments without losing human perspective."
+    },
+    {
+      title: "Nature Cure for Children",
+      author: "Dr. H.K. Bakhru",
+      publisher: "Jaico Books",
+      coverUrl: "https://covers.openlibrary.org/b/isbn/9788172248239-M.jpg",
+      call: "615 · BAK",
+      category: "Family & Health",
+      desc: "A comprehensive guide on natural wellness principles, preventive health, and holistic childhood routines."
+    },
+    {
+      title: "The Complete Panchatantra Omnibus",
+      author: "Retold by Gratian Vas",
+      publisher: "Series editor: Sunita Pant Bansal",
+      coverUrl: "https://covers.openlibrary.org/b/isbn/9788182522206-M.jpg",
+      call: "398 · VAS",
+      category: "Family & Health",
+      desc: "Classic folk literature exploring themes of governance, ethics, human relationships, and strategic wisdom."
+    }
   ];
 
   /* STATS CALCULATIONS */
+  const STATS = { readersReached: 4 };
   const booksShared = donatedBooks.length;
-  const co2Saved = Math.round(booksShared * 5.1);
-  const treesWorth = (booksShared / 25).toFixed(1);
-  const waterSaved = Math.round(booksShared * 120);
+  const AVG_CO2_PER_BOOK = 5.1; 
+  const BOOKS_PER_TREE = 25;
+  const AVG_WATER_PER_BOOK = 120;
+
+  const co2Saved = Math.round(booksShared * AVG_CO2_PER_BOOK);
+  const treesWorth = (booksShared / BOOKS_PER_TREE).toFixed(1);
+  const waterSaved = Math.round(booksShared * AVG_WATER_PER_BOOK);
 
   document.getElementById('stats-bar').innerHTML = `
-    <div class="stat-card"><div class="num">4</div><div class="label">Readers Reached</div></div>
-    <div class="stat-card"><div class="num">${booksShared}</div><div class="label">Books Passed</div></div>
-    <div class="stat-card"><div class="num">~${co2Saved}kg</div><div class="label">CO₂ Offset</div></div>
+    <div class="stat-card"><div class="num">${STATS.readersReached}</div><div class="label">Readers Reached</div></div>
+    <div class="stat-card"><div class="num">${booksShared}</div><div class="label">Books Circulated</div></div>
+    <div class="stat-card"><div class="num">~${co2Saved} kg</div><div class="label">CO₂ Offset</div></div>
     <div class="stat-card"><div class="num">${treesWorth}</div><div class="label">Trees Conserved</div></div>
   `;
 
   /* SPELLING CORRECTION ASSURED: "Litres" */
   document.getElementById('impact-grid').innerHTML = `
-    <div class="impact-card"><div class="fig">1 Tree ≈ 25 Books</div><div class="cap">Average yield per tree for print paper production.</div></div>
-    <div class="impact-card"><div class="fig">5.1 kg CO₂</div><div class="cap">Estimated carbon offset per reused book.</div></div>
-    <div class="impact-card"><div class="fig">~120 Litres</div><div class="cap">Water conserved per book in circulation.</div></div>
-    <div class="impact-card"><div class="fig">${waterSaved} Litres</div><div class="cap">Total water saved through RE:READ so far.</div></div>
+    <div class="impact-card"><div class="fig">1 Tree ≈ 25 Books</div><div class="cap">Average yield per tree for physical print manufacturing. Reuse preserves natural forest land.</div></div>
+    <div class="impact-card"><div class="fig">2.7–7.5 kg CO₂</div><div class="cap">Estimated carbon footprint offset per reused title across manufacturing and transport.</div></div>
+    <div class="impact-card"><div class="fig">~120 Litres</div><div class="cap">Average water usage conserved per book kept in continuous circulation.</div></div>
+    <div class="impact-card"><div class="fig">${treesWorth} Trees Worth</div><div class="cap">Calculated total timber conservation footprint achieved by this collection so far.</div></div>
   `;
 
-  /* SMART MOBILE-FRIENDLY MAIL OPENER DEDICATED DEBUGGING */
+  /* MOBILE SMART EMAIL ROUTING */
   function isMobile() {
     return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
   }
@@ -712,7 +1088,6 @@
     }
 
     if (isMobile()) {
-      // Direct location redirect prevents mobile pop-up blocking issues
       window.location.href = url;
     } else {
       window.open(url, '_blank');
@@ -722,76 +1097,208 @@
   function copyDetails(text, toastId) {
     navigator.clipboard.writeText(text).then(() => {
       const toast = document.getElementById(toastId);
-      toast.style.display = 'block';
-      setTimeout(() => { toast.style.display = 'none'; }, 2000);
+      if (toast) {
+        toast.style.display = 'block';
+        setTimeout(() => { toast.style.display = 'none'; }, 2000);
+      }
     });
   }
 
-  /* RENDER CATALOG */
+  /* COVER RENDER HELPERS */
+  function renderCover(book, index, isDonated) {
+    const badgeMarkup = book.badge ? `<span class="badge-tag">${book.badge}</span>` : '';
+    const statusMarkup = isDonated ? `<span class="badge badge-circ">Circulating</span>` : `<span class="badge badge-avail">Available</span>`;
+    const quickBtnAttr = isDonated ? `data-donated-index="${index}"` : `data-index="${index}"`;
+
+    return `
+      <div class="cover">
+        ${badgeMarkup}
+        ${statusMarkup}
+        <img class="cover-img" src="${book.coverUrl}" alt="${book.title}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+        <div class="cover-fallback" style="display:none;">
+          <span class="spine-title">${book.title}</span>
+        </div>
+        <span class="call-label">${book.call}</span>
+        <button type="button" class="quickview-btn" ${quickBtnAttr}>Quick View</button>
+      </div>
+    `;
+  }
+
+  /* RENDER AVAILABLE BOOKS */
   const shelf = document.getElementById('shelf');
+  const tabsEl = document.getElementById('tabs');
+  document.getElementById('shelf-count').textContent = `(${books.length} Available Items)`;
+
   books.forEach((book, i) => {
     const toastId = `toast-${i}`;
     const subject = `Book Request: ${book.title}`;
-    const body = `Hi Karthik,\n\nI want to request "${book.title}" via RE:READ.\n\nName:\nAddress:\n`;
+    const body = `Hi Karthik,\n\nI would like to request the following book from RE:READ:\n\nTitle: ${book.title}\nAuthor: ${book.author}\n\nRecipient Details:\nName: \nDelivery Address: \nPhone (Optional): \n\nThank you!`;
     const fullText = `To: ${OWNER_EMAIL}\nSubject: ${subject}\n\n${body}`;
 
-    const card = document.createElement('div');
+    const card = document.createElement('article');
     card.className = 'card';
     card.dataset.category = book.category;
     card.innerHTML = `
-      <div class="cover">
-        <span class="badge badge-avail">Available</span>
-        <img class="cover-img" src="${book.coverUrl}" alt="${book.title}" onerror="this.style.display='none'">
-      </div>
+      ${renderCover(book, i, false)}
       <div class="card-body">
         <h3 class="card-title">${book.title}</h3>
         <div class="card-author">${book.author}</div>
-        <p class="card-desc">${book.desc}</p>
+        ${book.publisher ? `<div class="card-publisher">${book.publisher}</div>` : ''}
+        <div class="card-desc">${book.desc}</div>
         <div class="btn-group">
-          <button class="btn-primary" onclick="smartEmailOpen('${subject}', '${body.replace(/\n/g, '\\n')}')">⚡ Request Book</button>
+          <button class="btn-primary" onclick="smartEmailOpen('${subject}', '${body.replace(/\n/g, '\\n')}')">✉ Request Book</button>
           <div class="btn-secondary-row">
             <button class="btn-secondary" onclick="openWebMail('gmail', '${subject}', '${body.replace(/\n/g, '\\n')}')">Gmail</button>
             <button class="btn-secondary" onclick="openWebMail('outlook', '${subject}', '${body.replace(/\n/g, '\\n')}')">Outlook</button>
-            <button class="btn-secondary" onclick="copyDetails('${fullText.replace(/\n/g, '\\n')}', '${toastId}')">Copy</button>
+            <button class="btn-secondary" onclick="copyDetails('${fullText.replace(/\n/g, '\\n')}', '${toastId}')">Copy Text</button>
           </div>
-          <div class="copied-toast" id="${toastId}">Copied to Clipboard ✓</div>
+          <div class="copied-toast" id="${toastId}">Details copied to clipboard ✓</div>
         </div>
       </div>
     `;
     shelf.appendChild(card);
   });
 
-  /* RENDER DONATED CATALOG */
+  /* AVAILABLE CATEGORY TABS */
+  const categories = ['All', ...new Set(books.map(b => b.category))];
+  tabsEl.innerHTML = categories.map((c, i) =>
+    `<button type="button" class="tab${i === 0 ? ' active' : ''}" data-cat="${c}">${c}</button>`
+  ).join('');
+
+  tabsEl.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabsEl.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      const cat = tab.dataset.cat;
+      shelf.querySelectorAll('.card').forEach(card => {
+        card.classList.toggle('hidden', cat !== 'All' && card.dataset.category !== cat);
+      });
+    });
+  });
+
+  /* RENDER CIRCULATED / DONATED BOOKS */
   const donatedShelf = document.getElementById('donated-shelf');
-  donatedBooks.forEach((book) => {
-    const card = document.createElement('div');
+  const donatedTabsEl = document.getElementById('donated-tabs');
+
+  donatedBooks.forEach((book, i) => {
+    const card = document.createElement('article');
     card.className = 'card';
     card.dataset.category = book.category;
     card.innerHTML = `
-      <div class="cover">
-        <span class="badge badge-circ">In Circulation</span>
-        <img class="cover-img" src="${book.coverUrl}" alt="${book.title}" onerror="this.style.display='none'">
-      </div>
+      ${renderCover(book, i, true)}
       <div class="card-body">
         <h3 class="card-title">${book.title}</h3>
         <div class="card-author">${book.author}</div>
-        <p class="card-desc">${book.desc}</p>
+        ${book.publisher ? `<div class="card-publisher">${book.publisher}</div>` : ''}
+        <div class="card-desc">${book.desc}</div>
+        <div class="donated-note">📬 In active circulation with reader</div>
       </div>
     `;
     donatedShelf.appendChild(card);
   });
 
-  /* TOGGLE VIEWS */
+  /* CIRCULATED CATEGORY TABS */
+  const donatedCategories = ['All', ...new Set(donatedBooks.map(b => b.category))];
+  donatedTabsEl.innerHTML = donatedCategories.map((c, i) =>
+    `<button type="button" class="tab${i === 0 ? ' active' : ''}" data-cat="${c}">${c}</button>`
+  ).join('');
+
+  donatedTabsEl.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      donatedTabsEl.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      const cat = tab.dataset.cat;
+      donatedShelf.querySelectorAll('.card').forEach(card => {
+        card.classList.toggle('hidden', cat !== 'All' && card.dataset.category !== cat);
+      });
+    });
+  });
+
+  document.getElementById('donated-impact').innerHTML =
+    `<strong>${booksShared} total volumes distributed</strong> preserving approximately ${treesWorth} trees' worth of processed timber and ${waterSaved.toLocaleString()} litres of water.`;
+
+  /* VIEW TOGGLE BETWEEN AVAILABLE AND CIRCULATION HISTORY */
   const viewToggle = document.getElementById('view-toggle');
+  const shelfTitleEl = document.getElementById('shelf-title');
+  const shelfCountEl = document.getElementById('shelf-count');
+
   viewToggle.querySelectorAll('.view-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       viewToggle.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      const isDonated = btn.dataset.view === 'donated';
-      shelf.style.display = isDonated ? 'none' : 'grid';
-      donatedShelf.style.display = isDonated ? 'grid' : 'none';
-      document.getElementById('shelf-title').textContent = isDonated ? '🔄 Circulation History' : '📚 Available Books';
+      const view = btn.dataset.view;
+
+      if (view === 'donated') {
+        shelf.style.display = 'none';
+        tabsEl.style.display = 'none';
+        donatedShelf.style.display = 'grid';
+        donatedTabsEl.style.display = 'flex';
+        document.getElementById('donated-impact').style.display = 'block';
+        shelfTitleEl.textContent = 'Circulation History';
+        shelfCountEl.textContent = `(${donatedBooks.length} Distributed Items)`;
+      } else {
+        shelf.style.display = 'grid';
+        tabsEl.style.display = 'flex';
+        donatedShelf.style.display = 'none';
+        donatedTabsEl.style.display = 'none';
+        document.getElementById('donated-impact').style.display = 'none';
+        shelfTitleEl.textContent = 'Currently on the shelf';
+        shelfCountEl.textContent = `(${books.length} Available Items)`;
+      }
     });
+  });
+
+  /* QUICK VIEW MODAL FUNCTIONALITY */
+  const modalBackdrop = document.getElementById('modal-backdrop');
+  const modalContent = document.getElementById('modal-content');
+
+  function closeModal() {
+    modalBackdrop.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function openQuickView(book, isDonated) {
+    const subject = `Book Request: ${book.title}`;
+    const body = `Hi Karthik,\n\nI would like to request "${book.title}" from RE:READ.\n\nName:\nAddress:\n`;
+    const fullText = `To: ${OWNER_EMAIL}\nSubject: ${subject}\n\n${body}`;
+
+    modalContent.innerHTML = `
+      <button type="button" class="modal-close" onclick="closeModal()">&times;</button>
+      <h3 style="font-family:'Space Grotesk'; font-size:1.4rem; margin:0 0 4px;">${book.title}</h3>
+      <div style="color:var(--primary-violet); font-weight:600; font-size:0.9rem; margin-bottom:12px;">${book.author}</div>
+      <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.6; margin-bottom:20px;">${book.desc}</p>
+      ${!isDonated ? `
+        <div class="btn-group">
+          <button class="btn-primary" onclick="smartEmailOpen('${subject}', '${body.replace(/\n/g, '\\n')}')">✉ Request Book</button>
+          <div class="btn-secondary-row">
+            <button class="btn-secondary" onclick="openWebMail('gmail', '${subject}', '${body.replace(/\n/g, '\\n')}')">Gmail</button>
+            <button class="btn-secondary" onclick="openWebMail('outlook', '${subject}', '${body.replace(/\n/g, '\\n')}')">Outlook</button>
+            <button class="btn-secondary" onclick="copyDetails('${fullText.replace(/\n/g, '\\n')}', 'modal-toast')">Copy</button>
+          </div>
+          <div class="copied-toast" id="modal-toast">Details copied to clipboard ✓</div>
+        </div>
+      ` : `<div class="donated-note">📬 In active circulation with reader</div>`}
+    `;
+    modalBackdrop.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  shelf.addEventListener('click', (e) => {
+    if (e.target.classList.contains('quickview-btn')) {
+      const idx = e.target.dataset.index;
+      openQuickView(books[idx], false);
+    }
+  });
+
+  donatedShelf.addEventListener('click', (e) => {
+    if (e.target.classList.contains('quickview-btn')) {
+      const idx = e.target.dataset.donatedIndex;
+      openQuickView(donatedBooks[idx], true);
+    }
+  });
+
+  modalBackdrop.addEventListener('click', (e) => {
+    if (e.target === modalBackdrop) closeModal();
   });
 
   /* FORM HANDLING */
@@ -803,7 +1310,7 @@
 
     const newCard = document.createElement('div');
     newCard.className = 'comment-card';
-    newCard.innerHTML = `<p>"${msg}"</p><span>— ${name}</span>`;
+    newCard.innerHTML = `<p>"${msg}"</p><span>— ${name} (Community Member)</span>`;
     grid.prepend(newCard);
 
     document.getElementById('comment-name').value = '';
