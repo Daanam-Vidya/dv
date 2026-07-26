@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ReBook Community Portal</title>
+  <title>RE:READ Community Portal</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
@@ -184,8 +184,13 @@
     .genz-hero p {
       font-size: 1.1rem;
       color: var(--text-muted);
-      max-width: 720px;
+      max-width: 780px;
       margin: 0 auto 2rem auto;
+      line-height: 1.7;
+    }
+
+    .genz-hero p strong {
+      color: var(--mint-green);
     }
 
     .genz-actions {
@@ -203,7 +208,7 @@
       text-decoration: none;
       cursor: pointer;
       border: none;
-      transition: all 0.25 ease;
+      transition: all 0.25s ease;
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
@@ -575,7 +580,7 @@
 
   <!-- NAVIGATION HEADER -->
   <nav class="navbar">
-    <a href="#" class="brand-logo">📚 ReBook Community</a>
+    <a href="#" class="brand-logo">📚 RE:READ Community</a>
     <ul class="nav-links">
       <li><a href="#mission">Mission</a></li>
       <li><a href="#dashboard" onclick="triggerCounters()">Dashboard</a></li>
@@ -591,7 +596,7 @@
       <span class="genz-tag">♻️ Pass the Book, Not the Trash</span>
       <h1>Read, Share, Reforest.</h1>
       <p>
-        Physical books are meant to be read, not forgotten on shelves or thrown away. We are building an open peer-to-peer circulation network where every shared page turns into real-world environmental impact.
+        <strong>RE:READ Community</strong> is designed with a dual purpose: directly preserving trees by giving physical books endless life, while helping readers rebuild deep focus, form tangible reading habits, and step away from constant digital glare for a meaningful screen detox.
       </p>
       <div class="genz-actions">
         <a href="#shelf" class="btn btn-green">Explore Bookshelf 📖</a>
@@ -599,23 +604,23 @@
       </div>
     </div>
 
-    <!-- WIDGET 1: MISSION & SDG IMPACT (NEW FRONT WIDGET) -->
+    <!-- WIDGET 1: MISSION & SDG IMPACT -->
     <div id="mission" class="mission-widget">
       <h2 class="section-title">🎯 Our Mission & UN SDG Alignment</h2>
       <p class="section-sub">Why we pass physical books instead of buying new ones.</p>
 
       <div class="mission-grid">
         <div class="mission-card">
-          <h3>🌲 Why 25 Trees?</h3>
+          <h3>🌲 Why 25 Trees Goal?</h3>
           <p>
-            Standard book production uses massive amounts of virgin timber and water. By recirculating physical copies, our goal is to save the equivalent of 25 mature trees from being felled for single-read books.
+            Standard paper production consumes massive amounts of timber. Since 1 tree yields roughly 25 books, recirculating physical copies saves entire mini-forests from being cut down for single-use reading.
           </p>
         </div>
 
         <div class="mission-card">
-          <h3>♻️ Impact of Reusing</h3>
+          <h3>📱 Digital Detox & Habit Forming</h3>
           <p>
-            Reusing 1 physical book 5 times saves up to 12 lbs of CO2 emissions and conserves over 1,400 gallons of water compared to producing 5 new standalone paperbacks.
+            Physical reading restores cognitive attention spans destroyed by screen overexposure. RE:READ turns physical book handoffs into a habit-forming community ritual.
           </p>
         </div>
 
@@ -683,14 +688,14 @@
           </div>
         </div>
 
-        <!-- Trees Conserved (Calculated Dynamic Metric) -->
+        <!-- Trees Conserved (Exact Math: 4 books / 25 per tree = 0.16) -->
         <div class="metric-card">
           <div>
             <div class="metric-head"><span>🌲</span> Trees Conserved</div>
-            <div class="metric-num"><span id="trees-conserved" data-target="0">0</span> <span style="font-size: 1rem; color: #94a3b8;">/ 25 Goal</span></div>
+            <div class="metric-num"><span id="trees-conserved" data-target="0.16" data-decimals="2">0.00</span> <span style="font-size: 1rem; color: #94a3b8;">/ 25 Goal</span></div>
           </div>
           <div class="metric-desc">
-            Calculated based on total active physical books and pages kept in continuous circulation.
+            Calculated accurately: 1 tree yields 25 books. 4 books in circulation = <strong>0.16 trees conserved</strong>.
           </div>
         </div>
       </div>
@@ -713,8 +718,8 @@
       <div class="books-grid">
         <div class="book-card" data-status="circulating">
           <div>
-            <div class="book-title">The Silent Patient</div>
-            <div class="book-author">by Alex Michaelides</div>
+            <div class="book-title">Good Power</div>
+            <div class="book-author">by Ginni Rometty</div>
           </div>
           <div class="book-footer">
             <span class="badge badge-circulating">In Circulation</span>
@@ -724,8 +729,8 @@
 
         <div class="book-card" data-status="circulating">
           <div>
-            <div class="book-title">Atomic Habits</div>
-            <div class="book-author">by James Clear</div>
+            <div class="book-title">Can't Hurt Me</div>
+            <div class="book-author">by David Goggins</div>
           </div>
           <div class="book-footer">
             <span class="badge badge-circulating">In Circulation</span>
@@ -733,21 +738,21 @@
           </div>
         </div>
 
-        <div class="book-card" data-status="available">
+        <div class="book-card" data-status="circulating">
           <div>
-            <div class="book-title">Braiding Sweetgrass</div>
-            <div class="book-author">by Robin Wall Kimmerer</div>
+            <div class="book-title">Hit Refresh</div>
+            <div class="book-author">by Satya Nadella</div>
           </div>
           <div class="book-footer">
-            <span class="badge badge-available">Available</span>
+            <span class="badge badge-circulating">In Circulation</span>
             <span class="read-count">2 Readers</span>
           </div>
         </div>
 
         <div class="book-card" data-status="circulating">
           <div>
-            <div class="book-title">To Kill a Mockingbird</div>
-            <div class="book-author">by Harper Lee</div>
+            <div class="book-title">Your Next Five Moves</div>
+            <div class="book-author">by Patrick Bet-David</div>
           </div>
           <div class="book-footer">
             <span class="badge badge-circulating">In Circulation</span>
@@ -766,36 +771,26 @@
         <table>
           <thead>
             <tr>
-              <th>Book Title</th>
-              <th>Last Handed To</th>
-              <th>Exchange Hub Location</th>
+              <th>Name of Book</th>
               <th>Status</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td><strong>Atomic Habits</strong></td>
-              <td>Sarah M.</td>
-              <td>Community Hub North</td>
-              <td><span class="badge badge-circulating">Reading</span></td>
+              <td><strong>Good Power</strong></td>
+              <td><span class="badge badge-circulating">Donated to next reader</span></td>
             </tr>
             <tr>
-              <td><strong>The Silent Patient</strong></td>
-              <td>David K.</td>
-              <td>Central Library Drop Box</td>
-              <td><span class="badge badge-circulating">Reading</span></td>
+              <td><strong>Can't Hurt Me</strong></td>
+              <td><span class="badge badge-circulating">Donated to next reader</span></td>
             </tr>
             <tr>
-              <td><strong>Braiding Sweetgrass</strong></td>
-              <td>Returned to Shelf</td>
-              <td>Community Hub South</td>
-              <td><span class="badge badge-available">Ready to Borrow</span></td>
+              <td><strong>Hit Refresh</strong></td>
+              <td><span class="badge badge-circulating">Donated to next reader</span></td>
             </tr>
             <tr>
-              <td><strong>To Kill a Mockingbird</strong></td>
-              <td>Elena R.</td>
-              <td>East Side Exchange Box</td>
-              <td><span class="badge badge-circulating">Reading</span></td>
+              <td><strong>Your Next Five Moves</strong></td>
+              <td><span class="badge badge-circulating">Donated to next reader</span></td>
             </tr>
           </tbody>
         </table>
@@ -816,19 +811,19 @@
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       // 1. Visitor Count Logic
-      let visitors = parseInt(localStorage.getItem("rebook_visitors") || "0", 10) + 1;
-      localStorage.setItem("rebook_visitors", visitors);
+      let visitors = parseInt(localStorage.getItem("reread_visitors") || "0", 10) + 1;
+      localStorage.setItem("reread_visitors", visitors);
       document.getElementById("visitor-count").setAttribute("data-target", visitors);
 
       // 2. Community Supporters Counter Logic
       const supportBtn = document.getElementById("support-btn");
-      let supporters = parseInt(localStorage.getItem("rebook_supporters") || "0", 10);
+      let supporters = parseInt(localStorage.getItem("reread_supporters") || "0", 10);
       document.getElementById("support-count").setAttribute("data-target", supporters);
 
       supportBtn.addEventListener("click", (e) => {
         e.preventDefault();
         supporters += 1;
-        localStorage.setItem("rebook_supporters", supporters);
+        localStorage.setItem("reread_supporters", supporters);
         
         // Update data attribute and re-animate counter
         const supportDisplay = document.getElementById("support-count");
@@ -842,18 +837,12 @@
         }, 2500);
       });
 
-      // 3. Dynamic Calculation for Trees Conserved
-      // Assuming 4 books in active circulation * avg pages saved = calculated ratio
-      const booksInCirculation = 4;
-      const calculatedTreesConserved = Math.max(1, Math.round((booksInCirculation * 3.5))); 
-      document.getElementById("trees-conserved").setAttribute("data-target", calculatedTreesConserved);
-
       // Trigger initial counter animations on view
       triggerCounters();
     });
 
-    // 4. Smooth Counter Rolling Animation
-    function animateCounter(element, target) {
+    // 3. Smooth Counter Rolling Animation (Handles integers & decimals)
+    function animateCounter(element, target, decimals = 0) {
       let start = 0;
       const duration = 1200; 
       const stepTime = 20;
@@ -861,17 +850,17 @@
       const increment = target / steps;
 
       if (target === 0) {
-        element.textContent = "0";
+        element.textContent = (0).toFixed(decimals);
         return;
       }
 
       const timer = setInterval(() => {
         start += increment;
         if (start >= target) {
-          element.textContent = target.toLocaleString();
+          element.textContent = target.toFixed(decimals);
           clearInterval(timer);
         } else {
-          element.textContent = Math.floor(start).toLocaleString();
+          element.textContent = start.toFixed(decimals);
         }
       }, stepTime);
     }
@@ -879,12 +868,13 @@
     function triggerCounters() {
       const counters = document.querySelectorAll('[data-target]');
       counters.forEach(counter => {
-        const target = parseInt(counter.getAttribute('data-target'), 10) || 0;
-        animateCounter(counter, target);
+        const target = parseFloat(counter.getAttribute('data-target')) || 0;
+        const decimals = parseInt(counter.getAttribute('data-decimals') || "0", 10);
+        animateCounter(counter, target, decimals);
       });
     }
 
-    // 5. Bookshelf Filter Function
+    // 4. Bookshelf Filter Function
     function filterBooks(category) {
       const cards = document.querySelectorAll('.book-card');
       const buttons = document.querySelectorAll('.filter-btn');
