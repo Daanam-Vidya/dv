@@ -133,39 +133,133 @@
     .tagline { margin: 0 auto; }
   }
 
-  /* Bento Hero Art */
+  /* ---------- CREATIVE HERO ART (3D DYNAMIC STACK) ---------- */
   .hero-art {
     width: 100%;
-    max-width: 320px;
-    aspect-ratio: 1;
-    border-radius: var(--radius-lg);
-    background: var(--glass-bg);
-    border: 1px solid var(--border-color);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    max-width: 340px;
+    height: 340px;
+    position: relative;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    position: relative;
-    overflow: hidden;
+    perspective: 1000px;
   }
 
-  .hero-art-glow {
+  .hero-glow {
     position: absolute;
-    width: 180px; height: 180px;
+    width: 220px;
+    height: 220px;
     background: var(--gradient-violet-pink);
-    filter: blur(60px);
-    opacity: 0.4;
+    filter: blur(80px);
+    opacity: 0.35;
+    border-radius: 50%;
+    animation: pulseGlow 4s ease-in-out infinite alternate;
   }
 
-  .hero-svg {
-    z-index: 2;
-    animation: float 5s ease-in-out infinite;
+  @keyframes pulseGlow {
+    0% { transform: scale(0.9); opacity: 0.25; }
+    100% { transform: scale(1.15); opacity: 0.45; }
   }
 
-  @keyframes float {
-    0%, 100% { transform: translateY(0px) rotate(0deg); }
-    50% { transform: translateY(-10px) rotate(2deg); }
+  .stack-container {
+    position: relative;
+    width: 220px;
+    height: 220px;
+    transform-style: preserve-3d;
+    transform: rotateX(15deg) rotateY(-15deg);
+    transition: transform 0.5s ease-out;
+  }
+
+  .hero-art:hover .stack-container {
+    transform: rotateX(22deg) rotateY(-8deg) scale(1.05);
+  }
+
+  .book-layer {
+    position: absolute;
+    width: 150px;
+    height: 200px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 16px;
+    backdrop-filter: blur(12px);
+    transition: var(--transition);
+  }
+
+  .book-layer-1 {
+    background: linear-gradient(145deg, rgba(168, 85, 247, 0.3), rgba(18, 22, 32, 0.9));
+    transform: translateZ(0px) rotate(-8deg);
+    top: 10px; left: 10px;
+  }
+
+  .book-layer-2 {
+    background: linear-gradient(145deg, rgba(236, 72, 153, 0.35), rgba(18, 22, 32, 0.95));
+    transform: translateZ(30px) rotate(4deg);
+    top: 0; left: 35px;
+    border-color: rgba(236, 72, 153, 0.4);
+  }
+
+  .book-layer-3 {
+    background: linear-gradient(145deg, rgba(16, 185, 129, 0.4), rgba(10, 12, 16, 0.95));
+    transform: translateZ(60px) rotate(-2deg);
+    top: -10px; left: 60px;
+    border-color: rgba(16, 185, 129, 0.5);
+  }
+
+  .hero-art:hover .book-layer-1 { transform: translateZ(-10px) rotate(-14deg) translateY(10px); }
+  .hero-art:hover .book-layer-2 { transform: translateZ(25px) rotate(0deg); }
+  .hero-art:hover .book-layer-3 { transform: translateZ(70px) rotate(6deg) translateY(-10px); }
+
+  .book-spine-line {
+    width: 24px;
+    height: 4px;
+    background: rgba(255,255,255,0.6);
+    border-radius: 2px;
+  }
+
+  .book-tag {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #FFF;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .circle-badge {
+    position: absolute;
+    bottom: -10px;
+    right: -10px;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: var(--glass-bg);
+    border: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(8px);
+    z-index: 10;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+  }
+
+  .circle-text-svg {
+    width: 80px;
+    height: 80px;
+    animation: rotateText 16s linear infinite;
+  }
+
+  @keyframes rotateText {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  .circle-center-icon {
+    position: absolute;
+    font-size: 1.2rem;
   }
 
   /* ---------- STATS BENTO GRID ---------- */
@@ -236,7 +330,7 @@
     font-weight: 700;
   }
 
-  /* ---------- MISSION / GOALS ---------- */
+  /* ---------- MISSION / GOALS & UN CONTEXT ---------- */
   .mission-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -264,30 +358,66 @@
     color: var(--text-muted);
   }
 
-  .goal-card {
-    background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(168, 85, 247, 0.1));
-    border: 1px solid var(--border-color);
+  /* EXPANDED 25 TREES & DEFORESTATION CARD */
+  .goal-card-expanded {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(168, 85, 247, 0.08));
+    border: 1px solid rgba(16, 185, 129, 0.3);
     border-radius: var(--radius-lg);
-    padding: 28px 32px;
+    padding: 32px;
+    margin-bottom: 48px;
+  }
+
+  .goal-header {
     display: flex;
     align-items: center;
-    gap: 24px;
-    margin-bottom: 48px;
+    gap: 16px;
+    margin-bottom: 20px;
     flex-wrap: wrap;
   }
 
-  .goal-fig {
+  .goal-badge {
     font-family: 'Space Grotesk', sans-serif;
     font-weight: 700;
-    font-size: 2rem;
+    font-size: 1.8rem;
     color: var(--accent-emerald);
+    background: rgba(16, 185, 129, 0.15);
+    padding: 6px 16px;
+    border-radius: var(--radius-sm);
   }
 
-  .goal-cap {
-    font-size: 0.95rem;
+  .goal-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin: 0;
+  }
+
+  .goal-body {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+  }
+
+  .goal-box {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 20px;
+  }
+
+  .goal-box h4 {
+    margin: 0 0 8px;
+    font-size: 1rem;
+    color: var(--primary-pink);
+    font-family: 'Space Grotesk', sans-serif;
+  }
+
+  .goal-box p {
+    margin: 0;
+    font-size: 0.88rem;
     color: var(--text-muted);
-    flex: 1;
-    min-width: 260px;
+    line-height: 1.5;
   }
 
   /* ---------- IMPACT GRID ---------- */
@@ -795,16 +925,35 @@
         <span class="dot"></span> Gen-Z Circular Reading Club
       </div>
       <h1 class="title">RE:<span>READ</span></h1>
-      <p class="tagline">A curated, zero-cost lending collective circulating physical books across readers — zero fees, pure sustainability.</p>
+      <p class="tagline">A curated, zero-cost lending collective circulating physical books across readers — zero fees, pure sustainability, and screen detox.</p>
     </div>
 
+    <!-- CREATIVE TOP RIGHT HERO ANIMATION -->
     <div class="hero-art">
-      <div class="hero-art-glow"></div>
-      <svg class="hero-svg" width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="#A855F7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
-        <circle cx="12" cy="10" r="3"></circle>
-      </svg>
+      <div class="hero-glow"></div>
+      <div class="stack-container">
+        <div class="book-layer book-layer-1">
+          <div class="book-spine-line"></div>
+          <div class="book-tag">Pass It On</div>
+        </div>
+        <div class="book-layer book-layer-2">
+          <div class="book-spine-line"></div>
+          <div class="book-tag">Zero Cost</div>
+        </div>
+        <div class="book-layer book-layer-3">
+          <div class="book-spine-line"></div>
+          <div class="book-tag">RE:READ</div>
+        </div>
+      </div>
+      <div class="circle-badge">
+        <svg class="circle-text-svg" viewBox="0 0 100 100">
+          <path id="circlePath" d="M 50, 50 m -35, 0 a 35,35 0 1,1 70,0 a 35,35 0 1,1 -70,0" fill="none" />
+          <text font-size="9.5" fill="#A855F7" font-weight="bold" letter-spacing="2">
+            <textPath href="#circlePath">CIRCULATE · THE · CULTURE ·</textPath>
+          </text>
+        </svg>
+        <span class="circle-center-icon">⚡</span>
+      </div>
     </div>
   </header>
 
@@ -815,7 +964,7 @@
     <!-- STATEMENT -->
     <section class="statement">
       <p>"This started as a simple commitment to circular reading. Real change flourishes from small actions: one book, shared with one reader, at a time. The goal is not scale, but responsible reuse."</p>
-      <cite>— Karthik Varadharajan</cite>
+      <cite>— Arjit</cite>
     </section>
 
     <!-- MISSION & PLEDGES -->
@@ -827,8 +976,8 @@
           <p>Extending item lifespan to conserve natural resources and minimize waste.</p>
         </div>
         <div class="mission-card">
-          <h3>Mindful Reading</h3>
-          <p>Fostering deliberate, tactile engagement with literature over screen distraction.</p>
+          <h3>Digital Detox / Anti-Chocolic</h3>
+          <p>Trading dopamine scroll loops for physical paper. Proving Gen Z can unplug and read intentionally.</p>
         </div>
         <div class="mission-card">
           <h3>Privacy First</h3>
@@ -837,13 +986,29 @@
       </div>
     </section>
 
-    <!-- 2-YEAR GOAL CARD -->
-    <div class="goal-card">
-      <div class="goal-fig">🌳 25 Trees</div>
-      <div class="goal-cap"><strong>2-Year Target:</strong> Conserve the paper equivalent of 25 mature trees over the next 2 years through active book recirculation. A clear, achievable milestone built step-by-step with every shared reading cycle.</div>
-    </div>
+    <!-- EXPANDED 25 TREES, DEFORESTATION & UN GOALS CONTEXT -->
+    <section class="goal-card-expanded">
+      <div class="goal-header">
+        <span class="goal-badge">🌳 25 Trees Target</span>
+        <h3 class="goal-title">Global Impact Context & Gen-Z Call to Action</h3>
+      </div>
+      <div class="goal-body">
+        <div class="goal-box">
+          <h4>🪓 The Deforestation Reality</h4>
+          <p>Human activity cuts down over <strong>15 billion trees globally every single year</strong>. Paper production alone accounts for billions of consumed trees annually. Recirculating physical books directly stems this loss at the grass-roots level.</p>
+        </div>
+        <div class="goal-box">
+          <h4>🇺🇳 UN Sustainable Development Goals</h4>
+          <p>Our 25-Tree Target directly aligns with <strong>UN SDG 12 (Responsible Consumption)</strong> and <strong>SDG 15 (Life on Land)</strong> by maximizing the life cycle of every printed volume before new paper needs to be milled.</p>
+        </div>
+        <div class="goal-box">
+          <h4>📱 Digital Detox vs. Screen Addiction</h4>
+          <p>Gen Z is often labeled as digital-chocolics hooked on endless feed scrolling. By choosing physical paperbacks, we prove that our generation can unplug, reclaim deep focus, and lead circular eco-movements.</p>
+        </div>
+      </div>
+    </section>
 
-    <!-- ECO METRICS (SPELLING CORRECTED: LITRES) -->
+    <!-- ECO METRICS -->
     <section>
       <div class="section-title">⚡ Environmental Impact Framework</div>
       <div class="impact-grid" id="impact-grid"></div>
@@ -914,7 +1079,7 @@
         </div>
         <div class="step-card">
           <strong>3. Receive & Share</strong>
-          <p>The book is sent directly at no charge. Read and pass it forward when completed.</p>
+          <p>The book is sent directly at no charge. Read, detox from screens, and pass it forward when completed.</p>
         </div>
       </div>
     </section>
@@ -925,12 +1090,12 @@
       <h3 style="font-family:'Space Grotesk'; font-size:1.5rem; margin:0 0 8px;">Questions or contributions?</h3>
       <p style="color:var(--text-muted); margin:0 0 20px;">Inquiries, recommendations, or general contact are processed directly via standard mail.</p>
       <div style="display:flex; justify-content:center; gap:12px; flex-wrap:wrap;">
-        <button class="btn-primary" onclick="smartEmailOpen('RE:READ Inquiry', 'Hi Karthik,\n\n')">Write to Karthik</button>
-        <button class="btn-secondary" onclick="openWebMail('gmail', 'RE:READ Inquiry', 'Hi Karthik,\n\n')">Open in Gmail</button>
-        <button class="btn-secondary" onclick="openWebMail('outlook', 'RE:READ Inquiry', 'Hi Karthik,\n\n')">Open in Outlook</button>
+        <button class="btn-primary" onclick="smartEmailOpen('RE:READ Inquiry', 'Hi Arjit,\n\n')">Write to Arjit</button>
+        <button class="btn-secondary" onclick="openWebMail('gmail', 'RE:READ Inquiry', 'Hi Arjit,\n\n')">Open in Gmail</button>
+        <button class="btn-secondary" onclick="openWebMail('outlook', 'RE:READ Inquiry', 'Hi Arjit,\n\n')">Open in Outlook</button>
       </div>
     </div>
-    <p style="color:var(--text-muted); font-size:0.85rem;">Curated by Karthik Varadharajan — advancing circular literacy one volume at a time.</p>
+    <p style="color:var(--text-muted); font-size:0.85rem;">Curated by Arjit — advancing circular literacy one volume at a time.</p>
   </footer>
 
 </div>
@@ -941,9 +1106,10 @@
 </div>
 
 <script>
-  const OWNER_EMAIL = "vksuccess777@outlook.com";
+  /* UPDATED EMAIL ADDRESS */
+  const OWNER_EMAIL = "daanamvidya@gmail.com";
 
-  /* ALL ORIGINAL CIRCULATED / DONATED BOOKS RESTORED */
+  /* ALL CIRCULATED / DONATED BOOKS */
   const donatedBooks = [
     {
       title: "Good Power",
@@ -983,7 +1149,7 @@
     }
   ];
 
-  /* ALL ORIGINAL AVAILABLE BOOKS RESTORED */
+  /* ALL AVAILABLE BOOKS */
   const books = [
     {
       title: "Shortcuts in Mathematics",
@@ -1061,7 +1227,6 @@
     <div class="stat-card"><div class="num">${treesWorth}</div><div class="label">Trees Conserved</div></div>
   `;
 
-  /* SPELLING CORRECTION ASSURED: "Litres" */
   document.getElementById('impact-grid').innerHTML = `
     <div class="impact-card"><div class="fig">1 Tree ≈ 25 Books</div><div class="cap">Average yield per tree for physical print manufacturing. Reuse preserves natural forest land.</div></div>
     <div class="impact-card"><div class="fig">2.7–7.5 kg CO₂</div><div class="cap">Estimated carbon footprint offset per reused title across manufacturing and transport.</div></div>
@@ -1132,7 +1297,7 @@
   books.forEach((book, i) => {
     const toastId = `toast-${i}`;
     const subject = `Book Request: ${book.title}`;
-    const body = `Hi Karthik,\n\nI would like to request the following book from RE:READ:\n\nTitle: ${book.title}\nAuthor: ${book.author}\n\nRecipient Details:\nName: \nDelivery Address: \nPhone (Optional): \n\nThank you!`;
+    const body = `Hi Arjit,\n\nI would like to request the following book from RE:READ:\n\nTitle: ${book.title}\nAuthor: ${book.author}\n\nRecipient Details:\nName: \nDelivery Address: \nPhone (Optional): \n\nThank you!`;
     const fullText = `To: ${OWNER_EMAIL}\nSubject: ${subject}\n\n${body}`;
 
     const card = document.createElement('article');
@@ -1259,7 +1424,7 @@
 
   function openQuickView(book, isDonated) {
     const subject = `Book Request: ${book.title}`;
-    const body = `Hi Karthik,\n\nI would like to request "${book.title}" from RE:READ.\n\nName:\nAddress:\n`;
+    const body = `Hi Arjit,\n\nI would like to request "${book.title}" from RE:READ.\n\nName:\nAddress:\n`;
     const fullText = `To: ${OWNER_EMAIL}\nSubject: ${subject}\n\n${body}`;
 
     modalContent.innerHTML = `
