@@ -37,10 +37,7 @@
     --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  *, *::before, *::after {
-    box-sizing: border-box;
-  }
-
+  *, *::before, *::after { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
 
   body {
@@ -133,7 +130,7 @@
     .tagline { margin: 0 auto; }
   }
 
-  /* ---------- CREATIVE HERO ART (3D DYNAMIC STACK) ---------- */
+  /* ---------- CREATIVE HERO ART (3D DYNAMIC STACK & ROTATING BADGE) ---------- */
   .hero-art {
     width: 100%;
     max-width: 340px;
@@ -358,7 +355,7 @@
     color: var(--text-muted);
   }
 
-  /* EXPANDED 25 TREES & DEFORESTATION CARD */
+  /* EXPANDED 25 TREES CARD */
   .goal-card-expanded {
     background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(168, 85, 247, 0.08));
     border: 1px solid rgba(16, 185, 129, 0.3);
@@ -533,9 +530,7 @@
     color: var(--text-main);
   }
 
-  .tab.active {
-    background: rgba(168, 85, 247, 0.15);
-  }
+  .tab.active { background: rgba(168, 85, 247, 0.15); }
 
   /* ---------- BOOK CARDS GRID ---------- */
   .shelf {
@@ -1075,7 +1070,7 @@
         </div>
         <div class="step-card">
           <strong>2. Request via Email</strong>
-          <p>Click "Request Book" to launch a pre-formatted message with delivery details.</p>
+          <p>Click "Request Book" to launch a pre-formatted message addressed to Arjit.</p>
         </div>
         <div class="step-card">
           <strong>3. Receive & Share</strong>
@@ -1106,7 +1101,7 @@
 </div>
 
 <script>
-  /* UPDATED EMAIL ADDRESS */
+  /* EXPLICITLY GUARANTEED RECIPIENT EMAIL ADDRESS */
   const OWNER_EMAIL = "daanamvidya@gmail.com";
 
   /* ALL CIRCULATED / DONATED BOOKS */
@@ -1234,7 +1229,7 @@
     <div class="impact-card"><div class="fig">${treesWorth} Trees Worth</div><div class="cap">Calculated total timber conservation footprint achieved by this collection so far.</div></div>
   `;
 
-  /* MOBILE SMART EMAIL ROUTING */
+  /* CROSS-PLATFORM MOBILE & DESKTOP EMAIL OPENERS */
   function isMobile() {
     return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
   }
