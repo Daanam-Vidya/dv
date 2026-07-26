@@ -30,6 +30,7 @@
       margin: 0;
       padding: 0;
       font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      -webkit-tap-highlight-color: transparent;
     }
 
     html {
@@ -53,7 +54,7 @@
       color: #ffffff;
       text-align: center;
       padding: 0.85rem 1rem;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     }
 
@@ -64,30 +65,32 @@
       cursor: pointer;
       transition: all 0.2s ease;
       display: inline-block;
-      padding: 0.1rem 0.4rem;
-      background: rgba(255, 255, 255, 0.1);
+      padding: 0.2rem 0.5rem;
+      background: rgba(255, 255, 255, 0.15);
       border-radius: 6px;
+      margin-top: 0.2rem;
     }
 
     .top-badge-banner a:hover {
-      transform: scale(1.05);
+      transform: scale(1.03);
       color: #ffffff;
     }
 
     .top-badge-banner .subtext {
       display: block;
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       color: #e2e8f0;
       margin-top: 0.25rem;
       opacity: 0.9;
     }
 
-    /* NAVIGATION HEADER WITH EMBEDDED BRAND LOGO */
+    /* NAVIGATION HEADER */
     .navbar {
-      background: rgba(15, 23, 42, 0.8);
+      background: rgba(15, 23, 42, 0.85);
       backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--card-border);
-      padding: 1rem 2rem;
+      padding: 0.8rem 1.25rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -97,7 +100,7 @@
     }
 
     .brand-logo {
-      font-size: 1.35rem;
+      font-size: 1.25rem;
       font-weight: 900;
       background: var(--genz-gradient);
       -webkit-background-clip: text;
@@ -105,7 +108,7 @@
       text-decoration: none;
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.4rem;
     }
 
     .brand-badge {
@@ -119,22 +122,30 @@
 
     .nav-links {
       display: flex;
-      gap: 1rem;
+      gap: 0.4rem;
       list-style: none;
-      flex-wrap: wrap;
+      overflow-x: auto;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+      padding: 0.2rem 0;
+    }
+
+    .nav-links::-webkit-scrollbar {
+      display: none;
     }
 
     .nav-links a {
       text-decoration: none;
       color: var(--text-muted);
       font-weight: 700;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       transition: all 0.2s ease;
-      padding: 0.4rem 0.8rem;
+      padding: 0.4rem 0.75rem;
       border-radius: 20px;
+      display: inline-block;
     }
 
-    .nav-links a:hover {
+    .nav-links a:hover, .nav-links a:active {
       color: var(--text-main);
       background: rgba(255, 255, 255, 0.08);
     }
@@ -142,19 +153,20 @@
     /* MAIN CONTAINER */
     .main-container {
       max-width: 1100px;
-      margin: 2rem auto 0 auto;
-      padding: 0 1.5rem;
+      margin: 1.5rem auto 0 auto;
+      padding: 0 1rem;
     }
 
     /* HERO BANNER */
     .genz-hero {
       background: rgba(30, 41, 59, 0.6);
       backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 24px;
-      padding: 3rem 2rem;
+      border-radius: 20px;
+      padding: 2rem 1.25rem;
       text-align: center;
-      margin-bottom: 2.5rem;
+      margin-bottom: 2rem;
       position: relative;
       overflow: hidden;
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
@@ -171,11 +183,10 @@
       pointer-events: none;
     }
 
-    /* STATIC BOOK WITH EMBEDDED SUBTLY SWAYING TREE LEAVES */
     .hero-graphic-container {
-      width: 120px;
-      height: 120px;
-      margin: 0 auto 1.2rem auto;
+      width: 100px;
+      height: 100px;
+      margin: 0 auto 1rem auto;
       position: relative;
       display: flex;
       justify-content: center;
@@ -184,7 +195,7 @@
 
     .static-book-wrapper {
       position: relative;
-      font-size: 3.8rem;
+      font-size: 3.2rem;
       line-height: 1;
       display: inline-block;
       filter: drop-shadow(0 0 20px rgba(16, 185, 129, 0.4));
@@ -192,53 +203,49 @@
 
     .embedded-tree {
       position: absolute;
-      top: -12px;
+      top: -10px;
       left: 50%;
       transform: translateX(-50%);
-      font-size: 2.2rem;
+      font-size: 1.8rem;
       animation: swayLeaves 3s ease-in-out infinite alternate;
       transform-origin: bottom center;
     }
 
     @keyframes swayLeaves {
-      0% {
-        transform: translateX(-50%) rotate(-3deg) scale(0.98);
-      }
-      100% {
-        transform: translateX(-50%) rotate(3deg) scale(1.02);
-      }
+      0% { transform: translateX(-50%) rotate(-3deg) scale(0.98); }
+      100% { transform: translateX(-50%) rotate(3deg) scale(1.02); }
     }
 
     .genz-tag {
       background: var(--genz-gradient);
       color: #ffffff;
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       font-weight: 800;
-      padding: 0.4rem 1rem;
+      padding: 0.35rem 0.85rem;
       border-radius: 999px;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: 0.8px;
       display: inline-block;
-      margin-bottom: 1rem;
+      margin-bottom: 0.8rem;
       box-shadow: 0 4px 12px rgba(236, 72, 153, 0.3);
     }
 
     .genz-hero h1 {
-      font-size: 2.8rem;
+      font-size: 2.1rem;
       font-weight: 900;
-      letter-spacing: -1px;
-      margin-bottom: 1rem;
+      letter-spacing: -0.5px;
+      margin-bottom: 0.8rem;
       background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
     .genz-hero p {
-      font-size: 1.05rem;
+      font-size: 0.95rem;
       color: var(--text-muted);
       max-width: 780px;
-      margin: 0 auto 1.5rem auto;
-      line-height: 1.7;
+      margin: 0 auto 1.2rem auto;
+      line-height: 1.6;
     }
 
     .genz-hero p strong {
@@ -247,130 +254,122 @@
 
     .hero-founder-tag {
       display: block;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       font-weight: 800;
       color: var(--mint-green);
       font-style: italic;
-      margin-bottom: 1.8rem;
+      margin-bottom: 1.5rem;
     }
 
     .genz-actions {
       display: flex;
       justify-content: center;
-      gap: 1rem;
+      gap: 0.75rem;
       flex-wrap: wrap;
     }
 
     .btn {
-      padding: 0.8rem 1.6rem;
+      padding: 0.75rem 1.4rem;
       border-radius: 999px;
       font-weight: 800;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       text-decoration: none;
       cursor: pointer;
       border: none;
       transition: all 0.25s ease;
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
+      justify-content: center;
+      gap: 0.4rem;
+      min-height: 44px; /* Optimal mobile touch target */
+      touch-action: manipulation;
     }
 
     .btn-green {
       background: linear-gradient(135deg, #10b981 0%, #059669 100%);
       color: #ffffff;
       box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
-    }
-
-    .btn-green:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+      width: 100%;
+      max-width: 280px;
     }
 
     .btn-outline {
       background: rgba(255, 255, 255, 0.05);
       color: #ffffff;
       border: 1px solid rgba(255, 255, 255, 0.2);
-    }
-
-    .btn-outline:hover {
-      background: rgba(255, 255, 255, 0.15);
-      transform: translateY(-2px);
+      width: 100%;
+      max-width: 280px;
     }
 
     /* SECTION TITLES */
     .section-title {
-      font-size: 1.8rem;
+      font-size: 1.5rem;
       font-weight: 800;
       color: #ffffff;
       margin-bottom: 0.3rem;
       display: flex;
       align-items: center;
-      gap: 0.6rem;
+      gap: 0.5rem;
     }
 
     .section-sub {
       color: var(--text-muted);
-      font-size: 0.95rem;
-      margin-bottom: 1.5rem;
+      font-size: 0.88rem;
+      margin-bottom: 1.25rem;
     }
 
     /* WIDGET 1: MISSION */
     .mission-widget {
       background: rgba(30, 41, 59, 0.7);
       backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       border: 1px solid var(--card-border);
-      border-radius: 20px;
-      padding: 2rem;
-      margin-bottom: 3rem;
+      border-radius: 18px;
+      padding: 1.25rem;
+      margin-bottom: 2.5rem;
       position: relative;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     }
 
     .mission-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-      margin-top: 1.5rem;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin-top: 1.25rem;
     }
 
     .mission-card {
       background: rgba(15, 23, 42, 0.6);
       border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 16px;
-      padding: 1.5rem;
-      transition: transform 0.2s ease;
-    }
-
-    .mission-card:hover {
-      transform: translateY(-4px);
+      border-radius: 14px;
+      padding: 1.2rem;
     }
 
     .mission-card h3 {
-      font-size: 1.1rem;
+      font-size: 1rem;
       color: var(--mint-green);
-      margin-bottom: 0.6rem;
+      margin-bottom: 0.5rem;
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.4rem;
     }
 
     .mission-card p {
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       color: var(--text-muted);
       line-height: 1.5;
     }
 
     .sdg-pills {
       display: flex;
-      gap: 0.6rem;
+      gap: 0.5rem;
       flex-wrap: wrap;
-      margin-top: 1rem;
+      margin-top: 0.8rem;
     }
 
     .sdg-pill {
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       font-weight: 800;
-      padding: 0.3rem 0.75rem;
+      padding: 0.3rem 0.65rem;
       border-radius: 8px;
       color: #fff;
     }
@@ -378,42 +377,41 @@
     .sdg-12 { background-color: #bf8b2e; }
     .sdg-15 { background-color: #56c02b; }
 
-    /* REFORESTATION GOAL CARD */
     .goal-container {
       background: rgba(15, 23, 42, 0.6);
       border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 16px;
-      padding: 1.5rem;
-      margin-top: 1.5rem;
+      border-radius: 14px;
+      padding: 1.2rem;
+      margin-top: 1.25rem;
     }
 
     .goal-top {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.6rem;
       flex-wrap: wrap;
-      gap: 0.5rem;
+      gap: 0.4rem;
     }
 
     .goal-title {
       font-weight: 800;
       color: #ffffff;
-      font-size: 1rem;
+      font-size: 0.9rem;
     }
 
     .goal-percentage {
       font-weight: 800;
       color: var(--mint-green);
-      font-size: 0.9rem;
+      font-size: 0.85rem;
     }
 
     .progress-bar-bg {
       background-color: rgba(255, 255, 255, 0.1);
       border-radius: 999px;
-      height: 12px;
+      height: 10px;
       overflow: hidden;
-      margin-bottom: 0.6rem;
+      margin-bottom: 0.5rem;
     }
 
     .progress-bar-fill {
@@ -425,25 +423,25 @@
     }
 
     .goal-footnote {
-      font-size: 0.82rem;
+      font-size: 0.78rem;
       color: var(--text-muted);
     }
 
     /* WIDGET 2: DASHBOARD METRICS */
     .metrics-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 1.25rem;
-      margin-bottom: 3rem;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.85rem;
+      margin-bottom: 2.5rem;
     }
 
     .metric-card {
       background: rgba(30, 41, 59, 0.7);
       backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       border: 1px solid var(--card-border);
-      border-radius: 18px;
-      padding: 1.5rem;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+      border-radius: 16px;
+      padding: 1rem;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -452,58 +450,64 @@
     .metric-head {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
-      font-size: 0.9rem;
+      gap: 0.4rem;
+      font-size: 0.8rem;
       font-weight: 700;
       color: var(--text-muted);
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.4rem;
     }
 
     .metric-num {
-      font-size: 2.6rem;
+      font-size: 1.8rem;
       font-weight: 900;
       color: #ffffff;
-      margin-bottom: 0.5rem;
-      letter-spacing: -1px;
+      margin-bottom: 0.4rem;
+      letter-spacing: -0.5px;
+      line-height: 1.1;
     }
 
     .metric-desc {
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       color: var(--text-muted);
       border-top: 1px solid rgba(255, 255, 255, 0.08);
-      padding-top: 0.75rem;
+      padding-top: 0.5rem;
+      line-height: 1.3;
     }
 
-    /* WIDGET 3: BOOKSHELF */
+    /* WIDGET 3: BOOKSHELF & FILTERS */
     .shelf-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
       margin-bottom: 1.25rem;
-      flex-wrap: wrap;
-      gap: 1rem;
     }
 
     .filter-group {
       display: flex;
       gap: 0.4rem;
       background: rgba(30, 41, 59, 0.7);
-      padding: 0.35rem;
+      padding: 0.4rem;
       border-radius: 14px;
       border: 1px solid var(--card-border);
-      flex-wrap: wrap;
+      overflow-x: auto;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+      margin-top: 0.8rem;
+    }
+
+    .filter-group::-webkit-scrollbar {
+      display: none;
     }
 
     .filter-btn {
       background: transparent;
       border: none;
-      padding: 0.4rem 0.8rem;
+      padding: 0.45rem 0.85rem;
       border-radius: 10px;
       font-size: 0.78rem;
       font-weight: 700;
       color: var(--text-muted);
       cursor: pointer;
       transition: all 0.2s ease;
+      touch-action: manipulation;
+      flex-shrink: 0;
     }
 
     .filter-btn.active, .filter-btn:hover {
@@ -513,71 +517,65 @@
 
     .books-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1.5rem;
-      margin-bottom: 3rem;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+      margin-bottom: 2.5rem;
     }
 
     .book-card {
       background: rgba(30, 41, 59, 0.7);
       backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       border: 1px solid var(--card-border);
-      border-radius: 18px;
-      padding: 1.4rem;
+      border-radius: 16px;
+      padding: 1.2rem;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-    }
-
-    .book-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-      border-color: rgba(255, 255, 255, 0.25);
     }
 
     .book-genre-tag {
-      font-size: 0.7rem;
+      font-size: 0.68rem;
       font-weight: 800;
       color: var(--genz-pink);
       text-transform: uppercase;
       letter-spacing: 0.8px;
-      margin-bottom: 0.3rem;
+      margin-bottom: 0.2rem;
     }
 
     .book-title {
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       font-weight: 800;
       color: #ffffff;
       margin-bottom: 0.2rem;
     }
 
     .book-author {
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       color: var(--mint-green);
       font-weight: 700;
-      margin-bottom: 0.8rem;
+      margin-bottom: 0.75rem;
     }
 
     .book-overview {
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       color: var(--text-muted);
-      line-height: 1.5;
-      margin-bottom: 1.2rem;
+      line-height: 1.45;
+      margin-bottom: 1rem;
       background: rgba(15, 23, 42, 0.4);
-      padding: 0.75rem;
+      padding: 0.7rem;
       border-radius: 10px;
       border: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     .request-options {
-      margin-top: 0.8rem;
-      padding-top: 0.8rem;
+      margin-top: 0.75rem;
+      padding-top: 0.75rem;
       border-top: 1px dashed rgba(255, 255, 255, 0.1);
     }
 
     .request-label {
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       font-weight: 800;
       color: var(--text-muted);
       margin-bottom: 0.5rem;
@@ -586,13 +584,15 @@
 
     .request-btn-group {
       display: flex;
-      gap: 0.5rem;
+      gap: 0.4rem;
+      flex-wrap: wrap;
     }
 
     .req-btn {
       flex: 1;
-      padding: 0.45rem 0.6rem;
-      font-size: 0.75rem;
+      min-width: 80px;
+      padding: 0.5rem 0.4rem;
+      font-size: 0.73rem;
       font-weight: 800;
       border-radius: 8px;
       text-decoration: none;
@@ -601,7 +601,20 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 0.3rem;
+      gap: 0.2rem;
+      touch-action: manipulation;
+      min-height: 38px;
+    }
+
+    .req-app {
+      background: rgba(16, 185, 129, 0.15);
+      color: #a7f3d0;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .req-app:hover, .req-app:active {
+      background: rgba(16, 185, 129, 0.3);
+      color: #ffffff;
     }
 
     .req-gmail {
@@ -610,7 +623,7 @@
       border: 1px solid rgba(239, 68, 68, 0.3);
     }
 
-    .req-gmail:hover {
+    .req-gmail:hover, .req-gmail:active {
       background: rgba(239, 68, 68, 0.3);
       color: #ffffff;
     }
@@ -621,7 +634,7 @@
       border: 1px solid rgba(59, 130, 246, 0.3);
     }
 
-    .req-outlook:hover {
+    .req-outlook:hover, .req-outlook:active {
       background: rgba(59, 130, 246, 0.3);
       color: #ffffff;
     }
@@ -636,9 +649,9 @@
     }
 
     .badge {
-      font-size: 0.7rem;
+      font-size: 0.68rem;
       font-weight: 800;
-      padding: 0.3rem 0.7rem;
+      padding: 0.25rem 0.6rem;
       border-radius: 999px;
       color: #ffffff;
       text-transform: uppercase;
@@ -649,7 +662,7 @@
     .badge-circulating { background-color: var(--badge-circulating); }
 
     .read-count {
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       color: var(--text-muted);
       font-weight: 700;
     }
@@ -658,21 +671,24 @@
     .table-card {
       background: rgba(30, 41, 59, 0.7);
       backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       border: 1px solid var(--card-border);
-      border-radius: 18px;
+      border-radius: 16px;
       overflow-x: auto;
-      margin-bottom: 3rem;
+      margin-bottom: 2.5rem;
+      -webkit-overflow-scrolling: touch;
     }
 
     table {
       width: 100%;
+      min-width: 450px;
       border-collapse: collapse;
       text-align: left;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
     }
 
     th, td {
-      padding: 1rem 1.25rem;
+      padding: 0.85rem 1rem;
       border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
 
@@ -681,7 +697,7 @@
       color: var(--text-muted);
       font-weight: 700;
       text-transform: uppercase;
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       letter-spacing: 0.5px;
     }
 
@@ -689,23 +705,71 @@
       border-bottom: none;
     }
 
-    /* UN SDG FOOTER BANNER */
+    /* UN SDG BANNER */
     .sdg-banner {
       background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
       border: 1px solid rgba(16, 185, 129, 0.3);
       border-radius: 16px;
-      padding: 1.5rem 1.75rem;
+      padding: 1.25rem;
     }
 
     .sdg-banner h3 {
       color: var(--mint-green);
-      font-size: 1.15rem;
+      font-size: 1rem;
       margin-bottom: 0.4rem;
     }
 
     .sdg-banner p {
       color: var(--text-muted);
-      font-size: 0.92rem;
+      font-size: 0.85rem;
+    }
+
+    /* DESKTOP MEDIA QUERIES (BREAKPOINTS) */
+    @media (min-width: 640px) {
+      .genz-hero {
+        padding: 3rem 2rem;
+        border-radius: 24px;
+      }
+
+      .genz-hero h1 {
+        font-size: 2.8rem;
+      }
+
+      .btn-green, .btn-outline {
+        width: auto;
+      }
+
+      .mission-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      }
+
+      .metrics-grid {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 1.25rem;
+      }
+
+      .metric-card {
+        padding: 1.5rem;
+      }
+
+      .metric-num {
+        font-size: 2.5rem;
+      }
+
+      .books-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .shelf-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+      }
+
+      .filter-group {
+        margin-top: 0;
+      }
     }
   </style>
 </head>
@@ -716,11 +780,11 @@
     🌟 <strong>Love what we're doing?</strong> To show your support for this initiative, 
     <a id="support-btn" role="button">click here</a> — a simple click lets us know you're with us!
     <span class="subtext">
-      Want to go a step further? You're always welcome to donate books or rehome used ones, though simply visiting and sharing is support enough.
+      Want to go a step further? You're always welcome to donate books or rehome used ones!
     </span>
   </div>
 
-  <!-- NAVIGATION HEADER WITH GEN Z BRANDING LOGO -->
+  <!-- NAVIGATION HEADER -->
   <nav class="navbar">
     <a href="#" class="brand-logo">
       <span class="brand-badge">♻️📖</span> RE:READ
@@ -735,7 +799,7 @@
 
   <div class="main-container">
 
-    <!-- HERO BANNER (STATIC BOOK WITH EMBEDDED SUBTLY SWAYING TREE) -->
+    <!-- HERO BANNER -->
     <div class="genz-hero">
       <div class="hero-graphic-container">
         <div class="static-book-wrapper">
@@ -789,7 +853,7 @@
         </div>
       </div>
 
-      <!-- REFORESTATION GOAL CARD WITH AUTOMATED MATH -->
+      <!-- REFORESTATION GOAL CARD -->
       <div class="goal-container">
         <div class="goal-top">
           <span class="goal-title">🌱 Goal Milestone: Conserve 25 Community Trees</span>
@@ -802,59 +866,47 @@
       </div>
     </div>
 
-    <!-- WIDGET 2: DASHBOARD METRICS WITH ANIMATED COUNTERS -->
+    <!-- WIDGET 2: DASHBOARD METRICS -->
     <div id="dashboard">
       <h2 class="section-title">📊 Community & Impact Dashboard</h2>
       <p class="section-sub">Real-time engagement, book movement, and sustainability tracking.</p>
 
       <div class="metrics-grid">
-        <!-- Visitor Count -->
         <div class="metric-card">
           <div>
-            <div class="metric-head"><span>👥</span> Website Visitors</div>
+            <div class="metric-head"><span>👥</span> Visitors</div>
             <div class="metric-num" id="visitor-count" data-target="0">0</div>
           </div>
-          <div class="metric-desc">
-            Total visitors who explored our platform. <em>Increases dynamically per visit.</em>
-          </div>
+          <div class="metric-desc">Total site visits recorded.</div>
         </div>
 
-        <!-- Community Supporters (PERSISTED IN MEMORY) -->
         <div class="metric-card">
           <div>
-            <div class="metric-head"><span>💚</span> Community Supporters</div>
+            <div class="metric-head"><span>💚</span> Supporters</div>
             <div class="metric-num" id="support-count" data-target="0">0</div>
           </div>
-          <div class="metric-desc">
-            Readers who clicked to support our mission. <strong>Saved in memory across reloads.</strong>
-          </div>
+          <div class="metric-desc">Saved in memory across reloads.</div>
         </div>
 
-        <!-- Total Books on Shelf -->
         <div class="metric-card">
           <div>
-            <div class="metric-head"><span>📚</span> Total Books Shared</div>
+            <div class="metric-head"><span>📚</span> Shared</div>
             <div class="metric-num" id="books-count" data-target="14">14</div>
           </div>
-          <div class="metric-desc">
-            Active copies available or circulating across the community.
-          </div>
+          <div class="metric-desc">Active community copies.</div>
         </div>
 
-        <!-- Trees Conserved -->
         <div class="metric-card">
           <div>
-            <div class="metric-head"><span>🌲</span> Trees Conserved</div>
-            <div class="metric-num"><span id="trees-conserved" data-target="0.56" data-decimals="2">0.00</span> <span style="font-size: 1rem; color: #94a3b8;">/ 25 Goal</span></div>
+            <div class="metric-head"><span>🌲</span> Conserved</div>
+            <div class="metric-num"><span id="trees-conserved" data-target="0.56" data-decimals="2">0.00</span></div>
           </div>
-          <div class="metric-desc">
-            Calculated accurately: 1 tree yields 25 books. 14 books = <strong>0.56 trees conserved</strong>.
-          </div>
+          <div class="metric-desc">Target goal: 25 Trees.</div>
         </div>
       </div>
     </div>
 
-    <!-- WIDGET 3: BOOKSHELF WITH GENRE CATEGORIES & STREAMLINED EMAIL REQUEST FORMS -->
+    <!-- WIDGET 3: BOOKSHELF -->
     <div id="shelf">
       <div class="shelf-header">
         <div>
@@ -865,26 +917,23 @@
           <button class="filter-btn active" onclick="filterBooks('all', this)">All Books (14)</button>
           <button class="filter-btn" onclick="filterBooks('circulating', this)">In Circulation (4)</button>
           <button class="filter-btn" onclick="filterBooks('available', this)">Available (10)</button>
-          <button class="filter-btn" onclick="filterBooks('genre-business', this)">Business & Leadership</button>
-          <button class="filter-btn" onclick="filterBooks('genre-fiction', this)">Fiction & Classics</button>
-          <button class="filter-btn" onclick="filterBooks('genre-children', this)">Children & Learning</button>
-          <button class="filter-btn" onclick="filterBooks('genre-selfhelp', this)">Self-Help & Mindset</button>
-          <button class="filter-btn" onclick="filterBooks('genre-finance', this)">Finance & Wealth</button>
+          <button class="filter-btn" onclick="filterBooks('genre-business', this)">Business</button>
+          <button class="filter-btn" onclick="filterBooks('genre-fiction', this)">Fiction</button>
+          <button class="filter-btn" onclick="filterBooks('genre-children', this)">Children</button>
+          <button class="filter-btn" onclick="filterBooks('genre-selfhelp', this)">Self-Help</button>
+          <button class="filter-btn" onclick="filterBooks('genre-finance', this)">Finance</button>
         </div>
       </div>
 
       <div class="books-grid">
 
-        <!-- ==================== 4 CIRCULATING BOOKS ==================== -->
-
+        <!-- 4 CIRCULATING BOOKS -->
         <div class="book-card" data-status="circulating" data-genre="genre-business">
           <div>
             <div class="book-genre-tag">Business & Leadership</div>
             <div class="book-title">Good Power</div>
             <div class="book-author">by Ginni Rometty</div>
-            <div class="book-overview">
-              Former IBM CEO shares a powerful leadership blueprint on using "good power" to transform organizations, drive ethical impact, and navigate complex change without losing integrity.
-            </div>
+            <div class="book-overview">Former IBM CEO shares a powerful leadership blueprint on using "good power" to transform organizations.</div>
           </div>
           <div class="book-footer">
             <span class="badge badge-circulating">In Circulation</span>
@@ -897,9 +946,7 @@
             <div class="book-genre-tag">Self-Help & Mindset</div>
             <div class="book-title">Can't Hurt Me</div>
             <div class="book-author">by David Goggins</div>
-            <div class="book-overview">
-              Navy SEAL veteran reveals how to master mind control, overcome extreme adversity, push past mental limits, and tap into the "40% Rule" to unlock unyielding human potential.
-            </div>
+            <div class="book-overview">Navy SEAL veteran reveals how to master mind control and push past mental limits.</div>
           </div>
           <div class="book-footer">
             <span class="badge badge-circulating">In Circulation</span>
@@ -912,9 +959,7 @@
             <div class="book-genre-tag">Business & Leadership</div>
             <div class="book-title">Hit Refresh</div>
             <div class="book-author">by Satya Nadella</div>
-            <div class="book-overview">
-              Microsoft’s CEO explores individual and corporate transformation, emphasizing empathy, cloud innovation, and tech ethics as core drivers to revitalize tech culture.
-            </div>
+            <div class="book-overview">Microsoft CEO explores individual and corporate transformation emphasizing empathy and tech innovation.</div>
           </div>
           <div class="book-footer">
             <span class="badge badge-circulating">In Circulation</span>
@@ -927,9 +972,7 @@
             <div class="book-genre-tag">Business & Leadership</div>
             <div class="book-title">Your Next Five Moves</div>
             <div class="book-author">by Patrick Bet-David</div>
-            <div class="book-overview">
-              A practical strategic playbook for entrepreneurs and leaders to master critical thinking, anticipate industry shifts, manage team dynamics, and scale business operations like a grandmaster.
-            </div>
+            <div class="book-overview">A strategic playbook for entrepreneurs and leaders to master critical thinking and anticipate shifts.</div>
           </div>
           <div class="book-footer">
             <span class="badge badge-circulating">In Circulation</span>
@@ -937,21 +980,18 @@
           </div>
         </div>
 
-        <!-- ==================== 10 AVAILABLE BOOKS WITH STREAMLINED EMAIL REQUEST ==================== -->
-
-        <!-- Book a -->
+        <!-- 10 AVAILABLE BOOKS WITH HYBRID EMAIL LINKS -->
         <div class="book-card" data-status="available" data-genre="genre-business">
           <div>
             <div class="book-genre-tag">Business & Leadership</div>
             <div class="book-title">The AI-Driven Leader</div>
             <div class="book-author">by Geoff Woods</div>
-            <div class="book-overview">
-              A forward-looking guide for executives and managers on integrating modern artificial intelligence tools into daily workflows to automate tasks, double productivity, and lead strategic change.
-            </div>
+            <div class="book-overview">Integrating modern artificial intelligence tools into daily workflows to automate tasks and lead change.</div>
           </div>
           <div class="request-options">
-            <span class="request-label">📨 Request Book (Pre-drafted Email):</span>
+            <span class="request-label">📨 Request Book via Email:</span>
             <div class="request-btn-group">
+              <a href="#" class="req-btn req-app" onclick="requestBook('The AI-Driven Leader by Geoff Woods', 'app'); return false;">📱 Mail App</a>
               <a href="#" class="req-btn req-gmail" onclick="requestBook('The AI-Driven Leader by Geoff Woods', 'gmail'); return false;">Gmail</a>
               <a href="#" class="req-btn req-outlook" onclick="requestBook('The AI-Driven Leader by Geoff Woods', 'outlook'); return false;">Outlook</a>
             </div>
@@ -962,19 +1002,17 @@
           </div>
         </div>
 
-        <!-- Book b -->
         <div class="book-card" data-status="available" data-genre="genre-business">
           <div>
             <div class="book-genre-tag">Business & Leadership</div>
             <div class="book-title">Chanakya in You</div>
             <div class="book-author">by Radhakrishnan Pillai</div>
-            <div class="book-overview">
-              An engaging story-based exploration applying ancient Indian leadership principles from Arthashastra to modern career success, strategy formation, personal ethics, and life goals.
-            </div>
+            <div class="book-overview">Applying ancient Indian leadership principles to modern career success and personal ethics.</div>
           </div>
           <div class="request-options">
-            <span class="request-label">📨 Request Book (Pre-drafted Email):</span>
+            <span class="request-label">📨 Request Book via Email:</span>
             <div class="request-btn-group">
+              <a href="#" class="req-btn req-app" onclick="requestBook('Chanakya in You by Radhakrishnan Pillai', 'app'); return false;">📱 Mail App</a>
               <a href="#" class="req-btn req-gmail" onclick="requestBook('Chanakya in You by Radhakrishnan Pillai', 'gmail'); return false;">Gmail</a>
               <a href="#" class="req-btn req-outlook" onclick="requestBook('Chanakya in You by Radhakrishnan Pillai', 'outlook'); return false;">Outlook</a>
             </div>
@@ -985,21 +1023,19 @@
           </div>
         </div>
 
-        <!-- Book c -->
         <div class="book-card" data-status="available" data-genre="genre-children">
           <div>
             <div class="book-genre-tag">Children & Learning</div>
             <div class="book-title">Think Like Maths Genius</div>
             <div class="book-author">by Arthur Benjamin & Michael Shermer</div>
-            <div class="book-overview">
-              Unlocks fast mental math shortcuts, rapid calculation secrets, and fun numerical tricks that boost cognitive agility and build unwavering confidence with numbers.
-            </div>
+            <div class="book-overview">Unlocks fast mental math shortcuts and fun numerical tricks to boost cognitive agility.</div>
           </div>
           <div class="request-options">
-            <span class="request-label">📨 Request Book (Pre-drafted Email):</span>
+            <span class="request-label">📨 Request Book via Email:</span>
             <div class="request-btn-group">
-              <a href="#" class="req-btn req-gmail" onclick="requestBook('Think Like Maths Genius by Arthur Benjamin and Michael Shermer', 'gmail'); return false;">Gmail</a>
-              <a href="#" class="req-btn req-outlook" onclick="requestBook('Think Like Maths Genius by Arthur Benjamin and Michael Shermer', 'outlook'); return false;">Outlook</a>
+              <a href="#" class="req-btn req-app" onclick="requestBook('Think Like Maths Genius', 'app'); return false;">📱 Mail App</a>
+              <a href="#" class="req-btn req-gmail" onclick="requestBook('Think Like Maths Genius', 'gmail'); return false;">Gmail</a>
+              <a href="#" class="req-btn req-outlook" onclick="requestBook('Think Like Maths Genius', 'outlook'); return false;">Outlook</a>
             </div>
           </div>
           <div class="book-footer">
@@ -1008,21 +1044,19 @@
           </div>
         </div>
 
-        <!-- Book d -->
         <div class="book-card" data-status="available" data-genre="genre-selfhelp">
           <div>
             <div class="book-genre-tag">Self-Help & Mindset</div>
             <div class="book-title">Nature Cure for Children</div>
             <div class="book-author">by Dr. H.K. Bakhru</div>
-            <div class="book-overview">
-              A holistic wellness reference providing natural remedies, wholesome nutrition principles, and eco-friendly lifestyle choices to foster pediatric health and preventive immunity.
-            </div>
+            <div class="book-overview">Holistic wellness reference providing natural remedies and wholesome nutrition principles.</div>
           </div>
           <div class="request-options">
-            <span class="request-label">📨 Request Book (Pre-drafted Email):</span>
+            <span class="request-label">📨 Request Book via Email:</span>
             <div class="request-btn-group">
-              <a href="#" class="req-btn req-gmail" onclick="requestBook('Nature Cure for Children by Dr. H.K. Bakhru', 'gmail'); return false;">Gmail</a>
-              <a href="#" class="req-btn req-outlook" onclick="requestBook('Nature Cure for Children by Dr. H.K. Bakhru', 'outlook'); return false;">Outlook</a>
+              <a href="#" class="req-btn req-app" onclick="requestBook('Nature Cure for Children', 'app'); return false;">📱 Mail App</a>
+              <a href="#" class="req-btn req-gmail" onclick="requestBook('Nature Cure for Children', 'gmail'); return false;">Gmail</a>
+              <a href="#" class="req-btn req-outlook" onclick="requestBook('Nature Cure for Children', 'outlook'); return false;">Outlook</a>
             </div>
           </div>
           <div class="book-footer">
@@ -1031,19 +1065,17 @@
           </div>
         </div>
 
-        <!-- Book e -->
         <div class="book-card" data-status="available" data-genre="genre-selfhelp">
           <div>
             <div class="book-genre-tag">Self-Help & Mindset</div>
             <div class="book-title">Atomic Habits</div>
             <div class="book-author">by James Clear</div>
-            <div class="book-overview">
-              An indispensable framework for building positive micro-habits and eliminating destructive behaviors through tiny, compound lifestyle shifts.
-            </div>
+            <div class="book-overview">Framework for building positive micro-habits and eliminating destructive behaviors.</div>
           </div>
           <div class="request-options">
-            <span class="request-label">📨 Request Book (Pre-drafted Email):</span>
+            <span class="request-label">📨 Request Book via Email:</span>
             <div class="request-btn-group">
+              <a href="#" class="req-btn req-app" onclick="requestBook('Atomic Habits by James Clear', 'app'); return false;">📱 Mail App</a>
               <a href="#" class="req-btn req-gmail" onclick="requestBook('Atomic Habits by James Clear', 'gmail'); return false;">Gmail</a>
               <a href="#" class="req-btn req-outlook" onclick="requestBook('Atomic Habits by James Clear', 'outlook'); return false;">Outlook</a>
             </div>
@@ -1054,21 +1086,19 @@
           </div>
         </div>
 
-        <!-- Book f -->
         <div class="book-card" data-status="available" data-genre="genre-finance">
           <div>
             <div class="book-genre-tag">Finance & Wealth</div>
             <div class="book-title">The Psychology of Money</div>
             <div class="book-author">by Morgan Housel</div>
-            <div class="book-overview">
-              Timeless lessons on wealth, greed, and happiness that highlight how behavioral psychology dictates financial decisions far more than technical formulas.
-            </div>
+            <div class="book-overview">Timeless lessons on wealth and happiness highlighting how behavioral psychology dictates choices.</div>
           </div>
           <div class="request-options">
-            <span class="request-label">📨 Request Book (Pre-drafted Email):</span>
+            <span class="request-label">📨 Request Book via Email:</span>
             <div class="request-btn-group">
-              <a href="#" class="req-btn req-gmail" onclick="requestBook('The Psychology of Money by Morgan Housel', 'gmail'); return false;">Gmail</a>
-              <a href="#" class="req-btn req-outlook" onclick="requestBook('The Psychology of Money by Morgan Housel', 'outlook'); return false;">Outlook</a>
+              <a href="#" class="req-btn req-app" onclick="requestBook('The Psychology of Money', 'app'); return false;">📱 Mail App</a>
+              <a href="#" class="req-btn req-gmail" onclick="requestBook('The Psychology of Money', 'gmail'); return false;">Gmail</a>
+              <a href="#" class="req-btn req-outlook" onclick="requestBook('The Psychology of Money', 'outlook'); return false;">Outlook</a>
             </div>
           </div>
           <div class="book-footer">
@@ -1077,19 +1107,17 @@
           </div>
         </div>
 
-        <!-- Book g -->
         <div class="book-card" data-status="available" data-genre="genre-fiction">
           <div>
             <div class="book-genre-tag">Fiction & Classics</div>
             <div class="book-title">The Alchemist</div>
             <div class="book-author">by Paulo Coelho</div>
-            <div class="book-overview">
-              A enchanting philosophical fable following a young Andalusian shepherd on a mystical journey to discover his personal legend and pursue his dreams.
-            </div>
+            <div class="book-overview">An enchanting fable following a young shepherd on a mystical journey to fulfill his dreams.</div>
           </div>
           <div class="request-options">
-            <span class="request-label">📨 Request Book (Pre-drafted Email):</span>
+            <span class="request-label">📨 Request Book via Email:</span>
             <div class="request-btn-group">
+              <a href="#" class="req-btn req-app" onclick="requestBook('The Alchemist by Paulo Coelho', 'app'); return false;">📱 Mail App</a>
               <a href="#" class="req-btn req-gmail" onclick="requestBook('The Alchemist by Paulo Coelho', 'gmail'); return false;">Gmail</a>
               <a href="#" class="req-btn req-outlook" onclick="requestBook('The Alchemist by Paulo Coelho', 'outlook'); return false;">Outlook</a>
             </div>
@@ -1100,19 +1128,17 @@
           </div>
         </div>
 
-        <!-- Book h -->
         <div class="book-card" data-status="available" data-genre="genre-selfhelp">
           <div>
             <div class="book-genre-tag">Self-Help & Mindset</div>
             <div class="book-title">Deep Work</div>
             <div class="book-author">by Cal Newport</div>
-            <div class="book-overview">
-              Rules for focused success in a distracted world, proving how cultivating rigorous deep focus produces unparalleled creative and professional value.
-            </div>
+            <div class="book-overview">Rules for focused success in a distracted world, proving how focused effort creates value.</div>
           </div>
           <div class="request-options">
-            <span class="request-label">📨 Request Book (Pre-drafted Email):</span>
+            <span class="request-label">📨 Request Book via Email:</span>
             <div class="request-btn-group">
+              <a href="#" class="req-btn req-app" onclick="requestBook('Deep Work by Cal Newport', 'app'); return false;">📱 Mail App</a>
               <a href="#" class="req-btn req-gmail" onclick="requestBook('Deep Work by Cal Newport', 'gmail'); return false;">Gmail</a>
               <a href="#" class="req-btn req-outlook" onclick="requestBook('Deep Work by Cal Newport', 'outlook'); return false;">Outlook</a>
             </div>
@@ -1123,21 +1149,19 @@
           </div>
         </div>
 
-        <!-- Book i -->
         <div class="book-card" data-status="available" data-genre="genre-finance">
           <div>
             <div class="book-genre-tag">Finance & Wealth</div>
             <div class="book-title">Rich Dad Poor Dad</div>
             <div class="book-author">by Robert Kiyosaki</div>
-            <div class="book-overview">
-              Classic personal finance guide contrasting working for money versus making money work for you through asset accumulation and financial literacy.
-            </div>
+            <div class="book-overview">Contrasting working for money versus making money work for you through assets.</div>
           </div>
           <div class="request-options">
-            <span class="request-label">📨 Request Book (Pre-drafted Email):</span>
+            <span class="request-label">📨 Request Book via Email:</span>
             <div class="request-btn-group">
-              <a href="#" class="req-btn req-gmail" onclick="requestBook('Rich Dad Poor Dad by Robert Kiyosaki', 'gmail'); return false;">Gmail</a>
-              <a href="#" class="req-btn req-outlook" onclick="requestBook('Rich Dad Poor Dad by Robert Kiyosaki', 'outlook'); return false;">Outlook</a>
+              <a href="#" class="req-btn req-app" onclick="requestBook('Rich Dad Poor Dad', 'app'); return false;">📱 Mail App</a>
+              <a href="#" class="req-btn req-gmail" onclick="requestBook('Rich Dad Poor Dad', 'gmail'); return false;">Gmail</a>
+              <a href="#" class="req-btn req-outlook" onclick="requestBook('Rich Dad Poor Dad', 'outlook'); return false;">Outlook</a>
             </div>
           </div>
           <div class="book-footer">
@@ -1146,19 +1170,17 @@
           </div>
         </div>
 
-        <!-- Book j -->
         <div class="book-card" data-status="available" data-genre="genre-business">
           <div>
             <div class="book-genre-tag">Business & Leadership</div>
             <div class="book-title">Zero to One</div>
             <div class="book-author">by Peter Thiel</div>
-            <div class="book-overview">
-              Notes on startups and how to build the future by focusing on unique creation rather than competing in overcrowded, existing markets.
-            </div>
+            <div class="book-overview">Notes on startups and how to build the future by focusing on unique creation.</div>
           </div>
           <div class="request-options">
-            <span class="request-label">📨 Request Book (Pre-drafted Email):</span>
+            <span class="request-label">📨 Request Book via Email:</span>
             <div class="request-btn-group">
+              <a href="#" class="req-btn req-app" onclick="requestBook('Zero to One by Peter Thiel', 'app'); return false;">📱 Mail App</a>
               <a href="#" class="req-btn req-gmail" onclick="requestBook('Zero to One by Peter Thiel', 'gmail'); return false;">Gmail</a>
               <a href="#" class="req-btn req-outlook" onclick="requestBook('Zero to One by Peter Thiel', 'outlook'); return false;">Outlook</a>
             </div>
@@ -1191,32 +1213,32 @@
             <tr>
               <td>Recent</td>
               <td>Can't Hurt Me</td>
-              <td>Circulating to new reader</td>
-              <td>0.04 Trees Conserved</td>
+              <td>Circulating to reader</td>
+              <td>0.04 Trees Saved</td>
             </tr>
             <tr>
               <td>Recent</td>
               <td>Good Power</td>
-              <td>Circulating to new reader</td>
-              <td>0.04 Trees Conserved</td>
+              <td>Circulating to reader</td>
+              <td>0.04 Trees Saved</td>
             </tr>
             <tr>
               <td>Recent</td>
               <td>Hit Refresh</td>
               <td>Handed off in community</td>
-              <td>0.04 Trees Conserved</td>
+              <td>0.04 Trees Saved</td>
             </tr>
             <tr>
               <td>Recent</td>
               <td>Your Next Five Moves</td>
               <td>Handed off in community</td>
-              <td>0.04 Trees Conserved</td>
+              <td>0.04 Trees Saved</td>
             </tr>
             <tr>
               <td>Initial</td>
               <td>10 Available Titles</td>
-              <td>Cataloged & Ready on Shelf</td>
-              <td>0.40 Trees Conserved</td>
+              <td>Cataloged & Ready</td>
+              <td>0.40 Trees Saved</td>
             </tr>
           </tbody>
         </table>
@@ -1227,13 +1249,12 @@
     <div class="sdg-banner">
       <h3>🇺🇳 Committed to UN Sustainable Development Goals</h3>
       <p>
-        Every shared physical book directly advances <strong>SDG 12 (Responsible Consumption & Production)</strong> and <strong>SDG 15 (Life on Land)</strong> by reducing paper waste, cutting down wood pulp demand, and creating a sustainable cycle of conscious reading.
+        Every shared physical book directly advances <strong>SDG 12 (Responsible Consumption)</strong> and <strong>SDG 15 (Life on Land)</strong> by reducing paper waste and wood pulp demand.
       </p>
     </div>
 
   </div>
 
-  <!-- EMBEDDED JAVASCRIPT LOGIC -->
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       initSupportSystem();
@@ -1242,7 +1263,6 @@
       triggerCounters();
     });
 
-    // 1. Support Counter Persistence
     function initSupportSystem() {
       let supports = parseInt(localStorage.getItem("reread_supports")) || 42;
       document.getElementById("support-count").setAttribute("data-target", supports);
@@ -1257,7 +1277,6 @@
       });
     }
 
-    // 2. Visitor Count Persistence
     function initVisitorSystem() {
       let visitors = parseInt(localStorage.getItem("reread_visitors")) || 128;
       visitors++;
@@ -1265,7 +1284,6 @@
       document.getElementById("visitor-count").setAttribute("data-target", visitors);
     }
 
-    // 3. Reforestation Math Calculation (25 books = 1 tree)
     function calculateTreesAndGoal() {
       const totalBooks = 14; 
       const targetTreesGoal = 25;
@@ -1278,7 +1296,6 @@
       document.getElementById("goal-footnote-text").innerText = `Calculated automatically: 1 tree yields 25 books. ${totalBooks} community books = ${treesSaved} trees saved!`;
     }
 
-    // 4. Animated Counters Algorithm
     function triggerCounters() {
       const counters = document.querySelectorAll('.metric-num[data-target], .metric-num span[data-target]');
       counters.forEach(counter => {
@@ -1306,7 +1323,6 @@
       }, stepTime);
     }
 
-    // 5. Bookshelf Category Filter Function
     function filterBooks(category, btnElement) {
       const buttons = document.querySelectorAll('.filter-btn');
       buttons.forEach(btn => btn.classList.remove('active'));
@@ -1327,13 +1343,16 @@
       });
     }
 
-    // 6. Email Request Direct Link Helper
+    // Handles both smartphone mail apps and web clients
     function requestBook(bookTitle, client) {
-      const recipient = "arijit@reread.community"; // Community dispatch email
+      const recipient = "arijit@reread.community";
       const subject = encodeURIComponent(`Book Request: ${bookTitle}`);
       const body = encodeURIComponent(`Hi RE:READ Team,\n\nI would love to request the physical copy of "${bookTitle}" for my next read.\n\nPlease let me know the handoff details.\n\nThank you!`);
 
-      if (client === 'gmail') {
+      if (client === 'app') {
+        // Triggers default email app on Smartphone or Desktop
+        window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
+      } else if (client === 'gmail') {
         window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=${recipient}&su=${subject}&body=${body}`, '_blank');
       } else if (client === 'outlook') {
         window.open(`https://outlook.office.com/mail/deeplink/compose?to=${recipient}&subject=${subject}&body=${body}`, '_blank');
