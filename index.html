@@ -2,1094 +2,1358 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <meta name="theme-color" content="#0d0f17">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>RE:READ Community Portal</title>
-  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   <style>
-    /* ==========================================================================
-       1. CORE DESIGN SYSTEM & DARK MODE GLASSMORPHISM
-       ========================================================================== */
     :root {
-      --bg-dark: #0b0d14;
-      --bg-card: rgba(20, 24, 38, 0.65);
-      --bg-card-border: rgba(255, 255, 255, 0.08);
-      --bg-card-hover: rgba(28, 34, 54, 0.85);
-      
-      --accent-violet: #8b5cf6;
-      --accent-violet-glow: rgba(139, 92, 246, 0.35);
-      --accent-emerald: #10b981;
-      --accent-emerald-glow: rgba(16, 185, 129, 0.3);
-      --accent-pink: #ec4899;
-      --accent-cyan: #06b6d4;
-
+      --primary-green: #10b981;
+      --dark-green: #065f46;
+      --mint-green: #a7f3d0;
+      --light-green: #ecfdf5;
+      --genz-purple: #8b5cf6;
+      --genz-pink: #ec4899;
+      --genz-gradient: linear-gradient(135deg, #8b5cf6 0%, #ec4899 50%, #f43f5e 100%);
+      --bg-main: #0f172a;
+      --card-bg: rgba(30, 41, 59, 0.7);
+      --card-border: rgba(255, 255, 255, 0.1);
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
-      --text-dim: #64748b;
-
-      --glass-blur: blur(16px);
-      --radius-xl: 24px;
-      --radius-lg: 16px;
-      --radius-md: 12px;
-      --radius-sm: 8px;
-
-      --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
-      --header-height: 70px;
-      --bottom-nav-height: 65px;
+      --badge-available: #10b981;
+      --badge-circulating: #f59e0b;
     }
 
-    /* Reset & Touch Optimizations */
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      -webkit-tap-highlight-color: transparent;
-      user-select: none;
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
     }
 
     html {
       scroll-behavior: smooth;
-      background-color: var(--bg-dark);
-      color: var(--text-main);
-      font-family: var(--font-sans);
     }
 
     body {
-      min-height: 100vh;
-      background: radial-gradient(circle at 50% -20%, #1e1b4b 0%, var(--bg-dark) 70%);
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      line-height: 1.6;
+      padding-bottom: 5rem;
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(139, 92, 246, 0.15) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(16, 185, 129, 0.15) 0px, transparent 50%);
       background-attachment: fixed;
-      line-height: 1.5;
-      padding-top: var(--header-height);
-      padding-bottom: calc(var(--bottom-nav-height) + 20px);
-      overflow-x: hidden;
     }
 
-    input, textarea, button, select {
-      font-family: inherit;
-      user-select: text;
+    /* TOP NOTIFICATION BADGE */
+    .top-badge-banner {
+      background: linear-gradient(90deg, #059669 0%, #7d2ae8 100%);
+      color: #ffffff;
+      text-align: center;
+      padding: 0.85rem 1rem;
+      font-size: 0.95rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    /* Scrollbar */
-    ::-webkit-scrollbar {
-      width: 8px;
-      height: 8px;
-    }
-    ::-webkit-scrollbar-track { background: var(--bg-dark); }
-    ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.15); border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: var(--accent-violet); }
-
-    /* ==========================================================================
-       2. APP HEADER & NAVIGATION BAR
-       ========================================================================== */
-    .app-header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: var(--header-height);
-      background: rgba(11, 13, 20, 0.75);
-      backdrop-filter: var(--glass-blur);
-      -webkit-backdrop-filter: var(--glass-blur);
-      border-bottom: 1px solid var(--bg-card-border);
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 24px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
+    .top-badge-banner a {
+      color: #fef08a;
       font-weight: 800;
-      font-size: 1.35rem;
-      letter-spacing: -0.02em;
+      text-decoration: underline;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-block;
+      padding: 0.1rem 0.4rem;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 6px;
+    }
+
+    .top-badge-banner a:hover {
+      transform: scale(1.05);
+      color: #ffffff;
+    }
+
+    .top-badge-banner .subtext {
+      display: block;
+      font-size: 0.82rem;
+      color: #e2e8f0;
+      margin-top: 0.25rem;
+      opacity: 0.9;
+    }
+
+    /* NAVIGATION HEADER WITH EMBEDDED BRAND LOGO */
+    .navbar {
+      background: rgba(15, 23, 42, 0.8);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--card-border);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
 
     .brand-logo {
-      width: 38px;
-      height: 38px;
-      background: linear-gradient(135deg, var(--accent-violet), var(--accent-pink));
-      border-radius: var(--radius-md);
+      font-size: 1.35rem;
+      font-weight: 900;
+      background: var(--genz-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-decoration: none;
       display: flex;
       align-items: center;
-      justify-content: center;
-      box-shadow: 0 0 15px var(--accent-violet-glow);
+      gap: 0.5rem;
     }
 
-    .brand-logo svg {
-      width: 22px;
-      height: 22px;
-      fill: #fff;
+    .brand-badge {
+      background: var(--genz-gradient);
+      color: #fff;
+      padding: 0.2rem 0.5rem;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      -webkit-text-fill-color: initial;
     }
 
-    .brand-text span {
-      color: var(--accent-violet);
-    }
-
-    .desktop-nav {
+    .nav-links {
       display: flex;
-      align-items: center;
-      gap: 28px;
+      gap: 1rem;
+      list-style: none;
+      flex-wrap: wrap;
     }
 
-    .nav-link {
-      font-size: 0.95rem;
-      font-weight: 500;
+    .nav-links a {
+      text-decoration: none;
       color: var(--text-muted);
-      transition: all 0.2s ease;
-      cursor: pointer;
-    }
-
-    .nav-link:hover, .nav-link.active {
-      color: var(--text-main);
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-    }
-
-    .header-actions {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    /* ==========================================================================
-       3. BUTTONS & BADGES
-       ========================================================================== */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 10px 20px;
-      border-radius: var(--radius-md);
-      font-weight: 600;
-      font-size: 0.9rem;
-      border: 1px solid transparent;
-      cursor: pointer;
-      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-      outline: none;
-      min-height: 44px; /* Touch target size */
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--accent-violet), #6d28d9);
-      color: #fff;
-      box-shadow: 0 4px 20px var(--accent-violet-glow);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 24px rgba(139, 92, 246, 0.5);
-    }
-
-    .btn-primary:active { transform: translateY(0); }
-
-    .btn-emerald {
-      background: linear-gradient(135deg, var(--accent-emerald), #047857);
-      color: #fff;
-      box-shadow: 0 4px 20px var(--accent-emerald-glow);
-    }
-
-    .btn-emerald:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 24px rgba(16, 185, 129, 0.5);
-    }
-
-    .btn-glass {
-      background: rgba(255, 255, 255, 0.05);
-      border-color: var(--bg-card-border);
-      color: var(--text-main);
-      backdrop-filter: var(--glass-blur);
-    }
-
-    .btn-glass:hover {
-      background: rgba(255, 255, 255, 0.1);
-      border-color: rgba(255, 255, 255, 0.2);
-    }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 4px 12px;
-      border-radius: 20px;
-      font-size: 0.75rem;
       font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
+      font-size: 0.9rem;
+      transition: all 0.2s ease;
+      padding: 0.4rem 0.8rem;
+      border-radius: 20px;
     }
 
-    .badge-violet {
-      background: rgba(139, 92, 246, 0.15);
-      border: 1px solid rgba(139, 92, 246, 0.3);
-      color: #c084fc;
+    .nav-links a:hover {
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.08);
     }
 
-    .badge-emerald {
-      background: rgba(16, 185, 129, 0.15);
-      border: 1px solid rgba(16, 185, 129, 0.3);
-      color: #34d399;
+    /* MAIN CONTAINER */
+    .main-container {
+      max-width: 1100px;
+      margin: 2rem auto 0 auto;
+      padding: 0 1.5rem;
     }
 
-    /* ==========================================================================
-       4. CONTAINER & BENTO DASHBOARD GRID
-       ========================================================================== */
-    .container {
-      max-width: 1240px;
-      margin: 0 auto;
-      padding: 24px 20px;
-    }
-
-    .bento-grid {
-      display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap: 20px;
-      margin-bottom: 40px;
-    }
-
-    .bento-card {
-      background: var(--bg-card);
-      border: 1px solid var(--bg-card-border);
-      border-radius: var(--radius-xl);
-      padding: 24px;
-      backdrop-filter: var(--glass-blur);
-      -webkit-backdrop-filter: var(--glass-blur);
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    /* HERO BANNER */
+    .genz-hero {
+      background: rgba(30, 41, 59, 0.6);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 24px;
+      padding: 3rem 2rem;
+      text-align: center;
+      margin-bottom: 2.5rem;
       position: relative;
       overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
     }
 
-    .bento-card:hover {
-      background: var(--bg-card-hover);
-      border-color: rgba(255, 255, 255, 0.15);
-      transform: translateY(-2px);
+    .genz-hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(139, 92, 246, 0.1) 0%, transparent 60%);
+      pointer-events: none;
     }
 
-    /* Hero Bento Card */
-    .hero-card {
-      grid-column: span 8;
+    /* STATIC BOOK WITH EMBEDDED SUBTLY SWAYING TREE LEAVES */
+    .hero-graphic-container {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 1.2rem auto;
+      position: relative;
       display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      min-height: 380px;
-      background: radial-gradient(circle at 90% 10%, rgba(139, 92, 246, 0.15), transparent 50%), var(--bg-card);
+      justify-content: center;
+      align-items: center;
     }
 
-    .hero-content {
-      max-width: 580px;
-      z-index: 2;
+    .static-book-wrapper {
+      position: relative;
+      font-size: 3.8rem;
+      line-height: 1;
+      display: inline-block;
+      filter: drop-shadow(0 0 20px rgba(16, 185, 129, 0.4));
     }
 
-    .hero-title {
-      font-size: 2.75rem;
+    .embedded-tree {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 2.2rem;
+      animation: swayLeaves 3s ease-in-out infinite alternate;
+      transform-origin: bottom center;
+    }
+
+    @keyframes swayLeaves {
+      0% {
+        transform: translateX(-50%) rotate(-3deg) scale(0.98);
+      }
+      100% {
+        transform: translateX(-50%) rotate(3deg) scale(1.02);
+      }
+    }
+
+    .genz-tag {
+      background: var(--genz-gradient);
+      color: #ffffff;
+      font-size: 0.75rem;
       font-weight: 800;
-      line-height: 1.15;
-      letter-spacing: -0.03em;
-      margin: 16px 0;
-      background: linear-gradient(135deg, #ffffff 30%, var(--text-muted));
+      padding: 0.4rem 1rem;
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      display: inline-block;
+      margin-bottom: 1rem;
+      box-shadow: 0 4px 12px rgba(236, 72, 153, 0.3);
+    }
+
+    .genz-hero h1 {
+      font-size: 2.8rem;
+      font-weight: 900;
+      letter-spacing: -1px;
+      margin-bottom: 1rem;
+      background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
-    .hero-desc {
+    .genz-hero p {
       font-size: 1.05rem;
       color: var(--text-muted);
-      margin-bottom: 24px;
+      max-width: 780px;
+      margin: 0 auto 1.5rem auto;
+      line-height: 1.7;
     }
 
-    .hero-graphic {
-      position: absolute;
-      right: -20px;
-      bottom: -20px;
-      width: 320px;
-      height: 320px;
-      pointer-events: none;
-      opacity: 0.85;
+    .genz-hero p strong {
+      color: var(--mint-green);
     }
 
-    .floating-book { animation: float 6s ease-in-out infinite; }
-    .orbit-ring { transform-origin: center; animation: spin 20s linear infinite; }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0) rotate(0deg); }
-      50% { transform: translateY(-12px) rotate(2deg); }
+    .hero-founder-tag {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 800;
+      color: var(--mint-green);
+      font-style: italic;
+      margin-bottom: 1.8rem;
     }
-    @keyframes spin { 100% { transform: rotate(360deg); } }
 
-    /* Live Stats Card */
-    .stats-card {
-      grid-column: span 4;
+    .genz-actions {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 0.8rem 1.6rem;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 0.9rem;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-green {
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      color: #ffffff;
+      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+    }
+
+    .btn-green:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+    }
+
+    .btn-outline {
+      background: rgba(255, 255, 255, 0.05);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, 0.15);
+      transform: translateY(-2px);
+    }
+
+    /* SECTION TITLES */
+    .section-title {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 0.3rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .section-sub {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* WIDGET 1: MISSION */
+    .mission-widget {
+      background: rgba(30, 41, 59, 0.7);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 2rem;
+      margin-bottom: 3rem;
+      position: relative;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .mission-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .mission-card {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 1.5rem;
+      transition: transform 0.2s ease;
+    }
+
+    .mission-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .mission-card h3 {
+      font-size: 1.1rem;
+      color: var(--mint-green);
+      margin-bottom: 0.6rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .mission-card p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .sdg-pills {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+
+    .sdg-pill {
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 0.3rem 0.75rem;
+      border-radius: 8px;
+      color: #fff;
+    }
+
+    .sdg-12 { background-color: #bf8b2e; }
+    .sdg-15 { background-color: #56c02b; }
+
+    /* REFORESTATION GOAL CARD */
+    .goal-container {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .goal-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .goal-title {
+      font-weight: 800;
+      color: #ffffff;
+      font-size: 1rem;
+    }
+
+    .goal-percentage {
+      font-weight: 800;
+      color: var(--mint-green);
+      font-size: 0.9rem;
+    }
+
+    .progress-bar-bg {
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 999px;
+      height: 12px;
+      overflow: hidden;
+      margin-bottom: 0.6rem;
+    }
+
+    .progress-bar-fill {
+      background: linear-gradient(90deg, #10b981 0%, #a7f3d0 100%);
+      height: 100%;
+      width: 0%;
+      border-radius: 999px;
+      transition: width 0.8s ease;
+    }
+
+    .goal-footnote {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    /* WIDGET 2: DASHBOARD METRICS */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 3rem;
+    }
+
+    .metric-card {
+      background: rgba(30, 41, 59, 0.7);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      background: linear-gradient(180deg, rgba(16, 185, 129, 0.08), transparent 60%), var(--bg-card);
     }
 
-    .stat-box {
-      padding: 16px 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    }
-    .stat-box:last-child { border-bottom: none; }
-
-    .stat-number {
-      font-size: 2.25rem;
-      font-weight: 800;
-      color: var(--text-main);
+    .metric-head {
       display: flex;
-      align-items: baseline;
-      gap: 4px;
-    }
-
-    .stat-number.emerald { color: var(--accent-emerald); }
-    .stat-number.violet { color: var(--accent-violet); }
-
-    .stat-label {
-      font-size: 0.85rem;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      font-weight: 700;
       color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      font-weight: 600;
+      margin-bottom: 0.5rem;
     }
 
-    /* SDG, Impact & Request Cards */
-    .sdg-card { grid-column: span 4; border-left: 4px solid var(--accent-emerald); }
-    .impact-card { grid-column: span 4; border-left: 4px solid var(--accent-pink); }
-    .action-card { 
-      grid-column: span 4; 
-      border-left: 4px solid var(--accent-violet); 
-      display: flex; 
-      flex-direction: column; 
-      justify-content: space-between; 
+    .metric-num {
+      font-size: 2.6rem;
+      font-weight: 900;
+      color: #ffffff;
+      margin-bottom: 0.5rem;
+      letter-spacing: -1px;
     }
 
-    /* ==========================================================================
-       5. DIGITAL LIBRARY CATALOG SECTION
-       ========================================================================== */
-    .section-header {
+    .metric-desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 0.75rem;
+    }
+
+    /* WIDGET 3: BOOKSHELF */
+    .shelf-header {
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
-      margin: 40px 0 20px 0;
+      margin-bottom: 1.25rem;
       flex-wrap: wrap;
-      gap: 16px;
+      gap: 1rem;
     }
 
-    .section-title {
-      font-size: 1.75rem;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-    }
-
-    .filter-bar {
+    .filter-group {
       display: flex;
-      gap: 8px;
-      overflow-x: auto;
-      padding-bottom: 8px;
-      width: 100%;
+      gap: 0.4rem;
+      background: rgba(30, 41, 59, 0.7);
+      padding: 0.35rem;
+      border-radius: 14px;
+      border: 1px solid var(--card-border);
+      flex-wrap: wrap;
     }
 
-    .filter-chip {
-      padding: 8px 16px;
-      border-radius: 30px;
-      background: var(--bg-card);
-      border: 1px solid var(--bg-card-border);
+    .filter-btn {
+      background: transparent;
+      border: none;
+      padding: 0.4rem 0.8rem;
+      border-radius: 10px;
+      font-size: 0.78rem;
+      font-weight: 700;
       color: var(--text-muted);
-      font-size: 0.85rem;
-      font-weight: 600;
       cursor: pointer;
-      white-space: nowrap;
       transition: all 0.2s ease;
     }
 
-    .filter-chip:hover, .filter-chip.active {
-      background: var(--accent-violet);
-      color: #fff;
-      border-color: var(--accent-violet);
-      box-shadow: 0 2px 10px var(--accent-violet-glow);
+    .filter-btn.active, .filter-btn:hover {
+      background: var(--genz-gradient);
+      color: #ffffff;
     }
 
-    .catalog-grid {
+    .books-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 20px;
-      margin-bottom: 40px;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
     }
 
     .book-card {
-      background: var(--bg-card);
-      border: 1px solid var(--bg-card-border);
-      border-radius: var(--radius-lg);
-      padding: 16px;
+      background: rgba(30, 41, 59, 0.7);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      padding: 1.4rem;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      transition: all 0.25s ease;
-      position: relative;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
     }
 
     .book-card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(255, 255, 255, 0.2);
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      border-color: rgba(255, 255, 255, 0.25);
     }
 
-    .book-cover-placeholder {
-      width: 100%;
-      height: 180px;
-      border-radius: var(--radius-md);
-      background: linear-gradient(135deg, #1e293b, #0f172a);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 14px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .book-cover-placeholder svg {
-      width: 48px;
-      height: 48px;
-      opacity: 0.4;
-      fill: var(--text-muted);
-    }
-
-    .book-tag {
-      position: absolute;
-      top: 10px;
-      right: 10px;
+    .book-genre-tag {
+      font-size: 0.7rem;
+      font-weight: 800;
+      color: var(--genz-pink);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 0.3rem;
     }
 
     .book-title {
-      font-size: 1.05rem;
-      font-weight: 700;
-      line-height: 1.3;
-      margin-bottom: 4px;
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 0.2rem;
     }
 
     .book-author {
       font-size: 0.85rem;
-      color: var(--text-muted);
-      margin-bottom: 12px;
+      color: var(--mint-green);
+      font-weight: 700;
+      margin-bottom: 0.8rem;
     }
 
-    .book-meta {
+    .book-overview {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 1.2rem;
+      background: rgba(15, 23, 42, 0.4);
+      padding: 0.75rem;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .request-options {
+      margin-top: 0.8rem;
+      padding-top: 0.8rem;
+      border-top: 1px dashed rgba(255, 255, 255, 0.1);
+    }
+
+    .request-label {
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .request-btn-group {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .req-btn {
+      flex: 1;
+      padding: 0.45rem 0.6rem;
+      font-size: 0.75rem;
+      font-weight: 800;
+      border-radius: 8px;
+      text-decoration: none;
+      text-align: center;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.3rem;
+    }
+
+    .req-gmail {
+      background: rgba(239, 68, 68, 0.15);
+      color: #fca5a5;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+
+    .req-gmail:hover {
+      background: rgba(239, 68, 68, 0.3);
+      color: #ffffff;
+    }
+
+    .req-outlook {
+      background: rgba(59, 130, 246, 0.15);
+      color: #93c5fd;
+      border: 1px solid rgba(59, 130, 246, 0.3);
+    }
+
+    .req-outlook:hover {
+      background: rgba(59, 130, 246, 0.3);
+      color: #ffffff;
+    }
+
+    .book-footer {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      padding-top: 0.75rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      margin-top: 0.5rem;
+    }
+
+    .badge {
+      font-size: 0.7rem;
+      font-weight: 800;
+      padding: 0.3rem 0.7rem;
+      border-radius: 999px;
+      color: #ffffff;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .badge-available { background-color: var(--badge-available); }
+    .badge-circulating { background-color: var(--badge-circulating); }
+
+    .read-count {
       font-size: 0.8rem;
-      color: var(--text-dim);
-      padding-top: 10px;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-      margin-top: auto;
+      color: var(--text-muted);
+      font-weight: 700;
     }
 
-    /* ==========================================================================
-       6. LIVE CIRCULATION LOG TABLE
-       ========================================================================== */
-    .log-container {
-      background: var(--bg-card);
-      border: 1px solid var(--bg-card-border);
-      border-radius: var(--radius-xl);
-      padding: 24px;
-      backdrop-filter: var(--glass-blur);
-      overflow: hidden;
-    }
-
-    .table-wrapper {
-      width: 100%;
+    /* WIDGET 4: ACTIVITY LOG TABLE */
+    .table-card {
+      background: rgba(30, 41, 59, 0.7);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
       overflow-x: auto;
+      margin-bottom: 3rem;
     }
 
-    .custom-table {
+    table {
       width: 100%;
       border-collapse: collapse;
       text-align: left;
       font-size: 0.9rem;
     }
 
-    .custom-table th {
-      padding: 12px 16px;
-      color: var(--text-dim);
+    th, td {
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    th {
+      background-color: rgba(15, 23, 42, 0.6);
+      color: var(--text-muted);
       font-weight: 700;
       text-transform: uppercase;
       font-size: 0.75rem;
-      letter-spacing: 0.05em;
-      border-bottom: 1px solid var(--bg-card-border);
+      letter-spacing: 0.5px;
     }
 
-    .custom-table td {
-      padding: 16px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* UN SDG FOOTER BANNER */
+    .sdg-banner {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 16px;
+      padding: 1.5rem 1.75rem;
+    }
+
+    .sdg-banner h3 {
+      color: var(--mint-green);
+      font-size: 1.15rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .sdg-banner p {
       color: var(--text-muted);
-    }
-
-    .custom-table tr:last-child td { border-bottom: none; }
-    .custom-table tr:hover td { background: rgba(255, 255, 255, 0.02); color: var(--text-main); }
-
-    .status-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 4px 10px;
-      border-radius: 12px;
-      font-size: 0.75rem;
-      font-weight: 600;
-    }
-
-    .status-active { background: rgba(16, 185, 129, 0.15); color: var(--accent-emerald); }
-    .status-pending { background: rgba(245, 158, 11, 0.15); color: #fbbf24; }
-
-    /* ==========================================================================
-       7. INCREMENTAL ENHANCEMENT: MOBILE APP BOTTOM TAB NAVIGATION BAR
-       ========================================================================== */
-    .bottom-tab-bar {
-      display: none; /* Hidden on Desktop */
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: var(--bottom-nav-height);
-      background: rgba(11, 13, 20, 0.92);
-      backdrop-filter: var(--glass-blur);
-      -webkit-backdrop-filter: var(--glass-blur);
-      border-top: 1px solid var(--bg-card-border);
-      z-index: 1000;
-      justify-content: space-around;
-      align-items: center;
-      padding-bottom: env(safe-area-inset-bottom);
-    }
-
-    .tab-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 4px;
-      color: var(--text-dim);
-      font-size: 0.7rem;
-      font-weight: 600;
-      cursor: pointer;
-      background: none;
-      border: none;
-      width: 100%;
-      height: 100%;
-      justify-content: center;
-    }
-
-    .tab-item.active { color: var(--accent-violet); }
-    .tab-item svg { width: 22px; height: 22px; fill: currentColor; }
-
-    /* ==========================================================================
-       8. INCREMENTAL ENHANCEMENT: UNIVERSAL EMAIL FORM MODAL (MOBILE + DESKTOP)
-       ========================================================================== */
-    .modal-overlay {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(5, 7, 12, 0.8);
-      backdrop-filter: var(--glass-blur);
-      -webkit-backdrop-filter: var(--glass-blur);
-      z-index: 2000;
-      align-items: flex-end; /* Slides up like an app sheet on mobile */
-      justify-content: center;
-      opacity: 0;
-      transition: opacity 0.25s ease;
-    }
-
-    .modal-overlay.active {
-      display: flex;
-      opacity: 1;
-    }
-
-    .modal-card {
-      background: #141824;
-      border: 1px solid var(--bg-card-border);
-      width: 100%;
-      max-width: 520px;
-      border-radius: 28px 28px 0 0;
-      padding: 28px;
-      box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.6);
-      transform: translateY(100%);
-      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      max-height: 90vh;
-      overflow-y: auto;
-    }
-
-    .modal-overlay.active .modal-card { transform: translateY(0); }
-
-    .modal-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-    }
-
-    .modal-title { font-size: 1.35rem; font-weight: 800; }
-
-    .modal-close {
-      background: rgba(255, 255, 255, 0.08);
-      border: none;
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      color: var(--text-muted);
-      font-size: 1.2rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .modal-close:hover { background: rgba(255, 255, 255, 0.15); color: var(--text-main); }
-
-    .form-group { margin-bottom: 18px; }
-
-    .form-label {
-      display: block;
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--text-muted);
-      margin-bottom: 8px;
-    }
-
-    .form-control {
-      width: 100%;
-      padding: 14px 16px;
-      background: rgba(10, 12, 18, 0.7);
-      border: 1px solid var(--bg-card-border);
-      border-radius: var(--radius-md);
-      color: var(--text-main);
-      font-size: 0.95rem;
-      outline: none;
-      transition: border-color 0.2s ease;
-    }
-
-    .form-control:focus {
-      border-color: var(--accent-violet);
-      box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2);
-    }
-
-    textarea.form-control {
-      min-height: 110px;
-      resize: vertical;
-    }
-
-    /* Responsive adjustments */
-    @media (max-width: 992px) {
-      .hero-card { grid-column: span 12; }
-      .stats-card { grid-column: span 12; }
-      .sdg-card, .impact-card, .action-card { grid-column: span 6; }
-    }
-
-    @media (max-width: 640px) {
-      :root { --header-height: 60px; }
-      .desktop-nav { display: none; }
-      .bottom-tab-bar { display: flex; }
-      .hero-title { font-size: 2rem; }
-      .bento-grid { gap: 12px; }
-      .bento-card { padding: 18px; }
-      .sdg-card, .impact-card, .action-card { grid-column: span 12; }
-      .hero-graphic { display: none; }
-      .modal-overlay { align-items: flex-end; }
-    }
-
-    @media (min-width: 641px) {
-      .modal-overlay { align-items: center; } /* Centered modal on desktop */
-      .modal-card { border-radius: 24px; }
+      font-size: 0.92rem;
     }
   </style>
 </head>
 <body>
 
-  <!-- ==========================================================================
-       9. APP HEADER
-       ========================================================================== -->
-  <header class="app-header">
-    <div class="brand">
-      <div class="brand-logo">
-        <svg viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+  <!-- TOP NOTIFICATION BADGE -->
+  <div class="top-badge-banner">
+    🌟 <strong>Love what we're doing?</strong> To show your support for this initiative, 
+    <a id="support-btn" role="button">click here</a> — a simple click lets us know you're with us!
+    <span class="subtext">
+      Want to go a step further? You're always welcome to donate books or rehome used ones, though simply visiting and sharing is support enough.
+    </span>
+  </div>
+
+  <!-- NAVIGATION HEADER WITH GEN Z BRANDING LOGO -->
+  <nav class="navbar">
+    <a href="#" class="brand-logo">
+      <span class="brand-badge">♻️📖</span> RE:READ
+    </a>
+    <ul class="nav-links">
+      <li><a href="#mission">Mission</a></li>
+      <li><a href="#dashboard" onclick="triggerCounters()">Dashboard</a></li>
+      <li><a href="#shelf">Bookshelf</a></li>
+      <li><a href="#activity">Activity Log</a></li>
+    </ul>
+  </nav>
+
+  <div class="main-container">
+
+    <!-- HERO BANNER (STATIC BOOK WITH EMBEDDED SUBTLY SWAYING TREE) -->
+    <div class="genz-hero">
+      <div class="hero-graphic-container">
+        <div class="static-book-wrapper">
+          📖
+          <span class="embedded-tree">🌳</span>
+        </div>
       </div>
-      <div class="brand-text">RE:<span>READ</span></div>
+
+      <span class="genz-tag">♻️ Pass the Book, Not the Trash</span>
+      <h1>Read, Share, Reforest.</h1>
+      <p>
+        <strong>RE:READ Community</strong> is designed with a dual purpose: directly preserving trees by giving physical books endless life, while helping readers rebuild deep focus, form tangible reading habits, and step away from constant digital glare for a meaningful screen detox.
+      </p>
+      <span class="hero-founder-tag">— Arijit K., Founder, RE:READ Community</span>
+
+      <div class="genz-actions">
+        <a href="#shelf" class="btn btn-green">Explore Bookshelf 📖</a>
+        <a href="#mission" class="btn btn-outline">Our Mission 🌿</a>
+      </div>
     </div>
 
-    <nav class="desktop-nav">
-      <a href="#overview" class="nav-link active">Overview</a>
-      <a href="#catalog" class="nav-link">Digital Library</a>
-      <a href="#impact" class="nav-link">Reforestation Math</a>
-      <a href="#log" class="nav-link">Live Activity</a>
-    </nav>
+    <!-- WIDGET 1: MISSION & SDG IMPACT -->
+    <div id="mission" class="mission-widget">
+      <h2 class="section-title">🎯 Our Mission & UN SDG Alignment</h2>
+      <p class="section-sub">Why we pass physical books instead of buying new ones.</p>
 
-    <div class="header-actions">
-      <button class="btn btn-primary" onclick="openEmailModal('General Inquiry')">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-        <span>Get in Touch</span>
-      </button>
-    </div>
-  </header>
-
-  <!-- ==========================================================================
-       10. MAIN CONTENT CONTAINER
-       ========================================================================== -->
-  <main class="container" id="overview">
-    
-    <!-- Bento Dashboard Grid -->
-    <div class="bento-grid">
-      
-      <!-- Hero Bento Item -->
-      <div class="bento-card hero-card">
-        <div class="hero-content">
-          <span class="badge badge-violet">Circular Economy Initiative</span>
-          <h1 class="hero-title">Circulate Knowledge. Plant Futures.</h1>
-          <p class="hero-desc">
-            RE:READ is a community-driven digital library system designed to eliminate book waste and fuel reforestation goals through shared reading momentum.
+      <div class="mission-grid">
+        <div class="mission-card">
+          <h3>🌲 Why 25 Trees Goal?</h3>
+          <p>
+            Standard paper production consumes massive amounts of timber. Since 1 tree yields roughly 25 books, recirculating physical copies saves entire mini-forests from being cut down for single-use reading.
           </p>
-          <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-            <a href="#catalog" class="btn btn-primary">Browse Library</a>
-            <button class="btn btn-glass" onclick="openEmailModal('Book Contribution Request')">Donate Books</button>
+        </div>
+
+        <div class="mission-card">
+          <h3>📱 Digital Detox & Habit Forming</h3>
+          <p>
+            Physical reading restores cognitive attention spans destroyed by screen overexposure. RE:READ turns physical book handoffs into a habit-forming community ritual.
+          </p>
+        </div>
+
+        <div class="mission-card">
+          <h3>🇺🇳 Global Goals</h3>
+          <p>
+            Our community directly advances United Nations Sustainable Development Goals by promoting sustainable consumption habits and preserving forest ecosystems.
+          </p>
+          <div class="sdg-pills">
+            <span class="sdg-pill sdg-12">SDG 12: Responsible Consumption</span>
+            <span class="sdg-pill sdg-15">SDG 15: Life on Land</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- REFORESTATION GOAL CARD WITH AUTOMATED MATH -->
+      <div class="goal-container">
+        <div class="goal-top">
+          <span class="goal-title">🌱 Goal Milestone: Conserve 25 Community Trees</span>
+          <span class="goal-percentage" id="goal-percentage-text">Calculating...</span>
+        </div>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="goal-progress-bar"></div>
+        </div>
+        <p class="goal-footnote" id="goal-footnote-text">Calculated automatically: 1 tree yields 25 books.</p>
+      </div>
+    </div>
+
+    <!-- WIDGET 2: DASHBOARD METRICS WITH ANIMATED COUNTERS -->
+    <div id="dashboard">
+      <h2 class="section-title">📊 Community & Impact Dashboard</h2>
+      <p class="section-sub">Real-time engagement, book movement, and sustainability tracking.</p>
+
+      <div class="metrics-grid">
+        <!-- Visitor Count -->
+        <div class="metric-card">
+          <div>
+            <div class="metric-head"><span>👥</span> Website Visitors</div>
+            <div class="metric-num" id="visitor-count" data-target="0">0</div>
+          </div>
+          <div class="metric-desc">
+            Total visitors who explored our platform. <em>Increases dynamically per visit.</em>
           </div>
         </div>
 
-        <!-- Animated SVG Graphic -->
-        <svg class="hero-graphic" viewBox="0 0 200 200">
-          <circle class="orbit-ring" cx="100" cy="100" r="70" fill="none" stroke="rgba(139, 92, 246, 0.2)" stroke-width="2" stroke-dasharray="6 6"/>
-          <g class="floating-book">
-            <rect x="70" y="60" width="60" height="80" rx="6" fill="#8b5cf6" opacity="0.8"/>
-            <path d="M75 65 h50 v70 h-50 z" fill="#1e1b4b"/>
-            <circle cx="100" cy="100" r="18" fill="#10b981"/>
-          </g>
-        </svg>
-      </div>
+        <!-- Community Supporters (PERSISTED IN MEMORY) -->
+        <div class="metric-card">
+          <div>
+            <div class="metric-head"><span>💚</span> Community Supporters</div>
+            <div class="metric-num" id="support-count" data-target="0">0</div>
+          </div>
+          <div class="metric-desc">
+            Readers who clicked to support our mission. <strong>Saved in memory across reloads.</strong>
+          </div>
+        </div>
 
-      <!-- Live Stats Bento Item -->
-      <div class="bento-card stats-card">
+        <!-- Total Books on Shelf -->
+        <div class="metric-card">
+          <div>
+            <div class="metric-head"><span>📚</span> Total Books Shared</div>
+            <div class="metric-num" id="books-count" data-target="14">14</div>
+          </div>
+          <div class="metric-desc">
+            Active copies available or circulating across the community.
+          </div>
+        </div>
+
+        <!-- Trees Conserved -->
+        <div class="metric-card">
+          <div>
+            <div class="metric-head"><span>🌲</span> Trees Conserved</div>
+            <div class="metric-num"><span id="trees-conserved" data-target="0.56" data-decimals="2">0.00</span> <span style="font-size: 1rem; color: #94a3b8;">/ 25 Goal</span></div>
+          </div>
+          <div class="metric-desc">
+            Calculated accurately: 1 tree yields 25 books. 14 books = <strong>0.56 trees conserved</strong>.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WIDGET 3: BOOKSHELF WITH GENRE CATEGORIES & STREAMLINED EMAIL REQUEST FORMS -->
+    <div id="shelf">
+      <div class="shelf-header">
         <div>
-          <span class="badge badge-emerald">Live Metrics</span>
-          <h3 style="margin-top: 8px;">Community Impact</h3>
+          <h2 class="section-title" style="margin: 0;">📚 Community Bookshelf</h2>
+          <p class="section-sub" style="margin: 0;">Browse titles available to request or currently circulating.</p>
         </div>
-
-        <div class="stat-box">
-          <div class="stat-number emerald" id="treeCounter">142</div>
-          <div class="stat-label">Trees Planted Equivalent</div>
-        </div>
-
-        <div class="stat-box">
-          <div class="stat-number violet" id="circulationCounter">1,890</div>
-          <div class="stat-label">Books Circulated</div>
-        </div>
-
-        <div class="stat-box">
-          <div class="stat-number">840 kg</div>
-          <div class="stat-label">Paper Waste Saved</div>
+        <div class="filter-group">
+          <button class="filter-btn active" onclick="filterBooks('all', this)">All Books (14)</button>
+          <button class="filter-btn" onclick="filterBooks('circulating', this)">In Circulation (4)</button>
+          <button class="filter-btn" onclick="filterBooks('available', this)">Available (10)</button>
+          <button class="filter-btn" onclick="filterBooks('genre-business', this)">Business & Leadership</button>
+          <button class="filter-btn" onclick="filterBooks('genre-fiction', this)">Fiction & Classics</button>
+          <button class="filter-btn" onclick="filterBooks('genre-children', this)">Children & Learning</button>
+          <button class="filter-btn" onclick="filterBooks('genre-selfhelp', this)">Self-Help & Mindset</button>
+          <button class="filter-btn" onclick="filterBooks('genre-finance', this)">Finance & Wealth</button>
         </div>
       </div>
 
-      <!-- UN SDG Goal Card -->
-      <div class="bento-card sdg-card" id="impact">
-        <span class="badge badge-emerald">UN SDG Alignment</span>
-        <h3 style="margin: 10px 0 6px 0;">Goal 12 & 15</h3>
-        <p style="font-size: 0.88rem; color: var(--text-muted);">
-          Responsible consumption meets life on land. Every 15 books circulated saves roughly 1 full tree from commercial timber processing.
-        </p>
-      </div>
+      <div class="books-grid">
 
-      <!-- Impact Calculator Item -->
-      <div class="bento-card impact-card">
-        <span class="badge badge-violet">Reforestation Math</span>
-        <h3 style="margin: 10px 0 6px 0;">The 15:1 Ratio</h3>
-        <p style="font-size: 0.88rem; color: var(--text-muted);">
-          For every 15 active loans, RE:READ funds 1 native sapling via our local environmental restoration partners.
-        </p>
-      </div>
+        <!-- ==================== 4 CIRCULATING BOOKS ==================== -->
 
-      <!-- Call to Action Card -->
-      <div class="bento-card action-card">
-        <div>
-          <h3 style="margin-bottom: 6px;">Need a Specific Title?</h3>
-          <p style="font-size: 0.88rem; color: var(--text-muted);">
-            Request a custom book loan directly through our universal form.
-          </p>
+        <div class="book-card" data-status="circulating" data-genre="genre-business">
+          <div>
+            <div class="book-genre-tag">Business & Leadership</div>
+            <div class="book-title">Good Power</div>
+            <div class="book-author">by Ginni Rometty</div>
+            <div class="book-overview">
+              Former IBM CEO shares a powerful leadership blueprint on using "good power" to transform organizations, drive ethical impact, and navigate complex change without losing integrity.
+            </div>
+          </div>
+          <div class="book-footer">
+            <span class="badge badge-circulating">In Circulation</span>
+            <span class="read-count">3 Readers</span>
+          </div>
         </div>
-        <button class="btn btn-emerald" style="margin-top: 16px; width: 100%;" onclick="openEmailModal('Custom Book Request')">
-          Request Book Loan
-        </button>
-      </div>
 
+        <div class="book-card" data-status="circulating" data-genre="genre-selfhelp">
+          <div>
+            <div class="book-genre-tag">Self-Help & Mindset</div>
+            <div class="book-title">Can't Hurt Me</div>
+            <div class="book-author">by David Goggins</div>
+            <div class="book-overview">
+              Navy SEAL veteran reveals how to master mind control, overcome extreme adversity, push past mental limits, and tap into the "40% Rule" to unlock unyielding human potential.
+            </div>
+          </div>
+          <div class="book-footer">
+            <span class="badge badge-circulating">In Circulation</span>
+            <span class="read-count">5 Readers</span>
+          </div>
+        </div>
+
+        <div class="book-card" data-status="circulating" data-genre="genre-business">
+          <div>
+            <div class="book-genre-tag">Business & Leadership</div>
+            <div class="book-title">Hit Refresh</div>
+            <div class="book-author">by Satya Nadella</div>
+            <div class="book-overview">
+              Microsoft’s CEO explores individual and corporate transformation, emphasizing empathy, cloud innovation, and tech ethics as core drivers to revitalize tech culture.
+            </div>
+          </div>
+          <div class="book-footer">
+            <span class="badge badge-circulating">In Circulation</span>
+            <span class="read-count">2 Readers</span>
+          </div>
+        </div>
+
+        <div class="book-card" data-status="circulating" data-genre="genre-business">
+          <div>
+            <div class="book-genre-tag">Business & Leadership</div>
+            <div class="book-title">Your Next Five Moves</div>
+            <div class="book-author">by Patrick Bet-David</div>
+            <div class="book-overview">
+              A practical strategic playbook for entrepreneurs and leaders to master critical thinking, anticipate industry shifts, manage team dynamics, and scale business operations like a grandmaster.
+            </div>
+          </div>
+          <div class="book-footer">
+            <span class="badge badge-circulating">In Circulation</span>
+            <span class="read-count">4 Readers</span>
+          </div>
+        </div>
+
+        <!-- ==================== 10 AVAILABLE BOOKS WITH STREAMLINED EMAIL REQUEST ==================== -->
+
+        <!-- Book a -->
+        <div class="book-card" data-status="available" data-genre="genre-business">
+          <div>
+            <div class="book-genre-tag">Business & Leadership</div>
+            <div class="book-title">The AI-Driven Leader</div>
+            <div class="book-author">by Geoff Woods</div>
+            <div class="book-overview">
+              A forward-looking guide for executives and managers on integrating modern artificial intelligence tools into daily workflows to automate tasks, double productivity, and lead strategic change.
+            </div>
+          </div>
+          <div class="request-options">
+            <span class="request-label">📨 Request Book (Pre-drafted Email):</span>
+            <div class="request-btn-group">
+              <a href="#" class="req-btn req-gmail" onclick="requestBook('The AI-Driven Leader by Geoff Woods', 'gmail'); return false;">Gmail</a>
+              <a href="#" class="req-btn req-outlook" onclick="requestBook('The AI-Driven Leader by Geoff Woods', 'outlook'); return false;">Outlook</a>
+            </div>
+          </div>
+          <div class="book-footer">
+            <span class="badge badge-available">Available</span>
+            <span class="read-count">Ready to Ship</span>
+          </div>
+        </div>
+
+        <!-- Book b -->
+        <div class="book-card" data-status="available" data-genre="genre-business">
+          <div>
+            <div class="book-genre-tag">Business & Leadership</div>
+            <div class="book-title">Chanakya in You</div>
+            <div class="book-author">by Radhakrishnan Pillai</div>
+            <div class="book-overview">
+              An engaging story-based exploration applying ancient Indian leadership principles from Arthashastra to modern career success, strategy formation, personal ethics, and life goals.
+            </div>
+          </div>
+          <div class="request-options">
+            <span class="request-label">📨 Request Book (Pre-drafted Email):</span>
+            <div class="request-btn-group">
+              <a href="#" class="req-btn req-gmail" onclick="requestBook('Chanakya in You by Radhakrishnan Pillai', 'gmail'); return false;">Gmail</a>
+              <a href="#" class="req-btn req-outlook" onclick="requestBook('Chanakya in You by Radhakrishnan Pillai', 'outlook'); return false;">Outlook</a>
+            </div>
+          </div>
+          <div class="book-footer">
+            <span class="badge badge-available">Available</span>
+            <span class="read-count">Ready to Ship</span>
+          </div>
+        </div>
+
+        <!-- Book c -->
+        <div class="book-card" data-status="available" data-genre="genre-children">
+          <div>
+            <div class="book-genre-tag">Children & Learning</div>
+            <div class="book-title">Think Like Maths Genius</div>
+            <div class="book-author">by Arthur Benjamin & Michael Shermer</div>
+            <div class="book-overview">
+              Unlocks fast mental math shortcuts, rapid calculation secrets, and fun numerical tricks that boost cognitive agility and build unwavering confidence with numbers.
+            </div>
+          </div>
+          <div class="request-options">
+            <span class="request-label">📨 Request Book (Pre-drafted Email):</span>
+            <div class="request-btn-group">
+              <a href="#" class="req-btn req-gmail" onclick="requestBook('Think Like Maths Genius by Arthur Benjamin and Michael Shermer', 'gmail'); return false;">Gmail</a>
+              <a href="#" class="req-btn req-outlook" onclick="requestBook('Think Like Maths Genius by Arthur Benjamin and Michael Shermer', 'outlook'); return false;">Outlook</a>
+            </div>
+          </div>
+          <div class="book-footer">
+            <span class="badge badge-available">Available</span>
+            <span class="read-count">Ready to Ship</span>
+          </div>
+        </div>
+
+        <!-- Book d -->
+        <div class="book-card" data-status="available" data-genre="genre-selfhelp">
+          <div>
+            <div class="book-genre-tag">Self-Help & Mindset</div>
+            <div class="book-title">Nature Cure for Children</div>
+            <div class="book-author">by Dr. H.K. Bakhru</div>
+            <div class="book-overview">
+              A holistic wellness reference providing natural remedies, wholesome nutrition principles, and eco-friendly lifestyle choices to foster pediatric health and preventive immunity.
+            </div>
+          </div>
+          <div class="request-options">
+            <span class="request-label">📨 Request Book (Pre-drafted Email):</span>
+            <div class="request-btn-group">
+              <a href="#" class="req-btn req-gmail" onclick="requestBook('Nature Cure for Children by Dr. H.K. Bakhru', 'gmail'); return false;">Gmail</a>
+              <a href="#" class="req-btn req-outlook" onclick="requestBook('Nature Cure for Children by Dr. H.K. Bakhru', 'outlook'); return false;">Outlook</a>
+            </div>
+          </div>
+          <div class="book-footer">
+            <span class="badge badge-available">Available</span>
+            <span class="read-count">Ready to Ship</span>
+          </div>
+        </div>
+
+        <!-- Book e -->
+        <div class="book-card" data-status="available" data-genre="genre-fiction">
+          <div>
+            <div class="book-genre-tag">Fiction & Classics</div>
+            <div class="book-title">The Complete Panchatantra Omnibus</div>
+            <div class="book-author">by Sunita Pant Bansal</div>
+            <div class="book-overview">
+              A timeless compilation of ancient moral fables using clever animal allegories to teach timeless lessons in wisdom, diplomacy, critical thinking, and human relationships.
+            </div>
+          </div>
+          <div class="request-options">
+            <span class="request-label">📨 Request Book (Pre-drafted Email):</span>
+            <div class="request-btn-group">
+              <a href="#" class="req-btn req-gmail" onclick="requestBook('The Complete Panchatantra Omnibus by Sunita Pant Bansal', 'gmail'); return false;">Gmail</a>
+              <a href="#" class="req-btn req-outlook" onclick="requestBook('The Complete Panchatantra Omnibus by Sunita Pant Bansal', 'outlook'); return false;">Outlook</a>
+            </div>
+          </div>
+          <div class="book-footer">
+            <span class="badge badge-available">Available</span>
+            <span class="read-count">Ready to Ship</span>
+          </div>
+        </div>
+
+        <!-- Book f -->
+        <div class="book-card" data-status="available" data-genre="genre-business">
+          <div>
+            <div class="book-genre-tag">Business & Leadership</div>
+            <div class="book-title">Getting Ready to Roar</div>
+            <div class="book-author">by Navin Pasricha</div>
+            <div class="book-overview">
+              Subtitled "Chief Auditor's Guide Audit Room to Board Room", this executive handbook details corporate governance, risk assessment, leadership elevation, and board interactions.
+            </div>
+          </div>
+          <div class="request-options">
+            <span class="request-label">📨 Request Book (Pre-drafted Email):</span>
+            <div class="request-btn-group">
+              <a href="#" class="req-btn req-gmail" onclick="requestBook('Getting Ready to Roar Chief Auditors guide Audit room to Board room by Navin Pasricha', 'gmail'); return false;">Gmail</a>
+              <a href="#" class="req-btn req-outlook" onclick="requestBook('Getting Ready to Roar Chief Auditors guide Audit room to Board room by Navin Pasricha', 'outlook'); return false;">Outlook</a>
+            </div>
+          </div>
+          <div class="book-footer">
+            <span class="badge badge-available">Available</span>
+            <span class="read-count">Ready to Ship</span>
+          </div>
+        </div>
+
+        <!-- Book g -->
+        <div class="book-card" data-status="available" data-genre="genre-children">
+          <div>
+            <div class="book-genre-tag">Children & Learning</div>
+            <div class="book-title">Shortcuts in Mathematics</div>
+            <div class="book-author">by Clive Stevens</div>
+            <div class="book-overview">
+              A handy manual packed with fast calculation tricks, problem-solving hacks, and practical methods designed to accelerate competitive exam preparation and numerical fluency.
+            </div>
+          </div>
+          <div class="request-options">
+            <span class="request-label">📨 Request Book (Pre-drafted Email):</span>
+            <div class="request-btn-group">
+              <a href="#" class="req-btn req-gmail" onclick="requestBook('Shortcuts in Mathematics by Clive Stevens', 'gmail'); return false;">Gmail</a>
+              <a href="#" class="req-btn req-outlook" onclick="requestBook('Shortcuts in Mathematics by Clive Stevens', 'outlook'); return false;">Outlook</a>
+            </div>
+          </div>
+          <div class="book-footer">
+            <span class="badge badge-available">Available</span>
+            <span class="read-count">Ready to Ship</span>
+          </div>
+        </div>
+
+        <!-- Book h -->
+        <div class="book-card" data-status="available" data-genre="genre-children">
+          <div>
+            <div class="book-genre-tag">Children & Learning</div>
+            <div class="book-title">The Journey Through Time</div>
+            <div class="book-author">by Geronimo Stilton</div>
+            <div class="book-overview">
+              An action-packed, richly illustrated adventure taking young readers through historical epochs, blending fun storytelling with historical discovery and reading enjoyment.
+            </div>
+          </div>
+          <div class="request-options">
+            <span class="request-label">📨 Request Book (Pre-drafted Email):</span>
+            <div class="request-btn-group">
+              <a href="#" class="req-btn req-gmail" onclick="requestBook('The Journey through time by Geronimo Stilton', 'gmail'); return false;">Gmail</a>
+              <a href="#" class="req-btn req-outlook" onclick="requestBook('The Journey through time by Geronimo Stilton', 'outlook'); return false;">Outlook</a>
+            </div>
+          </div>
+          <div class="book-footer">
+            <span class="badge badge-available">Available</span>
+            <span class="read-count">Ready to Ship</span>
+          </div>
+        </div>
+
+        <!-- Book i -->
+        <div class="book-card" data-status="available" data-genre="genre-finance">
+          <div>
+            <div class="book-genre-tag">Finance & Wealth</div>
+            <div class="book-title">The Way to Save & Prosper</div>
+            <div class="book-author">by Dhirendra Kumar (Value Research)</div>
+            <div class="book-overview">
+              A comprehensive personal finance roadmap focusing on long-term disciplined investing, mutual fund selection, asset protection, and sustainable wealth creation.
+            </div>
+          </div>
+          <div class="request-options">
+            <span class="request-label">📨 Request Book (Pre-drafted Email):</span>
+            <div class="request-btn-group">
+              <a href="#" class="req-btn req-gmail" onclick="requestBook('The way to save & propser Value Research by Dhirendra Kumar', 'gmail'); return false;">Gmail</a>
+              <a href="#" class="req-btn req-outlook" onclick="requestBook('The way to save & propser Value Research by Dhirendra Kumar', 'outlook'); return false;">Outlook</a>
+            </div>
+          </div>
+          <div class="book-footer">
+            <span class="badge badge-available">Available</span>
+            <span class="read-count">Ready to Ship</span>
+          </div>
+        </div>
+
+        <!-- Book j -->
+        <div class="book-card" data-status="available" data-genre="genre-fiction">
+          <div>
+            <div class="book-genre-tag">Fiction & Classics</div>
+            <div class="book-title">Malgudi Days</div>
+            <div class="book-author">by R.K. Narayan</div>
+            <div class="book-overview">
+              A masterpiece collection of short stories capturing the humor, simple warmth, and colorful slice-of-life tales set in the iconic fictional South Indian town of Malgudi.
+            </div>
+          </div>
+          <div class="request-options">
+            <span class="request-label">📨 Request Book (Pre-drafted Email):</span>
+            <div class="request-btn-group">
+              <a href="#" class="req-btn req-gmail" onclick="requestBook('Malgudi Days by R.K. Narayan', 'gmail'); return false;">Gmail</a>
+              <a href="#" class="req-btn req-outlook" onclick="requestBook('Malgudi Days by R.K. Narayan', 'outlook'); return false;">Outlook</a>
+            </div>
+          </div>
+          <div class="book-footer">
+            <span class="badge badge-available">Available</span>
+            <span class="read-count">Ready to Ship</span>
+          </div>
+        </div>
+
+      </div>
     </div>
 
-    <!-- ==========================================================================
-         11. CATALOG / DIGITAL LIBRARY
-         ========================================================================== -->
-    <div class="section-header" id="catalog">
-      <div>
-        <h2 class="section-title">Digital Catalog</h2>
-        <p style="color: var(--text-muted); font-size: 0.9rem;">Select a title to request via smartphone or desktop email client</p>
-      </div>
-      
-      <div class="filter-bar">
-        <button class="filter-chip active" onclick="filterCatalog('all', this)">All Titles</button>
-        <button class="filter-chip" onclick="filterCatalog('tech', this)">Computer Science & Tech</button>
-        <button class="filter-chip" onclick="filterCatalog('env', this)">Ecology & Environment</button>
-        <button class="filter-chip" onclick="filterCatalog('lit', this)">Classic Literature</button>
-      </div>
-    </div>
+    <!-- WIDGET 4: ACTIVITY LOG -->
+    <div id="activity">
+      <h2 class="section-title">⚡ Recent Circulation Activity</h2>
+      <p class="section-sub">Live log tracking book handoffs and community exchanges.</p>
 
-    <div class="catalog-grid" id="catalogGrid">
-      
-      <div class="book-card" data-category="tech">
-        <div class="book-cover-placeholder">
-          <svg viewBox="0 0 24 24"><path d="M4 6h16v12H4z"/></svg>
-          <span class="badge badge-violet book-tag">Tech</span>
-        </div>
-        <h3 class="book-title">Deep Learning Architectures</h3>
-        <p class="book-author">Ian Goodfellow et al.</p>
-        <div class="book-meta">
-          <span>Available: 2 Copies</span>
-          <button class="btn btn-glass" style="padding: 4px 10px; font-size: 0.75rem;" onclick="openEmailModal('Loan Request: Deep Learning Architectures')">Request</button>
-        </div>
-      </div>
-
-      <div class="book-card" data-category="env">
-        <div class="book-cover-placeholder">
-          <svg viewBox="0 0 24 24"><path d="M12 2L2 22h20z"/></svg>
-          <span class="badge badge-emerald book-tag">Ecology</span>
-        </div>
-        <h3 class="book-title">The Hidden Life of Trees</h3>
-        <p class="book-author">Peter Wohlleben</p>
-        <div class="book-meta">
-          <span>Available: 1 Copy</span>
-          <button class="btn btn-glass" style="padding: 4px 10px; font-size: 0.75rem;" onclick="openEmailModal('Loan Request: The Hidden Life of Trees')">Request</button>
-        </div>
-      </div>
-
-      <div class="book-card" data-category="tech">
-        <div class="book-cover-placeholder">
-          <svg viewBox="0 0 24 24"><path d="M20 4H4v16h16z"/></svg>
-          <span class="badge badge-violet book-tag">Tech</span>
-        </div>
-        <h3 class="book-title">Clean Code & Refactoring</h3>
-        <p class="book-author">Robert C. Martin</p>
-        <div class="book-meta">
-          <span>Available: 3 Copies</span>
-          <button class="btn btn-glass" style="padding: 4px 10px; font-size: 0.75rem;" onclick="openEmailModal('Loan Request: Clean Code')">Request</button>
-        </div>
-      </div>
-
-      <div class="book-card" data-category="lit">
-        <div class="book-cover-placeholder">
-          <svg viewBox="0 0 24 24"><path d="M12 2l10 18H2z"/></svg>
-          <span class="badge badge-violet book-tag">Literature</span>
-        </div>
-        <h3 class="book-title">Braiding Sweetgrass</h3>
-        <p class="book-author">Robin Wall Kimmerer</p>
-        <div class="book-meta">
-          <span>Available: 1 Copy</span>
-          <button class="btn btn-glass" style="padding: 4px 10px; font-size: 0.75rem;" onclick="openEmailModal('Loan Request: Braiding Sweetgrass')">Request</button>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- ==========================================================================
-         12. LIVE CIRCULATION LOG
-         ========================================================================== -->
-    <div class="section-header" id="log">
-      <div>
-        <h2 class="section-title">Live Circulation Activity</h2>
-        <p style="color: var(--text-muted); font-size: 0.9rem;">Real-time community book exchanges and tree milestone tracking</p>
-      </div>
-    </div>
-
-    <div class="log-container">
-      <div class="table-wrapper">
-        <table class="custom-table">
+      <div class="table-card">
+        <table>
           <thead>
             <tr>
-              <th>Transaction ID</th>
-              <th>Book Title</th>
+              <th>Name of Book & Author</th>
               <th>Status</th>
-              <th>Impact Created</th>
-              <th>Date</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>#RR-8902</td>
-              <td>Deep Learning Architectures</td>
-              <td><span class="status-pill status-active">Active Loan</span></td>
-              <td>+0.06 Trees Saved</td>
-              <td>Just Now</td>
+              <td><strong>Good Power</strong> <br><span style="font-size: 0.8rem; color: #94a3b8;">by Ginni Rometty</span></td>
+              <td><span class="badge badge-circulating">Donated to next reader</span></td>
             </tr>
             <tr>
-              <td>#RR-8899</td>
-              <td>The Hidden Life of Trees</td>
-              <td><span class="status-pill status-active">Active Loan</span></td>
-              <td>+0.06 Trees Saved</td>
-              <td>2 hours ago</td>
+              <td><strong>Can't Hurt Me</strong> <br><span style="font-size: 0.8rem; color: #94a3b8;">by David Goggins</span></td>
+              <td><span class="badge badge-circulating">Donated to next reader</span></td>
             </tr>
             <tr>
-              <td>#RR-8875</td>
-              <td>Design Patterns (Gang of Four)</td>
-              <td><span class="status-pill status-pending">Returned / In Audit</span></td>
-              <td>+1 Tree Milestone Unlocked</td>
-              <td>Yesterday</td>
+              <td><strong>Hit Refresh</strong> <br><span style="font-size: 0.8rem; color: #94a3b8;">by Satya Nadella</span></td>
+              <td><span class="badge badge-circulating">Donated to next reader</span></td>
             </tr>
             <tr>
-              <td>#RR-8850</td>
-              <td>Braiding Sweetgrass</td>
-              <td><span class="status-pill status-active">Active Loan</span></td>
-              <td>+0.06 Trees Saved</td>
-              <td>3 days ago</td>
+              <td><strong>Your Next Five Moves</strong> <br><span style="font-size: 0.8rem; color: #94a3b8;">by Patrick Bet-David</span></td>
+              <td><span class="badge badge-circulating">Donated to next reader</span></td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
 
-  </main>
-
-  <!-- ==========================================================================
-       13. MOBILE BOTTOM TAB NAVIGATION
-       ========================================================================== -->
-  <nav class="bottom-tab-bar">
-    <button class="tab-item active" onclick="scrollToSection('overview')">
-      <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
-      <span>Home</span>
-    </button>
-    <button class="tab-item" onclick="scrollToSection('catalog')">
-      <svg viewBox="0 0 24 24"><path d="M4 6h16v12H4z"/></svg>
-      <span>Library</span>
-    </button>
-    <button class="tab-item" onclick="scrollToSection('log')">
-      <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
-      <span>Activity</span>
-    </button>
-    <button class="tab-item" onclick="openEmailModal('Mobile App Contact')">
-      <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-      <span>Email</span>
-    </button>
-  </nav>
-
-  <!-- ==========================================================================
-       14. UNIVERSAL EMAIL FORM MODAL (MOBILE & DESKTOP)
-       ========================================================================== -->
-  <div class="modal-overlay" id="emailModal" onclick="handleOverlayClick(event)">
-    <div class="modal-card">
-      <div class="modal-header">
-        <h3 class="modal-title" id="modalTitle">Send Email Inquiry</h3>
-        <button class="modal-close" onclick="closeEmailModal()">✕</button>
-      </div>
-
-      <form id="emailForm" onsubmit="submitEmailForm(event)">
-        <div class="form-group">
-          <label class="form-label" for="senderName">Your Full Name</label>
-          <input type="text" id="senderName" class="form-control" placeholder="e.g. Alex Morgan" required>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label" for="senderEmail">Email Address</label>
-          <input type="email" id="senderEmail" class="form-control" placeholder="alex@example.com" required>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label" for="emailSubject">Subject / Request Type</label>
-          <input type="text" id="emailSubject" class="form-control" value="General Inquiry" required>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label" for="emailMessage">Message Details</label>
-          <textarea id="emailMessage" class="form-control" placeholder="Write your message or book request details here..." required></textarea>
-        </div>
-
-        <button type="submit" class="btn btn-primary" style="width: 100%; min-height: 48px;">
-          Send Email Now
-        </button>
-      </form>
+    <!-- UN SDG FOOTER BANNER -->
+    <div class="sdg-banner">
+      <h3>🌿 The Green Canopy Promise</h3>
+      <p>
+        Aligned with <strong>United Nations Sustainable Development Goals 12 & 15</strong>. Every page shared and every book recirculated helps reduce paper waste and supports verified reforestation projects across the globe.
+      </p>
     </div>
+
   </div>
 
-  <!-- ==========================================================================
-       15. JAVASCRIPT CONTROLLERS
-       ========================================================================== -->
+  <!-- INTERACTIVE LOGIC & EVENT HANDLERS -->
   <script>
-    // Universal recipient email address
-    const PORTAL_EMAIL = "community@reread-portal.org";
+    document.addEventListener("DOMContentLoaded", () => {
+      // 1. DYNAMIC MATH CALCULATION (14 Books Total)
+      const totalBooks = 14; 
+      const booksPerTree = 25;
+      const targetTreeGoal = 25;
 
-    function openEmailModal(defaultSubject = "General Inquiry") {
-      document.getElementById('emailSubject').value = defaultSubject;
-      document.getElementById('emailModal').classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
+      const treesConserved = totalBooks / booksPerTree; // 14 / 25 = 0.56
+      const goalPercentage = (treesConserved / targetTreeGoal) * 100;
 
-    function closeEmailModal() {
-      document.getElementById('emailModal').classList.remove('active');
-      document.body.style.overflow = '';
-    }
+      const treesElement = document.getElementById("trees-conserved");
+      treesElement.setAttribute("data-target", treesConserved);
 
-    function handleOverlayClick(event) {
-      if (event.target.classList.contains('modal-overlay')) {
-        closeEmailModal();
+      const goalPercentageText = document.getElementById("goal-percentage-text");
+      const goalProgressBar = document.getElementById("goal-progress-bar");
+      const goalFootnoteText = document.getElementById("goal-footnote-text");
+
+      goalPercentageText.textContent = `${treesConserved.toFixed(2)} of ${targetTreeGoal} Trees Conserved (${goalPercentage.toFixed(2)}%)`;
+      goalProgressBar.style.width = `${Math.max(goalPercentage, 3)}%`;
+      goalFootnoteText.innerHTML = `Automated Math: <strong>${totalBooks} shared books</strong> in shelf ÷ 25 books/tree = <strong>${treesConserved.toFixed(2)} trees conserved</strong>.`;
+
+      // 2. VISITOR COUNT LOGIC
+      let visitors = parseInt(localStorage.getItem("reread_visitors") || "0", 10) + 1;
+      localStorage.setItem("reread_visitors", visitors);
+      document.getElementById("visitor-count").setAttribute("data-target", visitors);
+
+      // 3. PERSISTENT COMMUNITY SUPPORTERS LOGIC
+      const supportBtn = document.getElementById("support-btn");
+      let supporters = parseInt(localStorage.getItem("reread_supporters") || "12", 10);
+      const supportDisplay = document.getElementById("support-count");
+      
+      supportDisplay.setAttribute("data-target", supporters);
+
+      supportBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        supporters += 1;
+        // Save to LocalStorage Memory immediately so it never resets
+        localStorage.setItem("reread_supporters", supporters);
+        
+        supportDisplay.setAttribute("data-target", supporters);
+        animateCounter(supportDisplay, supporters);
+
+        supportBtn.textContent = "Thank you for supporting!";
+        setTimeout(() => {
+          supportBtn.textContent = "click here";
+        }, 2500);
+      });
+
+      // Trigger initial counter animations
+      triggerCounters();
+    });
+
+    // 4. ANIMATED COUNTER ROLLING FUNCTION
+    function animateCounter(element, target, decimals = 0) {
+      let start = 0;
+      const duration = 1200; 
+      const stepTime = 20;
+      const steps = duration / stepTime;
+      const increment = target / steps;
+
+      if (target === 0) {
+        element.textContent = (0).toFixed(decimals);
+        return;
       }
-    }
 
-    // Direct Universal Email Trigger (Smartphones + Desktop)
-    function submitEmailForm(event) {
-      event.preventDefault();
-
-      const name = document.getElementById('senderName').value;
-      const email = document.getElementById('senderEmail').value;
-      const subject = document.getElementById('emailSubject').value;
-      const message = document.getElementById('emailMessage').value;
-
-      const formattedSubject = encodeURIComponent(`[RE:READ Portal] ${subject}`);
-      const formattedBody = encodeURIComponent(
-        `Name: ${name}\n` +
-        `Contact Email: ${email}\n\n` +
-        `Message / Request Details:\n${message}\n\n` +
-        `---\nSent via RE:READ Community Portal`
-      );
-
-      // Launches default native email application on any desktop or mobile OS
-      window.location.href = `mailto:${PORTAL_EMAIL}?subject=${formattedSubject}&body=${formattedBody}`;
-
-      closeEmailModal();
-      document.getElementById('emailForm').reset();
-    }
-
-    function filterCatalog(category, element) {
-      const chips = document.querySelectorAll('.filter-chip');
-      chips.forEach(chip => chip.classList.remove('active'));
-      element.classList.add('active');
-
-      const books = document.querySelectorAll('.book-card');
-      books.forEach(book => {
-        if (category === 'all' || book.getAttribute('data-category') === category) {
-          book.style.display = 'flex';
+      const timer = setInterval(() => {
+        start += increment;
+        if (start >= target) {
+          element.textContent = target.toFixed(decimals);
+          clearInterval(timer);
         } else {
-          book.style.display = 'none';
+          element.textContent = start.toFixed(decimals);
+        }
+      }, stepTime);
+    }
+
+    function triggerCounters() {
+      const counters = document.querySelectorAll('[data-target]');
+      counters.forEach(counter => {
+        const target = parseFloat(counter.getAttribute('data-target')) || 0;
+        const decimals = parseInt(counter.getAttribute('data-decimals') || "0", 10);
+        animateCounter(counter, target, decimals);
+      });
+    }
+
+    // 5. FILTER LOGIC FOR GENRES & STATUS
+    function filterBooks(category, btnElement) {
+      const cards = document.querySelectorAll('.book-card');
+      const buttons = document.querySelectorAll('.filter-btn');
+
+      buttons.forEach(btn => btn.classList.remove('active'));
+      if (btnElement) btnElement.classList.add('active');
+
+      cards.forEach(card => {
+        const status = card.getAttribute('data-status');
+        const genre = card.getAttribute('data-genre');
+
+        if (category === 'all') {
+          card.style.display = 'flex';
+        } else if (category === 'available' || category === 'circulating') {
+          card.style.display = (status === category) ? 'flex' : 'none';
+        } else {
+          card.style.display = (genre === category) ? 'flex' : 'none';
         }
       });
     }
 
-    function scrollToSection(id) {
-      const el = document.getElementById(id);
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth' });
+    // 6. STREAMLINED PRE-DRAFTED MAILTO FORM LINK GENERATOR (GMAIL & OUTLOOK)
+    function requestBook(bookTitle, provider) {
+      const recipient = "daanamvidya@gmail.com";
+      const subject = encodeURIComponent(`[RE:READ Book Request] Claiming: ${bookTitle}`);
+      const bodyText = `Hello RE:READ Team / DaanamVidya,
+
+I would like to request the physical book: "${bookTitle}" from the RE:READ community shelf.
+
+Here are my delivery and contact details:
+----------------------------------------
+- Full Name: 
+- Shipping / Delivery Address: 
+- Mobile / WhatsApp Number: 
+
+Thank you!
+[Your Name]`;
+
+      const encodedBody = encodeURIComponent(bodyText);
+
+      let url = "";
+      if (provider === 'gmail') {
+        url = `https://mail.google.com/mail/?view=cm&fs=1&to=${recipient}&su=${subject}&body=${encodedBody}`;
+      } else if (provider === 'outlook') {
+        url = `https://outlook.office.com/mail/deeplink/compose?to=${recipient}&subject=${subject}&body=${encodedBody}`;
+      } else {
+        url = `mailto:${recipient}?subject=${subject}&body=${encodedBody}`;
       }
-      const tabs = document.querySelectorAll('.tab-item');
-      tabs.forEach(tab => tab.classList.remove('active'));
-      if (event && event.currentTarget) {
-        event.currentTarget.classList.add('active');
-      }
+
+      window.open(url, '_blank');
     }
   </script>
 </body>
