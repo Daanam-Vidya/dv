@@ -61,6 +61,63 @@
 
   a { color: inherit; text-decoration: none; }
 
+  /* TOP SUPPORT BANNER */
+  .support-banner {
+    background: linear-gradient(90deg, rgba(168, 85, 247, 0.2), rgba(236, 72, 153, 0.2), rgba(16, 185, 129, 0.2));
+    border-bottom: 1px solid var(--border-color);
+    padding: 10px 16px;
+    text-align: center;
+    font-size: 0.88rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .support-banner p {
+    margin: 0;
+    color: var(--text-main);
+  }
+
+  .support-btn {
+    background: var(--gradient-violet-pink);
+    color: #FFF;
+    border: none;
+    padding: 6px 14px;
+    border-radius: var(--radius-full);
+    font-size: 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: 0 4px 12px rgba(168, 85, 247, 0.3);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .support-btn:hover {
+    transform: translateY(-1px) scale(1.03);
+    box-shadow: 0 6px 16px rgba(168, 85, 247, 0.5);
+  }
+
+  .support-toast {
+    font-size: 0.8rem;
+    color: var(--accent-emerald);
+    font-weight: 700;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .support-toast.show {
+    opacity: 1;
+  }
+
   .wrap {
     max-width: 1140px;
     margin: 0 auto;
@@ -69,7 +126,7 @@
 
   /* ---------- HEADER / HERO ---------- */
   header {
-    padding: 64px 0 32px;
+    padding: 48px 0 32px;
     display: grid;
     grid-template-columns: 1.2fr 0.8fr;
     gap: 40px;
@@ -262,12 +319,15 @@
   /* ---------- STATS BENTO GRID ---------- */
   .stats-bar {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     gap: 16px;
     margin: 32px 0 48px;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 900px) {
+    .stats-bar { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 600px) {
     .stats-bar { grid-template-columns: repeat(2, 1fr); }
   }
 
@@ -287,15 +347,21 @@
 
   .stat-card .num {
     font-family: 'Space Grotesk', sans-serif;
-    font-size: 2.2rem;
+    font-size: 2rem;
     font-weight: 700;
     background: var(--gradient-emerald-cyan);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
+  .stat-card.community-card .num {
+    background: var(--gradient-violet-pink);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
   .stat-card .label {
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     color: var(--text-muted);
     font-weight: 600;
     text-transform: uppercase;
@@ -912,6 +978,15 @@
 </head>
 <body>
 
+<!-- TOP SUPPORT BANNER -->
+<div class="support-banner">
+  <p>✨ Support RE:READ by donating physical books or circulating titles with friends!</p>
+  <button class="support-btn" onclick="supportInitiative()">
+    <span>❤️</span> Support Initiative
+  </button>
+  <span class="support-toast" id="support-toast">Thanks for your support! +1</span>
+</div>
+
 <div class="wrap">
 
   <header>
@@ -1104,6 +1179,28 @@
   /* EXPLICITLY GUARANTEED RECIPIENT EMAIL ADDRESS */
   const OWNER_EMAIL = "daanamvidya@gmail.com";
 
+  /* COMMUNITY SUPPORT COUNTER LOGIC */
+  let supportCount = parseInt(localStorage.getItem('reread_support_count')) || 142;
+
+  function supportInitiative() {
+    supportCount++;
+    localStorage.setItem('reread_support_count', supportCount);
+    
+    // Update the stat display if rendered
+    const supportElem = document.getElementById('num-community-support');
+    if (supportElem) {
+      supportElem.setAttribute('data-target', supportCount);
+      supportElem.innerText = supportCount;
+    }
+
+    // Show toast feedback
+    const toast = document.getElementById('support-toast');
+    toast.classList.add('show');
+    setTimeout(() => {
+      toast.classList.remove('show');
+    }, 2500);
+  }
+
   /* ALL CIRCULATED / DONATED BOOKS */
   const donatedBooks = [
     {
@@ -1140,100 +1237,260 @@
       coverUrl: "https://covers.openlibrary.org/b/isbn/9781982154806-M.jpg",
       call: "650 · BET",
       category: "Strategy & Growth",
-      desc: "A strategic methodology for personal and professional growth — practical frameworks for forward planning."
+      desc: "A strategic methodology for personal and professional clarity, framing big choices like grandmaster chess moves."
     }
   ];
 
-  /* ALL AVAILABLE BOOKS */
-  const books = [
+  /* AVAILABLE BOOKS CATALOG */
+  const availableBooks = [
     {
-      title: "Shortcuts in Mathematics",
-      author: "Clive Stevens",
-      publisher: "Sun Shine Publication",
-      coverUrl: "https://covers.openlibrary.org/b/isbn/9781845600075-M.jpg",
-      call: "510 · STE",
-      category: "Mind & Maths",
-      desc: "A pragmatic manual for mental arithmetic and mental calculation shortcuts — percentages, square roots, and division techniques."
+      title: "Atomic Habits",
+      author: "James Clear",
+      publisher: "An Easy & Proven Way to Build Good Habits & Break Bad Ones",
+      coverUrl: "https://covers.openlibrary.org/b/isbn/9780735211292-M.jpg",
+      call: "158 · CLE",
+      category: "Mindset & Resilience",
+      desc: "Tiny changes, remarkable results. James Clear provides a framework for improving every day through tiny behavioral systems."
     },
     {
-      title: "Think Like a Maths Genius",
-      author: "Arthur Benjamin",
-      publisher: "The Art of Calculating in Your Head",
-      coverUrl: "https://covers.openlibrary.org/b/isbn/9780285637955-M.jpg",
-      call: "153 · BEN",
-      category: "Mind & Maths",
-      badge: "Popular",
-      desc: "A guide on breaking complex mathematics into easy, intuitive mental processes, building calculation confidence."
+      title: "Deep Work",
+      author: "Cal Newport",
+      publisher: "Rules for Focused Success in a Distracted World",
+      coverUrl: "https://covers.openlibrary.org/b/isbn/9781455586691-M.jpg",
+      call: "001 · NEW",
+      category: "Strategy & Growth",
+      desc: "Focus is the superpower of the 21st century. Cal Newport argues that cultivating a deep work habit is the key to mastering complex information."
     },
     {
-      title: "Chanakya in You",
-      author: "Radhakrishnan Pillai",
-      publisher: "Jaico Publishing House",
-      coverUrl: "https://covers.openlibrary.org/b/isbn/9788184956818-M.jpg",
-      call: "181 · PIL",
-      category: "Life & Growth",
-      desc: "Translating classical strategic principles into modern organizational leadership and personal decision-making frameworks."
+      title: "The Psychology of Money",
+      author: "Morgan Housel",
+      publisher: "Timeless lessons on wealth, greed, and happiness",
+      coverUrl: "https://covers.openlibrary.org/b/isbn/9780857197689-M.jpg",
+      call: "332 · HOU",
+      category: "Strategy & Growth",
+      desc: "Doing well with money isn't necessarily about what you know. It's about how you behave. Essential reading for financial sanity."
     },
     {
-      title: "The AI Driven Leader",
-      author: "Geoff Woods",
-      publisher: "Main Street Books",
-      coverUrl: "https://covers.openlibrary.org/b/isbn/9781637633281-M.jpg",
-      call: "658 · WOO",
-      category: "Leadership & Strategy",
-      badge: "New Arrival",
-      desc: "A framework for practical executive leadership in automated technology environments without losing human perspective."
-    },
-    {
-      title: "Nature Cure for Children",
-      author: "Dr. H.K. Bakhru",
-      publisher: "Jaico Books",
-      coverUrl: "https://covers.openlibrary.org/b/isbn/9788172248239-M.jpg",
-      call: "615 · BAK",
-      category: "Family & Health",
-      desc: "A comprehensive guide on natural wellness principles, preventive health, and holistic childhood routines."
-    },
-    {
-      title: "The Complete Panchatantra Omnibus",
-      author: "Retold by Gratian Vas",
-      publisher: "Series editor: Sunita Pant Bansal",
-      coverUrl: "https://covers.openlibrary.org/b/isbn/9788182522206-M.jpg",
-      call: "398 · VAS",
-      category: "Family & Health",
-      desc: "Classic folk literature exploring themes of governance, ethics, human relationships, and strategic wisdom."
+      title: "Zero to One",
+      author: "Peter Thiel",
+      publisher: "Notes on Startups, or How to Build the Future",
+      coverUrl: "https://covers.openlibrary.org/b/isbn/9780804139298-M.jpg",
+      call: "658 · THI",
+      category: "Tech & Innovation",
+      desc: "The next Bill Gates will not build an operating system. The next Larry Page won't make a search engine. Thiel outlines how to build radical new value."
     }
   ];
 
-  /* STATS CALCULATIONS */
-  const STATS = { readersReached: 4 };
-  const booksShared = donatedBooks.length;
-  const AVG_CO2_PER_BOOK = 5.1; 
-  const BOOKS_PER_TREE = 25;
-  const AVG_WATER_PER_BOOK = 120;
-
-  const co2Saved = Math.round(booksShared * AVG_CO2_PER_BOOK);
-  const treesWorth = (booksShared / BOOKS_PER_TREE).toFixed(1);
-  const waterSaved = Math.round(booksShared * AVG_WATER_PER_BOOK);
-
-  document.getElementById('stats-bar').innerHTML = `
-    <div class="stat-card"><div class="num">${STATS.readersReached}</div><div class="label">Readers Reached</div></div>
-    <div class="stat-card"><div class="num">${booksShared}</div><div class="label">Books Circulated</div></div>
-    <div class="stat-card"><div class="num">~${co2Saved} kg</div><div class="label">CO₂ Offset</div></div>
-    <div class="stat-card"><div class="num">${treesWorth}</div><div class="label">Trees Conserved</div></div>
-  `;
-
-  document.getElementById('impact-grid').innerHTML = `
-    <div class="impact-card"><div class="fig">1 Tree ≈ 25 Books</div><div class="cap">Average yield per tree for physical print manufacturing. Reuse preserves natural forest land.</div></div>
-    <div class="impact-card"><div class="fig">2.7–7.5 kg CO₂</div><div class="cap">Estimated carbon footprint offset per reused title across manufacturing and transport.</div></div>
-    <div class="impact-card"><div class="fig">~120 Litres</div><div class="cap">Average water usage conserved per book kept in continuous circulation.</div></div>
-    <div class="impact-card"><div class="fig">${treesWorth} Trees Worth</div><div class="cap">Calculated total timber conservation footprint achieved by this collection so far.</div></div>
-  `;
-
-  /* CROSS-PLATFORM MOBILE & DESKTOP EMAIL OPENERS */
-  function isMobile() {
-    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  /* ANIMATED NUMBERS LOGIC */
+  function animateValue(obj, start, end, duration, decimal = 0, prefix = "", suffix = "") {
+    let startTimestamp = null;
+    const step = (timestamp) => {
+      if (!startTimestamp) startTimestamp = timestamp;
+      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+      const easeProgress = 1 - Math.pow(1 - progress, 3); // Ease out cubic
+      const currentValue = start + easeProgress * (end - start);
+      
+      obj.innerText = prefix + currentValue.toFixed(decimal) + suffix;
+      
+      if (progress < 1) {
+        window.requestAnimationFrame(step);
+      } else {
+        obj.innerText = prefix + end.toFixed(decimal) + suffix;
+      }
+    };
+    window.requestAnimationFrame(step);
   }
 
+  function triggerAnimatedStats() {
+    const statCards = document.querySelectorAll('.animate-num');
+    statCards.forEach(card => {
+      if (card.dataset.animated === "true") return;
+      card.dataset.animated = "true";
+      
+      const target = parseFloat(card.getAttribute('data-target'));
+      const decimal = parseInt(card.getAttribute('data-decimal') || '0');
+      const prefix = card.getAttribute('data-prefix') || '';
+      const suffix = card.getAttribute('data-suffix') || '';
+      
+      animateValue(card, 0, target, 1800, decimal, prefix, suffix);
+    });
+  }
+
+  /* RENDER METRICS & IMPACT */
+  function renderStats() {
+    const totalBooks = availableBooks.length + donatedBooks.length;
+    const treesConserved = (totalBooks * 0.05).toFixed(2);
+    const co2Conserved = (totalBooks * 2.5).toFixed(1);
+    const waterSaved = (totalBooks * 350);
+
+    // Stats bar
+    const statsBar = document.getElementById('stats-bar');
+    statsBar.innerHTML = `
+      <div class="stat-card">
+        <div class="num animate-num" data-target="${totalBooks}" data-suffix="">0</div>
+        <div class="label">Total Books</div>
+      </div>
+      <div class="stat-card">
+        <div class="num animate-num" data-target="${treesConserved}" data-decimal="2" data-suffix=" 🌳">0</div>
+        <div class="label">Trees Saved</div>
+      </div>
+      <div class="stat-card">
+        <div class="num animate-num" data-target="${co2Conserved}" data-decimal="1" data-suffix=" kg">0</div>
+        <div class="label">CO₂ Conserved</div>
+      </div>
+      <div class="stat-card">
+        <div class="num animate-num" data-target="${waterSaved}" data-suffix=" L">0</div>
+        <div class="label">Water Saved</div>
+      </div>
+      <div class="stat-card community-card">
+        <div class="num animate-num" id="num-community-support" data-target="${supportCount}" data-suffix=" ❤️">0</div>
+        <div class="label">Community Support</div>
+      </div>
+    `;
+
+    // Impact grid
+    const impactGrid = document.getElementById('impact-grid');
+    impactGrid.innerHTML = `
+      <div class="impact-card">
+        <div class="fig animate-num" data-target="${treesConserved}" data-decimal="2" data-suffix=" Trees">0</div>
+        <div class="cap">Primary Trees Conserved</div>
+      </div>
+      <div class="impact-card">
+        <div class="fig animate-num" data-target="${co2Conserved}" data-decimal="1" data-suffix=" kg">0</div>
+        <div class="cap">Carbon Emissions Prevented</div>
+      </div>
+      <div class="impact-card">
+        <div class="fig animate-num" data-target="${waterSaved}" data-suffix=" Liters">0</div>
+        <div class="cap">Freshwater Saved</div>
+      </div>
+      <div class="impact-card">
+        <div class="fig animate-num" data-target="${totalBooks}" data-suffix=" Volumes">0</div>
+        <div class="cap">Active In Circulation</div>
+      </div>
+    `;
+
+    // Initialize IntersectionObserver to trigger counter animations when visible
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          triggerAnimatedStats();
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.animate-num').forEach(el => observer.observe(el));
+    // Trigger immediately for above-the-fold elements
+    setTimeout(triggerAnimatedStats, 200);
+  }
+
+  /* RENDER SHELF BOOKS */
+  function renderShelf(books, shelfId, isDonated = false) {
+    const shelf = document.getElementById(shelfId);
+    shelf.innerHTML = books.map((b, i) => `
+      <div class="card" data-category="${b.category}">
+        <div class="cover">
+          <span class="badge ${isDonated ? 'badge-circ' : 'badge-avail'}">${isDonated ? 'CIRCULATED' : 'AVAILABLE'}</span>
+          <span class="badge-tag">${b.category}</span>
+          <img src="${b.coverUrl}" alt="${b.title}" class="cover-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="cover-fallback" style="display:none;">
+            <div class="spine-title">${b.title}</div>
+            <div style="font-size:0.8rem; color:var(--text-muted);">${b.author}</div>
+          </div>
+          <span class="call-label">${b.call}</span>
+          <button class="quickview-btn" onclick="openModal('${b.title.replace(/'/g, "\\'")}', '${b.author.replace(/'/g, "\\'")}', '${b.desc.replace(/'/g, "\\'")}', '${b.coverUrl}')">Quick View</button>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">${b.title}</h3>
+          <div class="card-author">${b.author}</div>
+          <div class="card-publisher">${b.publisher}</div>
+          <p class="card-desc">${b.desc}</p>
+          ${isDonated ? `
+            <div class="donated-note">✨ Currently being enjoyed by a community reader.</div>
+          ` : `
+            <div class="btn-group">
+              <button class="btn-primary" onclick="smartEmailOpen('Request: ${b.title}', 'Hi Arjit,\n\nI would love to read \"${b.title}\" by ${b.author}.\n\nThank you!')">
+                ✉️ Request Book
+              </button>
+              <div class="btn-secondary-row">
+                <button class="btn-secondary" onclick="openWebMail('gmail', 'Request: ${b.title}', 'Hi Arjit,\n\nI would love to read \"${b.title}\" by ${b.author}.\n\nThank you!')">Gmail</button>
+                <button class="btn-secondary" onclick="openWebMail('outlook', 'Request: ${b.title}', 'Hi Arjit,\n\nI would love to read \"${b.title}\" by ${b.author}.\n\nThank you!')">Outlook</button>
+              </div>
+            </div>
+          `}
+        </div>
+      </div>
+    `).join('');
+  }
+
+  /* RENDER CATEGORY TABS */
+  function renderTabs(books, tabsId, shelfId) {
+    const categories = ['All', ...new Set(books.map(b => b.category))];
+    const tabsContainer = document.getElementById(tabsId);
+    
+    tabsContainer.innerHTML = categories.map((cat, i) => `
+      <button class="tab ${i === 0 ? 'active' : ''}" onclick="filterCategory('${cat}', '${tabsId}', '${shelfId}')">${cat}</button>
+    `).join('');
+  }
+
+  function filterCategory(cat, tabsId, shelfId) {
+    const tabs = document.querySelectorAll(`#${tabsId} .tab`);
+    tabs.forEach(t => {
+      if (t.innerText === cat) t.classList.add('active');
+      else t.classList.remove('active');
+    });
+
+    const cards = document.querySelectorAll(`#${shelfId} .card`);
+    cards.forEach(card => {
+      if (cat === 'All' || card.dataset.category === cat) {
+        card.classList.remove('hidden');
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+  }
+
+  /* VIEW TOGGLE (AVAILABLE VS DONATED) */
+  function setupViewToggle() {
+    const btns = document.querySelectorAll('#view-toggle .view-btn');
+    btns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        btns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const view = btn.dataset.view;
+        const availShelf = document.getElementById('shelf');
+        const availTabs = document.getElementById('tabs');
+        const donatedShelf = document.getElementById('donated-shelf');
+        const donatedTabs = document.getElementById('donated-tabs');
+        const donatedImpact = document.getElementById('donated-impact');
+        const shelfTitle = document.getElementById('shelf-title');
+        const shelfCount = document.getElementById('shelf-count');
+
+        if (view === 'available') {
+          availShelf.style.display = 'grid';
+          availTabs.style.display = 'flex';
+          donatedShelf.style.display = 'none';
+          donatedTabs.style.display = 'none';
+          donatedImpact.style.display = 'none';
+          shelfTitle.innerText = 'Currently on the shelf';
+          shelfCount.innerText = `(${availableBooks.length} titles available)`;
+        } else {
+          availShelf.style.display = 'none';
+          availTabs.style.display = 'none';
+          donatedShelf.style.display = 'grid';
+          donatedTabs.style.display = 'flex';
+          donatedImpact.style.display = 'block';
+          shelfTitle.innerText = 'Circulation History';
+          shelfCount.innerText = `(${donatedBooks.length} titles circulated)`;
+          donatedImpact.innerHTML = `
+            🌱 <strong>Circulation Milestone:</strong> These ${donatedBooks.length} volumes have already completed their primary pass, preventing approximately <strong>${(donatedBooks.length * 2.5).toFixed(1)} kg</strong> of CO₂ emissions and saving <strong>${donatedBooks.length * 350} liters</strong> of water.
+          `;
+        }
+      });
+    });
+  }
+
+  /* EMAIL UTILITIES */
   function smartEmailOpen(subject, body) {
     const mailtoUrl = `mailto:${OWNER_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     window.location.href = mailtoUrl;
@@ -1242,241 +1499,75 @@
   function openWebMail(service, subject, body) {
     let url = "";
     if (service === 'gmail') {
-      url = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(OWNER_EMAIL)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      url = `https://mail.google.com/mail/?view=cm&fs=1&to=${OWNER_EMAIL}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     } else if (service === 'outlook') {
-      url = `https://outlook.live.com/mail/0/deeplink/compose?to=${encodeURIComponent(OWNER_EMAIL)}&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      url = `https://outlook.office.com/mail/deeplink/compose?to=${OWNER_EMAIL}&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     }
-
-    if (isMobile()) {
-      window.location.href = url;
-    } else {
-      window.open(url, '_blank');
-    }
+    window.open(url, '_blank');
   }
 
-  function copyDetails(text, toastId) {
-    navigator.clipboard.writeText(text).then(() => {
-      const toast = document.getElementById(toastId);
-      if (toast) {
-        toast.style.display = 'block';
-        setTimeout(() => { toast.style.display = 'none'; }, 2000);
-      }
-    });
+  /* MODAL QUICK VIEW */
+  function openModal(title, author, desc, coverUrl) {
+    const modalContent = document.getElementById('modal-content');
+    modalContent.innerHTML = `
+      <button class="modal-close" onclick="closeModal()">&times;</button>
+      <div style="text-align:center; margin-bottom:16px;">
+        <img src="${coverUrl}" alt="${title}" style="height:180px; border-radius:var(--radius-sm); object-fit:cover;">
+      </div>
+      <h2 style="font-family:'Space Grotesk'; margin:0 0 4px; font-size:1.4rem;">${title}</h2>
+      <div style="color:var(--primary-violet); font-weight:600; margin-bottom:16px;">${author}</div>
+      <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.6; margin-bottom:24px;">${desc}</p>
+      <button class="btn-primary" style="width:100%;" onclick="smartEmailOpen('Request: ${title}', 'Hi Arjit,\n\nI would love to read \"${title}\" by ${author}.\n\nThank you!'); closeModal();">
+        ✉️ Request Book via Mail
+      </button>
+    `;
+    document.getElementById('modal-backdrop').classList.add('open');
   }
-
-  /* COVER RENDER HELPERS */
-  function renderCover(book, index, isDonated) {
-    const badgeMarkup = book.badge ? `<span class="badge-tag">${book.badge}</span>` : '';
-    const statusMarkup = isDonated ? `<span class="badge badge-circ">Circulating</span>` : `<span class="badge badge-avail">Available</span>`;
-    const quickBtnAttr = isDonated ? `data-donated-index="${index}"` : `data-index="${index}"`;
-
-    return `
-      <div class="cover">
-        ${badgeMarkup}
-        ${statusMarkup}
-        <img class="cover-img" src="${book.coverUrl}" alt="${book.title}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-        <div class="cover-fallback" style="display:none;">
-          <span class="spine-title">${book.title}</span>
-        </div>
-        <span class="call-label">${book.call}</span>
-        <button type="button" class="quickview-btn" ${quickBtnAttr}>Quick View</button>
-      </div>
-    `;
-  }
-
-  /* RENDER AVAILABLE BOOKS */
-  const shelf = document.getElementById('shelf');
-  const tabsEl = document.getElementById('tabs');
-  document.getElementById('shelf-count').textContent = `(${books.length} Available Items)`;
-
-  books.forEach((book, i) => {
-    const toastId = `toast-${i}`;
-    const subject = `Book Request: ${book.title}`;
-    const body = `Hi Arjit,\n\nI would like to request the following book from RE:READ:\n\nTitle: ${book.title}\nAuthor: ${book.author}\n\nRecipient Details:\nName: \nDelivery Address: \nPhone (Optional): \n\nThank you!`;
-    const fullText = `To: ${OWNER_EMAIL}\nSubject: ${subject}\n\n${body}`;
-
-    const card = document.createElement('article');
-    card.className = 'card';
-    card.dataset.category = book.category;
-    card.innerHTML = `
-      ${renderCover(book, i, false)}
-      <div class="card-body">
-        <h3 class="card-title">${book.title}</h3>
-        <div class="card-author">${book.author}</div>
-        ${book.publisher ? `<div class="card-publisher">${book.publisher}</div>` : ''}
-        <div class="card-desc">${book.desc}</div>
-        <div class="btn-group">
-          <button class="btn-primary" onclick="smartEmailOpen('${subject}', '${body.replace(/\n/g, '\\n')}')">✉ Request Book</button>
-          <div class="btn-secondary-row">
-            <button class="btn-secondary" onclick="openWebMail('gmail', '${subject}', '${body.replace(/\n/g, '\\n')}')">Gmail</button>
-            <button class="btn-secondary" onclick="openWebMail('outlook', '${subject}', '${body.replace(/\n/g, '\\n')}')">Outlook</button>
-            <button class="btn-secondary" onclick="copyDetails('${fullText.replace(/\n/g, '\\n')}', '${toastId}')">Copy Text</button>
-          </div>
-          <div class="copied-toast" id="${toastId}">Details copied to clipboard ✓</div>
-        </div>
-      </div>
-    `;
-    shelf.appendChild(card);
-  });
-
-  /* AVAILABLE CATEGORY TABS */
-  const categories = ['All', ...new Set(books.map(b => b.category))];
-  tabsEl.innerHTML = categories.map((c, i) =>
-    `<button type="button" class="tab${i === 0 ? ' active' : ''}" data-cat="${c}">${c}</button>`
-  ).join('');
-
-  tabsEl.querySelectorAll('.tab').forEach(tab => {
-    tab.addEventListener('click', () => {
-      tabsEl.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
-      const cat = tab.dataset.cat;
-      shelf.querySelectorAll('.card').forEach(card => {
-        card.classList.toggle('hidden', cat !== 'All' && card.dataset.category !== cat);
-      });
-    });
-  });
-
-  /* RENDER CIRCULATED / DONATED BOOKS */
-  const donatedShelf = document.getElementById('donated-shelf');
-  const donatedTabsEl = document.getElementById('donated-tabs');
-
-  donatedBooks.forEach((book, i) => {
-    const card = document.createElement('article');
-    card.className = 'card';
-    card.dataset.category = book.category;
-    card.innerHTML = `
-      ${renderCover(book, i, true)}
-      <div class="card-body">
-        <h3 class="card-title">${book.title}</h3>
-        <div class="card-author">${book.author}</div>
-        ${book.publisher ? `<div class="card-publisher">${book.publisher}</div>` : ''}
-        <div class="card-desc">${book.desc}</div>
-        <div class="donated-note">📬 In active circulation with reader</div>
-      </div>
-    `;
-    donatedShelf.appendChild(card);
-  });
-
-  /* CIRCULATED CATEGORY TABS */
-  const donatedCategories = ['All', ...new Set(donatedBooks.map(b => b.category))];
-  donatedTabsEl.innerHTML = donatedCategories.map((c, i) =>
-    `<button type="button" class="tab${i === 0 ? ' active' : ''}" data-cat="${c}">${c}</button>`
-  ).join('');
-
-  donatedTabsEl.querySelectorAll('.tab').forEach(tab => {
-    tab.addEventListener('click', () => {
-      donatedTabsEl.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
-      const cat = tab.dataset.cat;
-      donatedShelf.querySelectorAll('.card').forEach(card => {
-        card.classList.toggle('hidden', cat !== 'All' && card.dataset.category !== cat);
-      });
-    });
-  });
-
-  document.getElementById('donated-impact').innerHTML =
-    `<strong>${booksShared} total volumes distributed</strong> preserving approximately ${treesWorth} trees' worth of processed timber and ${waterSaved.toLocaleString()} litres of water.`;
-
-  /* VIEW TOGGLE BETWEEN AVAILABLE AND CIRCULATION HISTORY */
-  const viewToggle = document.getElementById('view-toggle');
-  const shelfTitleEl = document.getElementById('shelf-title');
-  const shelfCountEl = document.getElementById('shelf-count');
-
-  viewToggle.querySelectorAll('.view-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      viewToggle.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const view = btn.dataset.view;
-
-      if (view === 'donated') {
-        shelf.style.display = 'none';
-        tabsEl.style.display = 'none';
-        donatedShelf.style.display = 'grid';
-        donatedTabsEl.style.display = 'flex';
-        document.getElementById('donated-impact').style.display = 'block';
-        shelfTitleEl.textContent = 'Circulation History';
-        shelfCountEl.textContent = `(${donatedBooks.length} Distributed Items)`;
-      } else {
-        shelf.style.display = 'grid';
-        tabsEl.style.display = 'flex';
-        donatedShelf.style.display = 'none';
-        donatedTabsEl.style.display = 'none';
-        document.getElementById('donated-impact').style.display = 'none';
-        shelfTitleEl.textContent = 'Currently on the shelf';
-        shelfCountEl.textContent = `(${books.length} Available Items)`;
-      }
-    });
-  });
-
-  /* QUICK VIEW MODAL FUNCTIONALITY */
-  const modalBackdrop = document.getElementById('modal-backdrop');
-  const modalContent = document.getElementById('modal-content');
 
   function closeModal() {
-    modalBackdrop.classList.remove('open');
-    document.body.style.overflow = '';
+    document.getElementById('modal-backdrop').classList.remove('open');
   }
 
-  function openQuickView(book, isDonated) {
-    const subject = `Book Request: ${book.title}`;
-    const body = `Hi Arjit,\n\nI would like to request "${book.title}" from RE:READ.\n\nName:\nAddress:\n`;
-    const fullText = `To: ${OWNER_EMAIL}\nSubject: ${subject}\n\n${body}`;
-
-    modalContent.innerHTML = `
-      <button type="button" class="modal-close" onclick="closeModal()">&times;</button>
-      <h3 style="font-family:'Space Grotesk'; font-size:1.4rem; margin:0 0 4px;">${book.title}</h3>
-      <div style="color:var(--primary-violet); font-weight:600; font-size:0.9rem; margin-bottom:12px;">${book.author}</div>
-      <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.6; margin-bottom:20px;">${book.desc}</p>
-      ${!isDonated ? `
-        <div class="btn-group">
-          <button class="btn-primary" onclick="smartEmailOpen('${subject}', '${body.replace(/\n/g, '\\n')}')">✉ Request Book</button>
-          <div class="btn-secondary-row">
-            <button class="btn-secondary" onclick="openWebMail('gmail', '${subject}', '${body.replace(/\n/g, '\\n')}')">Gmail</button>
-            <button class="btn-secondary" onclick="openWebMail('outlook', '${subject}', '${body.replace(/\n/g, '\\n')}')">Outlook</button>
-            <button class="btn-secondary" onclick="copyDetails('${fullText.replace(/\n/g, '\\n')}', 'modal-toast')">Copy</button>
-          </div>
-          <div class="copied-toast" id="modal-toast">Details copied to clipboard ✓</div>
-        </div>
-      ` : `<div class="donated-note">📬 In active circulation with reader</div>`}
-    `;
-    modalBackdrop.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-
-  shelf.addEventListener('click', (e) => {
-    if (e.target.classList.contains('quickview-btn')) {
-      const idx = e.target.dataset.index;
-      openQuickView(books[idx], false);
-    }
+  document.getElementById('modal-backdrop').addEventListener('click', (e) => {
+    if (e.target.id === 'modal-backdrop') closeModal();
   });
 
-  donatedShelf.addEventListener('click', (e) => {
-    if (e.target.classList.contains('quickview-btn')) {
-      const idx = e.target.dataset.donatedIndex;
-      openQuickView(donatedBooks[idx], true);
-    }
-  });
-
-  modalBackdrop.addEventListener('click', (e) => {
-    if (e.target === modalBackdrop) closeModal();
-  });
-
-  /* FORM HANDLING */
+  /* FEEDBACK FORM */
   document.getElementById('feedback-form').addEventListener('submit', (e) => {
     e.preventDefault();
     const name = document.getElementById('comment-name').value;
     const msg = document.getElementById('comment-msg').value;
-    const grid = document.getElementById('comments-grid');
 
+    const grid = document.getElementById('comments-grid');
     const newCard = document.createElement('div');
     newCard.className = 'comment-card';
-    newCard.innerHTML = `<p>"${msg}"</p><span>— ${name} (Community Member)</span>`;
+    newCard.innerHTML = `
+      <p>"${msg}"</p>
+      <span>— ${name} (Community Reader)</span>
+    `;
     grid.prepend(newCard);
 
     document.getElementById('comment-name').value = '';
     document.getElementById('comment-msg').value = '';
+    alert('Thank you for sharing your feedback!');
+  });
+
+  /* INITIALIZATION */
+  document.addEventListener('DOMContentLoaded', () => {
+    renderStats();
+    
+    // Render Available Books
+    renderShelf(availableBooks, 'shelf', false);
+    renderTabs(availableBooks, 'tabs', 'shelf');
+
+    // Render Donated / Circulated Books
+    renderShelf(donatedBooks, 'donated-shelf', true);
+    renderTabs(donatedBooks, 'donated-tabs', 'donated-shelf');
+
+    setupViewToggle();
+
+    document.getElementById('shelf-count').innerText = `(${availableBooks.length} titles available)`;
   });
 </script>
-
 </body>
 </html>
