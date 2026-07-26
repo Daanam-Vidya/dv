@@ -82,7 +82,7 @@
       opacity: 0.9;
     }
 
-    /* NAVIGATION HEADER */
+    /* NAVIGATION HEADER WITH EMBEDDED BRAND LOGO */
     .navbar {
       background: rgba(15, 23, 42, 0.8);
       backdrop-filter: blur(12px);
@@ -146,7 +146,7 @@
       padding: 0 1.5rem;
     }
 
-    /* GEN Z HERO BANNER WITH ANIMATED IMAGE */
+    /* HERO BANNER */
     .genz-hero {
       background: rgba(30, 41, 59, 0.6);
       backdrop-filter: blur(16px);
@@ -171,10 +171,10 @@
       pointer-events: none;
     }
 
-    /* CREATIVE ANIMATED ILLUSTRATION WITH EMBEDDED TREES */
+    /* STATIC BOOK WITH EMBEDDED SUBTLY SWAYING TREE LEAVES */
     .hero-graphic-container {
-      width: 150px;
-      height: 150px;
+      width: 120px;
+      height: 120px;
       margin: 0 auto 1.2rem auto;
       position: relative;
       display: flex;
@@ -182,75 +182,31 @@
       align-items: center;
     }
 
-    .floating-book {
-      font-size: 3.5rem;
-      z-index: 2;
-      animation: floatBook 3s ease-in-out infinite;
-      filter: drop-shadow(0 0 15px rgba(16, 185, 129, 0.6));
+    .static-book-wrapper {
+      position: relative;
+      font-size: 3.8rem;
+      line-height: 1;
+      display: inline-block;
+      filter: drop-shadow(0 0 20px rgba(16, 185, 129, 0.4));
     }
 
-    .orbit-ring {
+    .embedded-tree {
       position: absolute;
-      width: 130px;
-      height: 55px;
-      border: 2px dashed rgba(236, 72, 153, 0.6);
-      border-radius: 50%;
-      animation: rotateOrbit 7s linear infinite;
-      transform: rotate(-20deg);
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 2.2rem;
+      animation: swayLeaves 3s ease-in-out infinite alternate;
+      transform-origin: bottom center;
     }
 
-    .orbit-ring-secondary {
-      position: absolute;
-      width: 140px;
-      height: 60px;
-      border: 1px dashed rgba(16, 185, 129, 0.5);
-      border-radius: 50%;
-      animation: rotateOrbitReverse 9s linear infinite;
-      transform: rotate(25deg);
-    }
-
-    .orbiting-planet {
-      position: absolute;
-      font-size: 1.2rem;
-      top: -10px;
-      left: 15px;
-      animation: pulsePlanet 2s ease-in-out infinite alternate;
-    }
-
-    .orbiting-tree-1 {
-      position: absolute;
-      font-size: 1.2rem;
-      bottom: -8px;
-      right: 20px;
-      animation: pulsePlanet 2.5s ease-in-out infinite alternate;
-    }
-
-    .orbiting-tree-2 {
-      position: absolute;
-      font-size: 1.1rem;
-      top: 5px;
-      right: 10px;
-      animation: pulsePlanet 1.8s ease-in-out infinite alternate;
-    }
-
-    @keyframes floatBook {
-      0%, 100% { transform: translateY(0px) rotate(0deg); }
-      50% { transform: translateY(-10px) rotate(-3deg); }
-    }
-
-    @keyframes rotateOrbit {
-      0% { transform: rotate(-20deg) rotateZ(0deg); }
-      100% { transform: rotate(-20deg) rotateZ(360deg); }
-    }
-
-    @keyframes rotateOrbitReverse {
-      0% { transform: rotate(25deg) rotateZ(360deg); }
-      100% { transform: rotate(25deg) rotateZ(0deg); }
-    }
-
-    @keyframes pulsePlanet {
-      0% { transform: scale(0.9); }
-      100% { transform: scale(1.2); }
+    @keyframes swayLeaves {
+      0% {
+        transform: translateX(-50%) rotate(-3deg) scale(0.98);
+      }
+      100% {
+        transform: translateX(-50%) rotate(3deg) scale(1.02);
+      }
     }
 
     .genz-tag {
@@ -339,77 +295,6 @@
     .btn-outline:hover {
       background: rgba(255, 255, 255, 0.15);
       transform: translateY(-2px);
-    }
-
-    /* BRAND LOGO SHOWCASE CARD */
-    .branding-card {
-      background: rgba(30, 41, 59, 0.7);
-      backdrop-filter: blur(12px);
-      border: 1px dashed var(--genz-purple);
-      border-radius: 20px;
-      padding: 1.75rem;
-      margin-bottom: 2.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-    }
-
-    .branding-info h3 {
-      font-size: 1.2rem;
-      font-weight: 800;
-      color: #ffffff;
-      margin-bottom: 0.4rem;
-    }
-
-    .branding-info p {
-      font-size: 0.88rem;
-      color: var(--text-muted);
-    }
-
-    .brand-preview-box {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      background: rgba(15, 23, 42, 0.8);
-      padding: 0.8rem 1.2rem;
-      border-radius: 16px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .genz-logo-mark {
-      width: 48px;
-      height: 48px;
-      background: var(--genz-gradient);
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      box-shadow: 0 4px 15px rgba(236, 72, 153, 0.4);
-    }
-
-    .logo-text-stack {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .logo-main-text {
-      font-weight: 900;
-      font-size: 1.2rem;
-      letter-spacing: -0.5px;
-      background: var(--genz-gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .logo-sub-text {
-      font-size: 0.68rem;
-      font-weight: 800;
-      color: var(--mint-green);
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
     }
 
     /* SECTION TITLES */
@@ -835,14 +720,13 @@
     </span>
   </div>
 
-  <!-- NAVIGATION HEADER WITH GEN Z BRANDING -->
+  <!-- NAVIGATION HEADER WITH GEN Z BRANDING LOGO -->
   <nav class="navbar">
     <a href="#" class="brand-logo">
       <span class="brand-badge">♻️📖</span> RE:READ
     </a>
     <ul class="nav-links">
       <li><a href="#mission">Mission</a></li>
-      <li><a href="#brandkit">GenZ Brand Kit</a></li>
       <li><a href="#dashboard" onclick="triggerCounters()">Dashboard</a></li>
       <li><a href="#shelf">Bookshelf</a></li>
       <li><a href="#activity">Activity Log</a></li>
@@ -851,19 +735,13 @@
 
   <div class="main-container">
 
-    <!-- GEN Z HERO BANNER WITH EMBEDDED TREES & PLANETS -->
+    <!-- HERO BANNER (STATIC BOOK WITH EMBEDDED SUBTLY SWAYING TREE) -->
     <div class="genz-hero">
       <div class="hero-graphic-container">
-        <!-- Inner Orbit Ring with Planet & Tree -->
-        <div class="orbit-ring">
-          <span class="orbiting-planet">🪐</span>
-          <span class="orbiting-tree-1">🌲</span>
+        <div class="static-book-wrapper">
+          📖
+          <span class="embedded-tree">🌳</span>
         </div>
-        <!-- Outer Reverse Orbit Ring with Second Tree -->
-        <div class="orbit-ring-secondary">
-          <span class="orbiting-tree-2">🌳</span>
-        </div>
-        <div class="floating-book">📖</div>
       </div>
 
       <span class="genz-tag">♻️ Pass the Book, Not the Trash</span>
@@ -876,21 +754,6 @@
       <div class="genz-actions">
         <a href="#shelf" class="btn btn-green">Explore Bookshelf 📖</a>
         <a href="#mission" class="btn btn-outline">Our Mission 🌿</a>
-      </div>
-    </div>
-
-    <!-- ENHANCEMENT 3: GEN Z STANDARD BRANDING ASSET DISPLAY -->
-    <div id="brandkit" class="branding-card">
-      <div class="branding-info">
-        <h3>⚡ RE:READ Standard Branding (Insta & LinkedIn)</h3>
-        <p>Use our standard high-contrast GenZ aesthetic: <strong>Hyper Violet + Neon Mint</strong> with sustainable recycle marks.</p>
-      </div>
-      <div class="brand-preview-box">
-        <div class="genz-logo-mark">♻️</div>
-        <div class="logo-text-stack">
-          <span class="logo-main-text">RE:READ</span>
-          <span class="logo-sub-text">COMMUNITY • NO WASTED PAGES</span>
-        </div>
       </div>
     </div>
 
@@ -956,7 +819,7 @@
           </div>
         </div>
 
-        <!-- Community Supporters (ENHANCEMENT 2: PERSISTED IN MEMORY) -->
+        <!-- Community Supporters (PERSISTED IN MEMORY) -->
         <div class="metric-card">
           <div>
             <div class="metric-head"><span>💚</span> Community Supporters</div>
@@ -991,7 +854,7 @@
       </div>
     </div>
 
-    <!-- WIDGET 3: BOOKSHELF WITH GENRE CATEGORIES & EMAIL REQUEST FORMS -->
+    <!-- WIDGET 3: BOOKSHELF WITH GENRE CATEGORIES & STREAMLINED EMAIL REQUEST FORMS -->
     <div id="shelf">
       <div class="shelf-header">
         <div>
@@ -1012,7 +875,7 @@
 
       <div class="books-grid">
 
-        <!-- ==================== EXISTING 4 CIRCULATING BOOKS ==================== -->
+        <!-- ==================== 4 CIRCULATING BOOKS ==================== -->
 
         <div class="book-card" data-status="circulating" data-genre="genre-business">
           <div>
@@ -1074,7 +937,7 @@
           </div>
         </div>
 
-        <!-- ==================== ENHANCEMENT 4: 10 NEW AVAILABLE BOOKS WITH EMAIL REQUEST ==================== -->
+        <!-- ==================== 10 AVAILABLE BOOKS WITH STREAMLINED EMAIL REQUEST ==================== -->
 
         <!-- Book a -->
         <div class="book-card" data-status="available" data-genre="genre-business">
@@ -1354,7 +1217,7 @@
 
   </div>
 
-  <!-- INTERACTIVE LOGIC & ENHANCEMENT HANDLERS -->
+  <!-- INTERACTIVE LOGIC & EVENT HANDLERS -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       // 1. DYNAMIC MATH CALCULATION (14 Books Total)
@@ -1381,7 +1244,7 @@
       localStorage.setItem("reread_visitors", visitors);
       document.getElementById("visitor-count").setAttribute("data-target", visitors);
 
-      // 3. ENHANCEMENT 2: PERSISTENT COMMUNITY SUPPORTERS LOGIC
+      // 3. PERSISTENT COMMUNITY SUPPORTERS LOGIC
       const supportBtn = document.getElementById("support-btn");
       let supporters = parseInt(localStorage.getItem("reread_supporters") || "12", 10);
       const supportDisplay = document.getElementById("support-count");
@@ -1440,7 +1303,7 @@
       });
     }
 
-    // 5. ENHANCEMENT 4 (FILTER LOGIC FOR GENRES & STATUS)
+    // 5. FILTER LOGIC FOR GENRES & STATUS
     function filterBooks(category, btnElement) {
       const cards = document.querySelectorAll('.book-card');
       const buttons = document.querySelectorAll('.filter-btn');
@@ -1462,7 +1325,7 @@
       });
     }
 
-    // 6. ENHANCEMENT 4: PRE-DRAFTED MAILTO FORM LINK GENERATOR (GMAIL & OUTLOOK)
+    // 6. STREAMLINED PRE-DRAFTED MAILTO FORM LINK GENERATOR (GMAIL & OUTLOOK)
     function requestBook(bookTitle, provider) {
       const recipient = "daanamvidya@gmail.com";
       const subject = encodeURIComponent(`[RE:READ Book Request] Claiming: ${bookTitle}`);
@@ -1475,24 +1338,18 @@ Here are my delivery and contact details:
 - Full Name: 
 - Shipping / Delivery Address: 
 - Mobile / WhatsApp Number: 
-- Preferred Reading Time (weeks): 
 
-I promise to keep the book in great condition and re-share / pass it forward to the next reader when finished!
-
-Thank you,
+Thank you!
 [Your Name]`;
 
       const encodedBody = encodeURIComponent(bodyText);
 
       let url = "";
       if (provider === 'gmail') {
-        // Universal Gmail Web/Mobile compose link
         url = `https://mail.google.com/mail/?view=cm&fs=1&to=${recipient}&su=${subject}&body=${encodedBody}`;
       } else if (provider === 'outlook') {
-        // Universal Outlook Web/Mobile compose link
         url = `https://outlook.office.com/mail/deeplink/compose?to=${recipient}&subject=${subject}&body=${encodedBody}`;
       } else {
-        // Native Mail App Fallback
         url = `mailto:${recipient}?subject=${subject}&body=${encodedBody}`;
       }
 
