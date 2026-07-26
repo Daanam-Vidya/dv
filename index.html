@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Community & Environmental Impact Dashboard</title>
+  <title>Community Book Sharing & Impact Portal</title>
   <style>
     :root {
       --primary: #2d6a4f;
@@ -14,6 +14,8 @@
       --text-dark: #212529;
       --text-muted: #6c757d;
       --border-color: #e9ecef;
+      --badge-available: #2a9d8f;
+      --badge-circulating: #e76f51;
     }
 
     * {
@@ -27,10 +29,10 @@
       background-color: var(--bg-light);
       color: var(--text-dark);
       line-height: 1.6;
-      padding-bottom: 3rem;
+      padding-bottom: 4rem;
     }
 
-    /* Top Notification Banner */
+    /* 1. TOP NOTIFICATION BADGE */
     .top-badge-banner {
       background-color: #d8f3dc;
       color: #1b4332;
@@ -60,79 +62,242 @@
       font-style: italic;
     }
 
-    /* Container */
+    /* CONTAINER & HEADINGS */
     .container {
-      max-width: 1000px;
-      margin: 2.5rem auto 0 auto;
+      max-width: 1050px;
+      margin: 2rem auto 0 auto;
       padding: 0 1.5rem;
     }
 
     .section-title {
-      font-size: 1.75rem;
+      font-size: 1.6rem;
       color: var(--primary);
       margin-bottom: 0.5rem;
+      margin-top: 2.5rem;
+    }
+
+    .section-title:first-of-type {
+      margin-top: 1rem;
     }
 
     .section-desc {
       color: var(--text-muted);
-      margin-bottom: 2rem;
-      font-size: 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
     }
 
-    /* Metric Grid */
+    /* 2. METRICS GRID */
     .metrics-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.5rem;
-      margin-bottom: 3rem;
+      gap: 1.25rem;
+      margin-bottom: 2rem;
     }
 
     .metric-card {
       background-color: var(--card-bg);
       border: 1px solid var(--border-color);
       border-radius: 12px;
-      padding: 1.5rem;
+      padding: 1.25rem;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.03);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .metric-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 12px rgba(0, 0, 0, 0.06);
     }
 
     .metric-header {
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       font-weight: 600;
       color: var(--text-dark);
-      margin-bottom: 0.75rem;
-    }
-
-    .metric-header .icon {
-      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
     }
 
     .metric-value {
-      font-size: 2.25rem;
+      font-size: 2rem;
       font-weight: 800;
       color: var(--primary);
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.5rem;
     }
 
     .metric-context {
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       color: var(--text-muted);
       border-top: 1px solid var(--border-color);
-      padding-top: 0.75rem;
+      padding-top: 0.5rem;
     }
 
-    /* UN SDG Callout Banner */
+    /* 3. GOAL & PROGRESS BAR */
+    .goal-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 2.5rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.03);
+    }
+
+    .goal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+    }
+
+    .goal-title {
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .goal-stats {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .progress-bar-bg {
+      background-color: #e9ecef;
+      border-radius: 8px;
+      height: 16px;
+      overflow: hidden;
+      margin-bottom: 0.75rem;
+    }
+
+    .progress-bar-fill {
+      background-color: var(--accent);
+      height: 100%;
+      width: 0%; /* Initial state for 0 / 25 goal */
+      transition: width 0.4s ease;
+    }
+
+    .goal-note {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* 4. BOOK SHELF & FILTERS */
+    .shelf-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .filter-buttons {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .filter-btn {
+      background-color: #e9ecef;
+      border: none;
+      padding: 0.4rem 0.9rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--text-dark);
+      transition: all 0.2s ease;
+    }
+
+    .filter-btn.active, .filter-btn:hover {
+      background-color: var(--primary);
+      color: #ffffff;
+    }
+
+    .books-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .book-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .book-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 0.25rem;
+    }
+
+    .book-author {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .book-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: auto;
+      padding-top: 0.75rem;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .badge {
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.25rem 0.6rem;
+      border-radius: 12px;
+      color: #ffffff;
+      text-transform: uppercase;
+    }
+
+    .badge-available { background-color: var(--badge-available); }
+    .badge-circulating { background-color: var(--badge-circulating); }
+
+    .readers-count {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    /* 5. CIRCULATED ACTIVITY LOG TABLE */
+    .table-container {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      overflow-x: auto;
+      margin-bottom: 2.5rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.9rem;
+    }
+
+    th, td {
+      padding: 0.85rem 1.25rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    th {
+      background-color: #f1f3f5;
+      color: var(--text-dark);
+      font-weight: 700;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* 6. GREEN CANOPY UN SDG CALLOUT */
     .sdg-card {
       background-color: #ffffff;
       border-left: 5px solid var(--accent);
@@ -146,26 +311,13 @@
 
     .sdg-card h3 {
       color: var(--primary);
-      font-size: 1.2rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      margin-bottom: 0.5rem;
+      font-size: 1.15rem;
+      margin-bottom: 0.4rem;
     }
 
     .sdg-card p {
       color: #495057;
-      font-size: 0.95rem;
-    }
-
-    /* Responsive adjustment */
-    @media (max-width: 600px) {
-      .container {
-        padding: 0 1rem;
-      }
-      .metrics-grid {
-        grid-template-columns: 1fr;
-      }
+      font-size: 0.9rem;
     }
   </style>
 </head>
@@ -181,76 +333,178 @@
   </div>
 
   <div class="container">
+    
+    <!-- SECTION 1: IMPACT METRICS DASHBOARD -->
     <h1 class="section-title">Community & Environmental Impact Dashboard</h1>
     <p class="section-desc">Track our real-time community engagement, book sharing activity, and environmental goals at a glance.</p>
 
-    <!-- METRICS GRID -->
     <div class="metrics-grid">
-      
-      <!-- Metric 1: Website Visitors -->
       <div class="metric-card">
         <div>
-          <div class="metric-header">
-            <span class="icon">👥</span> Website Visitors
-          </div>
+          <div class="metric-header"><span>👥</span> Website Visitors</div>
           <div class="metric-value" id="visitor-count">0</div>
         </div>
         <div class="metric-context">
-          Total visitors who have explored our platform to support sustainable reading. <em>Increases automatically with every visit.</em>
+          Total visitors who explored our platform. <em>Increases automatically with every visit.</em>
         </div>
       </div>
 
-      <!-- Metric 2: Community Supporters -->
       <div class="metric-card">
         <div>
-          <div class="metric-header">
-            <span class="icon">💚</span> Community Supporters
-          </div>
+          <div class="metric-header"><span>💚</span> Community Supporters</div>
           <div class="metric-value" id="support-count">0</div>
         </div>
         <div class="metric-context">
-          Readers who clicked the top badge to acknowledge our mission. <em>Increases dynamically on click (no sign-up required).</em>
+          Readers who clicked to acknowledge our mission. <em>Increases dynamically on click (no sign-up required).</em>
         </div>
       </div>
 
-      <!-- Metric 3: Books in Circulation -->
       <div class="metric-card">
         <div>
-          <div class="metric-header">
-            <span class="icon">📚</span> Books in Circulation
-          </div>
+          <div class="metric-header"><span>📚</span> Books in Circulation</div>
           <div class="metric-value">4</div>
         </div>
         <div class="metric-context">
-          Active physical books currently passing between readers in the community to extend their lifecycle.
+          Active physical books currently passing between readers in the community.
         </div>
       </div>
 
-      <!-- Metric 4: Trees Planted -->
       <div class="metric-card">
         <div>
-          <div class="metric-header">
-            <span class="icon">🌳</span> Trees Planted Goal
-          </div>
-          <div class="metric-value">0 <span style="font-size: 1.1rem; font-weight: 500; color: #6c757d;">/ 25</span></div>
+          <div class="metric-header"><span>🌳</span> Trees Planted Goal</div>
+          <div class="metric-value">0 <span style="font-size: 1rem; color: #6c757d;">/ 25</span></div>
         </div>
         <div class="metric-context">
-          Reforestation progress tied to reading milestones (Goal: Plant 1 tree per 1,000 pages read).
+          Reforestation progress based on community reading milestones (1 tree per 1,000 pages read).
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 2: REFORESTATION GOAL TRACKER -->
+    <div class="goal-card">
+      <div class="goal-header">
+        <span class="goal-title">🌱 Target Goal: Plant 25 Community Trees</span>
+        <span class="goal-stats">0 of 25 Trees Planted (0%)</span>
+      </div>
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="goal-progress"></div>
+      </div>
+      <p class="goal-note">Every 1,000 pages read and logged across our 4 community books funds 1 tree planted through verified reforestation partners.</p>
+    </div>
+
+    <!-- SECTION 3: COMMUNITY BOOKSHELF -->
+    <div class="shelf-controls">
+      <div>
+        <h2 class="section-title" style="margin: 0;">Community Bookshelf Shelf</h2>
+        <p class="section-desc" style="margin: 0;">Explore active titles currently in our community library.</p>
+      </div>
+      <div class="filter-buttons">
+        <button class="filter-btn active" onclick="filterBooks('all')">All (4)</button>
+        <button class="filter-btn" onclick="filterBooks('circulating')">In Circulation</button>
+        <button class="filter-btn" onclick="filterBooks('available')">Available</button>
+      </div>
+    </div>
+
+    <div class="books-grid" id="books-container">
+      <div class="book-card" data-status="circulating">
+        <div>
+          <div class="book-title">The Silent Patient</div>
+          <div class="book-author">by Alex Michaelides</div>
+        </div>
+        <div class="book-meta">
+          <span class="badge badge-circulating">In Circulation</span>
+          <span class="readers-count">3 Readers</span>
         </div>
       </div>
 
+      <div class="book-card" data-status="circulating">
+        <div>
+          <div class="book-title">Atomic Habits</div>
+          <div class="book-author">by James Clear</div>
+        </div>
+        <div class="book-meta">
+          <span class="badge badge-circulating">In Circulation</span>
+          <span class="readers-count">5 Readers</span>
+        </div>
+      </div>
+
+      <div class="book-card" data-status="available">
+        <div>
+          <div class="book-title">Braiding Sweetgrass</div>
+          <div class="book-author">by Robin Wall Kimmerer</div>
+        </div>
+        <div class="book-meta">
+          <span class="badge badge-available">Available</span>
+          <span class="readers-count">2 Readers</span>
+        </div>
+      </div>
+
+      <div class="book-card" data-status="circulating">
+        <div>
+          <div class="book-title">To Kill a Mockingbird</div>
+          <div class="book-author">by Harper Lee</div>
+        </div>
+        <div class="book-meta">
+          <span class="badge badge-circulating">In Circulation</span>
+          <span class="readers-count">4 Readers</span>
+        </div>
+      </div>
     </div>
 
-    <!-- GLOBAL ALIGNMENT CALLOUT -->
+    <!-- SECTION 4: RECENT CIRCULATION LOG -->
+    <h2 class="section-title">Recent Circulation Activity</h2>
+    <p class="section-desc">Live log of book handoffs and community exchanges.</p>
+
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Book Title</th>
+            <th>Last Handed To</th>
+            <th>Location</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Atomic Habits</strong></td>
+            <td>Sarah M.</td>
+            <td>Community Hub North</td>
+            <td><span class="badge badge-circulating">Reading</span></td>
+          </tr>
+          <tr>
+            <td><strong>The Silent Patient</strong></td>
+            <td>David K.</td>
+            <td>Central Library Drop Box</td>
+            <td><span class="badge badge-circulating">Reading</span></td>
+          </tr>
+          <tr>
+            <td><strong>Braiding Sweetgrass</strong></td>
+            <td>Returned to Shelf</td>
+            <td>Community Hub South</td>
+            <td><span class="badge badge-available">Ready to Borrow</span></td>
+          </tr>
+          <tr>
+            <td><strong>To Kill a Mockingbird</strong></td>
+            <td>Elena R.</td>
+            <td>East Side Exchange Box</td>
+            <td><span class="badge badge-circulating">Reading</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- SECTION 5: GREEN CANOPY PROMISE (UN SDG ALIGNMENT) -->
     <div class="sdg-card">
       <h3>🌿 The Green Canopy Promise</h3>
       <p>
         Aligned with <strong>United Nations Sustainable Development Goal 15 (Life on Land)</strong>. Every page shared and every book circulated helps reduce paper waste and supports verified reforestation projects across the globe.
       </p>
     </div>
+
   </div>
 
-  <!-- SCRIPT FOR DYNAMIC COUNTERS -->
+  <!-- JAVASCRIPT FOR INTERACTIVITY & METRICS -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       // 1. Automatic Visitor Count Logic
@@ -259,7 +513,7 @@
       localStorage.setItem("site_visitors", currentVisitors.toString());
       document.getElementById("visitor-count").textContent = currentVisitors.toLocaleString();
 
-      // 2. Community Support Click Logic
+      // 2. Community Support Click Counter Logic
       const supportBtn = document.getElementById("support-btn");
       const supportCountDisplay = document.getElementById("support-count");
 
@@ -272,13 +526,30 @@
         localStorage.setItem("community_supporters", currentSupport.toString());
         supportCountDisplay.textContent = currentSupport.toLocaleString();
 
-        // Subtle click confirmation feedback
+        // Visual click acknowledgment feedback
         supportBtn.textContent = "Thank you for supporting!";
         setTimeout(() => {
           supportBtn.textContent = "click here";
         }, 2500);
       });
     });
+
+    // 3. Bookshelf Filter Function
+    function filterBooks(filter) {
+      const cards = document.querySelectorAll('.book-card');
+      const buttons = document.querySelectorAll('.filter-btn');
+
+      buttons.forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+
+      cards.forEach(card => {
+        if (filter === 'all' || card.getAttribute('data-status') === filter) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
   </script>
 </body>
 </html>
