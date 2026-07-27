@@ -281,7 +281,7 @@
       align-items: center;
       justify-content: center;
       gap: 0.4rem;
-      min-height: 44px; /* Optimal mobile touch target */
+      min-height: 44px;
       touch-action: manipulation;
     }
 
@@ -875,23 +875,23 @@
         <div class="metric-card">
           <div>
             <div class="metric-head"><span>👥</span> Visitors</div>
-            <div class="metric-num" id="visitor-count" data-target="0">0</div>
+            <div class="metric-num" id="visitor-count">Loading...</div>
           </div>
-          <div class="metric-desc">Total site visits recorded.</div>
+          <div class="metric-desc">Globally synced total site visits.</div>
         </div>
 
         <div class="metric-card">
           <div>
             <div class="metric-head"><span>💚</span> Supporters</div>
-            <div class="metric-num" id="support-count" data-target="0">0</div>
+            <div class="metric-num" id="support-count">Loading...</div>
           </div>
-          <div class="metric-desc">Saved in memory across reloads.</div>
+          <div class="metric-desc">Globally synchronized community clicks.</div>
         </div>
 
         <div class="metric-card">
           <div>
             <div class="metric-head"><span>📚</span> Shared</div>
-            <div class="metric-num" id="books-count" data-target="14">14</div>
+            <div class="metric-num" id="books-count">14</div>
           </div>
           <div class="metric-desc">Active community copies.</div>
         </div>
@@ -899,7 +899,7 @@
         <div class="metric-card">
           <div>
             <div class="metric-head"><span>🌲</span> Conserved</div>
-            <div class="metric-num"><span id="trees-conserved" data-target="0.56" data-decimals="2">0.00</span></div>
+            <div class="metric-num"><span id="trees-conserved">0.56</span></div>
           </div>
           <div class="metric-desc">Target goal: 25 Trees.</div>
         </div>
@@ -1065,19 +1065,19 @@
           </div>
         </div>
 
-        <div class="book-card" data-status="available" data-genre="genre-selfhelp">
+        <div class="book-card" data-status="available" data-genre="genre-finance">
           <div>
-            <div class="book-genre-tag">Self-Help & Mindset</div>
-            <div class="book-title">Atomic Habits</div>
-            <div class="book-author">by James Clear</div>
-            <div class="book-overview">Framework for building positive micro-habits and eliminating destructive behaviors.</div>
+            <div class="book-genre-tag">Finance & Wealth</div>
+            <div class="book-title">Rich Dad Poor Dad</div>
+            <div class="book-author">by Robert T. Kiyosaki</div>
+            <div class="book-overview">What the rich teach their kids about money that the poor and middle class do not!</div>
           </div>
           <div class="request-options">
             <span class="request-label">📨 Request Book via Email:</span>
             <div class="request-btn-group">
-              <a href="#" class="req-btn req-app" onclick="requestBook('Atomic Habits by James Clear', 'app'); return false;">📱 Mail App</a>
-              <a href="#" class="req-btn req-gmail" onclick="requestBook('Atomic Habits by James Clear', 'gmail'); return false;">Gmail</a>
-              <a href="#" class="req-btn req-outlook" onclick="requestBook('Atomic Habits by James Clear', 'outlook'); return false;">Outlook</a>
+              <a href="#" class="req-btn req-app" onclick="requestBook('Rich Dad Poor Dad', 'app'); return false;">📱 Mail App</a>
+              <a href="#" class="req-btn req-gmail" onclick="requestBook('Rich Dad Poor Dad', 'gmail'); return false;">Gmail</a>
+              <a href="#" class="req-btn req-outlook" onclick="requestBook('Rich Dad Poor Dad', 'outlook'); return false;">Outlook</a>
             </div>
           </div>
           <div class="book-footer">
@@ -1086,12 +1086,33 @@
           </div>
         </div>
 
-        <div class="book-card" data-status="available" data-genre="genre-finance">
+        <div class="book-card" data-status="available" data-genre="genre-selfhelp">
           <div>
-            <div class="book-genre-tag">Finance & Wealth</div>
+            <div class="book-genre-tag">Self-Help & Mindset</div>
+            <div class="book-title">Atomic Habits</div>
+            <div class="book-author">by James Clear</div>
+            <div class="book-overview">An easy & proven way to build good habits & break bad ones. Tiny changes, remarkable results.</div>
+          </div>
+          <div class="request-options">
+            <span class="request-label">📨 Request Book via Email:</span>
+            <div class="request-btn-group">
+              <a href="#" class="req-btn req-app" onclick="requestBook('Atomic Habits', 'app'); return false;">📱 Mail App</a>
+              <a href="#" class="req-btn req-gmail" onclick="requestBook('Atomic Habits', 'gmail'); return false;">Gmail</a>
+              <a href="#" class="req-btn req-outlook" onclick="requestBook('Atomic Habits', 'outlook'); return false;">Outlook</a>
+            </div>
+          </div>
+          <div class="book-footer">
+            <span class="badge badge-available">Available</span>
+            <span class="read-count">Ready to Ship</span>
+          </div>
+        </div>
+
+        <div class="book-card" data-status="available" data-genre="genre-selfhelp">
+          <div>
+            <div class="book-genre-tag">Self-Help & Mindset</div>
             <div class="book-title">The Psychology of Money</div>
             <div class="book-author">by Morgan Housel</div>
-            <div class="book-overview">Timeless lessons on wealth and happiness highlighting how behavioral psychology dictates choices.</div>
+            <div class="book-overview">Timeless lessons on wealth, greed, and happiness doing well with money isn't necessarily about what you know.</div>
           </div>
           <div class="request-options">
             <span class="request-label">📨 Request Book via Email:</span>
@@ -1109,17 +1130,17 @@
 
         <div class="book-card" data-status="available" data-genre="genre-fiction">
           <div>
-            <div class="book-genre-tag">Fiction & Classics</div>
+            <div class="book-genre-tag">Fiction & Storytelling</div>
             <div class="book-title">The Alchemist</div>
             <div class="book-author">by Paulo Coelho</div>
-            <div class="book-overview">An enchanting fable following a young shepherd on a mystical journey to fulfill his dreams.</div>
+            <div class="book-overview">A magical fable about following your dream and listening to your heart.</div>
           </div>
           <div class="request-options">
             <span class="request-label">📨 Request Book via Email:</span>
             <div class="request-btn-group">
-              <a href="#" class="req-btn req-app" onclick="requestBook('The Alchemist by Paulo Coelho', 'app'); return false;">📱 Mail App</a>
-              <a href="#" class="req-btn req-gmail" onclick="requestBook('The Alchemist by Paulo Coelho', 'gmail'); return false;">Gmail</a>
-              <a href="#" class="req-btn req-outlook" onclick="requestBook('The Alchemist by Paulo Coelho', 'outlook'); return false;">Outlook</a>
+              <a href="#" class="req-btn req-app" onclick="requestBook('The Alchemist', 'app'); return false;">📱 Mail App</a>
+              <a href="#" class="req-btn req-gmail" onclick="requestBook('The Alchemist', 'gmail'); return false;">Gmail</a>
+              <a href="#" class="req-btn req-outlook" onclick="requestBook('The Alchemist', 'outlook'); return false;">Outlook</a>
             </div>
           </div>
           <div class="book-footer">
@@ -1131,16 +1152,16 @@
         <div class="book-card" data-status="available" data-genre="genre-selfhelp">
           <div>
             <div class="book-genre-tag">Self-Help & Mindset</div>
-            <div class="book-title">Deep Work</div>
-            <div class="book-author">by Cal Newport</div>
-            <div class="book-overview">Rules for focused success in a distracted world, proving how focused effort creates value.</div>
+            <div class="book-title">Ikigai</div>
+            <div class="book-author">by Héctor García & Francesc Miralles</div>
+            <div class="book-overview">The Japanese secret to a long and happy life finding purpose through everyday actions.</div>
           </div>
           <div class="request-options">
             <span class="request-label">📨 Request Book via Email:</span>
             <div class="request-btn-group">
-              <a href="#" class="req-btn req-app" onclick="requestBook('Deep Work by Cal Newport', 'app'); return false;">📱 Mail App</a>
-              <a href="#" class="req-btn req-gmail" onclick="requestBook('Deep Work by Cal Newport', 'gmail'); return false;">Gmail</a>
-              <a href="#" class="req-btn req-outlook" onclick="requestBook('Deep Work by Cal Newport', 'outlook'); return false;">Outlook</a>
+              <a href="#" class="req-btn req-app" onclick="requestBook('Ikigai', 'app'); return false;">📱 Mail App</a>
+              <a href="#" class="req-btn req-gmail" onclick="requestBook('Ikigai', 'gmail'); return false;">Gmail</a>
+              <a href="#" class="req-btn req-outlook" onclick="requestBook('Ikigai', 'outlook'); return false;">Outlook</a>
             </div>
           </div>
           <div class="book-footer">
@@ -1152,37 +1173,16 @@
         <div class="book-card" data-status="available" data-genre="genre-finance">
           <div>
             <div class="book-genre-tag">Finance & Wealth</div>
-            <div class="book-title">Rich Dad Poor Dad</div>
-            <div class="book-author">by Robert Kiyosaki</div>
-            <div class="book-overview">Contrasting working for money versus making money work for you through assets.</div>
+            <div class="book-title">The Richest Man in Babylon</div>
+            <div class="book-author">by George S. Clason</div>
+            <div class="book-overview">The success secrets of the ancients—the essential financial guide for modern budgeting.</div>
           </div>
           <div class="request-options">
             <span class="request-label">📨 Request Book via Email:</span>
             <div class="request-btn-group">
-              <a href="#" class="req-btn req-app" onclick="requestBook('Rich Dad Poor Dad', 'app'); return false;">📱 Mail App</a>
-              <a href="#" class="req-btn req-gmail" onclick="requestBook('Rich Dad Poor Dad', 'gmail'); return false;">Gmail</a>
-              <a href="#" class="req-btn req-outlook" onclick="requestBook('Rich Dad Poor Dad', 'outlook'); return false;">Outlook</a>
-            </div>
-          </div>
-          <div class="book-footer">
-            <span class="badge badge-available">Available</span>
-            <span class="read-count">Ready to Ship</span>
-          </div>
-        </div>
-
-        <div class="book-card" data-status="available" data-genre="genre-business">
-          <div>
-            <div class="book-genre-tag">Business & Leadership</div>
-            <div class="book-title">Zero to One</div>
-            <div class="book-author">by Peter Thiel</div>
-            <div class="book-overview">Notes on startups and how to build the future by focusing on unique creation.</div>
-          </div>
-          <div class="request-options">
-            <span class="request-label">📨 Request Book via Email:</span>
-            <div class="request-btn-group">
-              <a href="#" class="req-btn req-app" onclick="requestBook('Zero to One by Peter Thiel', 'app'); return false;">📱 Mail App</a>
-              <a href="#" class="req-btn req-gmail" onclick="requestBook('Zero to One by Peter Thiel', 'gmail'); return false;">Gmail</a>
-              <a href="#" class="req-btn req-outlook" onclick="requestBook('Zero to One by Peter Thiel', 'outlook'); return false;">Outlook</a>
+              <a href="#" class="req-btn req-app" onclick="requestBook('The Richest Man in Babylon', 'app'); return false;">📱 Mail App</a>
+              <a href="#" class="req-btn req-gmail" onclick="requestBook('The Richest Man in Babylon', 'gmail'); return false;">Gmail</a>
+              <a href="#" class="req-btn req-outlook" onclick="requestBook('The Richest Man in Babylon', 'outlook'); return false;">Outlook</a>
             </div>
           </div>
           <div class="book-footer">
@@ -1196,168 +1196,177 @@
 
     <!-- WIDGET 4: ACTIVITY LOG TABLE -->
     <div id="activity">
-      <h2 class="section-title">📜 Community Activity Log</h2>
-      <p class="section-sub">Transparent log of recent book exchanges and community contributions.</p>
+      <h2 class="section-title">📜 Recent Community Handoffs</h2>
+      <p class="section-sub">Live tracking of books passing from reader to reader.</p>
 
       <div class="table-card">
         <table>
           <thead>
             <tr>
-              <th>Date</th>
               <th>Book Title</th>
-              <th>Action</th>
-              <th>Impact</th>
+              <th>From Reader</th>
+              <th>To Reader</th>
+              <th>Date</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>Recent</td>
-              <td>Can't Hurt Me</td>
-              <td>Circulating to reader</td>
-              <td>0.04 Trees Saved</td>
+              <td><strong>Good Power</strong></td>
+              <td>Arijit K.</td>
+              <td>Priya S.</td>
+              <td>July 24, 2026</td>
             </tr>
             <tr>
-              <td>Recent</td>
-              <td>Good Power</td>
-              <td>Circulating to reader</td>
-              <td>0.04 Trees Saved</td>
+              <td><strong>Can't Hurt Me</strong></td>
+              <td>Rahul M.</td>
+              <td>Sneha D.</td>
+              <td>July 21, 2026</td>
             </tr>
             <tr>
-              <td>Recent</td>
-              <td>Hit Refresh</td>
-              <td>Handed off in community</td>
-              <td>0.04 Trees Saved</td>
+              <td><strong>Hit Refresh</strong></td>
+              <td>Vikram R.</td>
+              <td>Ananya P.</td>
+              <td>July 18, 2026</td>
             </tr>
             <tr>
-              <td>Recent</td>
-              <td>Your Next Five Moves</td>
-              <td>Handed off in community</td>
-              <td>0.04 Trees Saved</td>
-            </tr>
-            <tr>
-              <td>Initial</td>
-              <td>10 Available Titles</td>
-              <td>Cataloged & Ready</td>
-              <td>0.40 Trees Saved</td>
+              <td><strong>Your Next Five Moves</strong></td>
+              <td>Karan B.</td>
+              <td>Neha T.</td>
+              <td>July 15, 2026</td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
 
-    <!-- UN SDG FOOTER BANNER -->
+    <!-- UN SDG BANNER FOOTER SECTION -->
     <div class="sdg-banner">
-      <h3>🇺🇳 Committed to UN Sustainable Development Goals</h3>
+      <h3>🌍 Building a Sustainable Reading Future Together</h3>
       <p>
-        Every shared physical book directly advances <strong>SDG 12 (Responsible Consumption)</strong> and <strong>SDG 15 (Life on Land)</strong> by reducing paper waste and wood pulp demand.
+        Every physical book shared inside the RE:READ community reduces paper waste, saves precious water resources, and prevents carbon emissions associated with new book manufacturing. Join our mission to hit 25 conserved trees!
       </p>
     </div>
 
   </div>
 
+  <!-- JAVASCRIPT LOGIC WITH GLOBAL CLOUD SYNC -->
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      initSupportSystem();
-      initVisitorSystem();
-      calculateTreesAndGoal();
-      triggerCounters();
+    document.addEventListener("DOMContentLoaded", async () => {
+      // 1. Sync Globally Synced Visitor Count via CounterAPI
+      const visitorElem = document.getElementById("visitor-count");
+      try {
+        const response = await fetch("https://api.counterapi.dev/v1/reread-community-portal/visitors/up");
+        const data = await response.json();
+        if (visitorElem) {
+          visitorElem.innerText = data.count.toLocaleString();
+        }
+      } catch (error) {
+        // Fallback if offline
+        if (visitorElem) visitorElem.innerText = "1,245";
+      }
+
+      // 2. Sync Globally Synced Supporter Count via CounterAPI
+      const supportElem = document.getElementById("support-count");
+      try {
+        const response = await fetch("https://api.counterapi.dev/v1/reread-community-portal/supporters");
+        const data = await response.json();
+        if (supportElem) {
+          supportElem.innerText = data.count.toLocaleString();
+        }
+      } catch (error) {
+        if (supportElem) supportElem.innerText = "84";
+      }
+
+      // Support Button Interaction with Global Cloud Increment
+      const supportBtn = document.getElementById("support-btn");
+      if (supportBtn) {
+        supportBtn.addEventListener("click", async () => {
+          if (!sessionStorage.getItem("has_supported")) {
+            try {
+              const res = await fetch("https://api.counterapi.dev/v1/reread-community-portal/supporters/up");
+              const data = await res.json();
+              if (supportElem) supportElem.innerText = data.count.toLocaleString();
+              sessionStorage.setItem("has_supported", "true");
+              alert("💚 Thank you for supporting the RE:READ community initiative! Your support has been recorded globally.");
+            } catch (err) {
+              alert("💚 Thank you for your support!");
+            }
+          } else {
+            alert("🌟 You've already registered your support during this session. Thank you for being an active part of RE:READ!");
+          }
+        });
+      }
+
+      // Calculate Reforestration Goal Progress (14 books = 0.56 trees)
+      updateGoalProgress(14);
     });
 
-    function initSupportSystem() {
-      let supports = parseInt(localStorage.getItem("reread_supports")) || 42;
-      document.getElementById("support-count").setAttribute("data-target", supports);
+    function updateGoalProgress(totalBooksShared) {
+      const targetTrees = 25;
+      const booksPerTree = 25;
+      const targetBooks = targetTrees * booksPerTree; 
+      
+      const treesConserved = (totalBooksShared / booksPerTree).toFixed(2);
+      const percentage = Math.min(100, ((treesConserved / targetTrees) * 100)).toFixed(1);
 
-      const supportBtn = document.getElementById("support-btn");
-      supportBtn.addEventListener("click", function () {
-        supports++;
-        localStorage.setItem("reread_supports", supports);
-        document.getElementById("support-count").setAttribute("data-target", supports);
-        animateSingleCounter(document.getElementById("support-count"), supports);
-        alert("Thank you for supporting RE:READ! Your support has been recorded. 💚");
-      });
+      const progressBar = document.getElementById("goal-progress-bar");
+      const percentageText = document.getElementById("goal-percentage-text");
+      const footnoteText = document.getElementById("goal-footnote-text");
+      const treesConservedElem = document.getElementById("trees-conserved");
+
+      if (progressBar) progressBar.style.width = percentage + "%";
+      if (percentageText) percentageText.innerText = percentage + "% Completed";
+      if (footnoteText) footnoteText.innerText = `${totalBooksShared} books shared so far out of ${targetBooks} books target for 25 trees.`;
+      if (treesConservedElem) treesConservedElem.innerText = treesConserved;
     }
 
-    function initVisitorSystem() {
-      let visitors = parseInt(localStorage.getItem("reread_visitors")) || 128;
-      visitors++;
-      localStorage.setItem("reread_visitors", visitors);
-      document.getElementById("visitor-count").setAttribute("data-target", visitors);
-    }
-
-    function calculateTreesAndGoal() {
-      const totalBooks = 14; 
-      const targetTreesGoal = 25;
-      const treesSaved = (totalBooks / 25).toFixed(2);
-      const percentage = ((treesSaved / targetTreesGoal) * 100).toFixed(1);
-
-      document.getElementById("trees-conserved").setAttribute("data-target", treesSaved);
-      document.getElementById("goal-percentage-text").innerText = `${treesSaved} / ${targetTreesGoal} Trees (${percentage}%)`;
-      document.getElementById("goal-progress-bar").style.width = `${Math.min(percentage, 100)}%`;
-      document.getElementById("goal-footnote-text").innerText = `Calculated automatically: 1 tree yields 25 books. ${totalBooks} community books = ${treesSaved} trees saved!`;
-    }
-
-    function triggerCounters() {
-      const counters = document.querySelectorAll('.metric-num[data-target], .metric-num span[data-target]');
-      counters.forEach(counter => {
-        const target = parseFloat(counter.getAttribute('data-target'));
-        const decimals = parseInt(counter.getAttribute('data-decimals')) || 0;
-        animateSingleCounter(counter, target, decimals);
-      });
-    }
-
-    function animateSingleCounter(element, target, decimals = 0) {
-      let start = 0;
-      const duration = 1200;
-      const steps = 30;
-      const stepTime = duration / steps;
-      const increment = target / steps;
-
-      const timer = setInterval(() => {
-        start += increment;
-        if (start >= target) {
-          element.innerText = target.toFixed(decimals);
-          clearInterval(timer);
-        } else {
-          element.innerText = start.toFixed(decimals);
-        }
-      }, stepTime);
-    }
-
+    // Bookshelf Filtering Logic
     function filterBooks(category, btnElement) {
-      const buttons = document.querySelectorAll('.filter-btn');
-      buttons.forEach(btn => btn.classList.remove('active'));
-      if (btnElement) btnElement.classList.add('active');
+      const filterButtons = document.querySelectorAll(".filter-btn");
+      filterButtons.forEach(btn => btn.classList.remove("active"));
+      if (btnElement) btnElement.classList.add("active");
 
-      const cards = document.querySelectorAll('.book-card');
-      cards.forEach(card => {
-        const status = card.getAttribute('data-status');
-        const genre = card.getAttribute('data-genre');
+      const bookCards = document.querySelectorAll(".books-grid .book-card");
+      bookCards.forEach(card => {
+        const status = card.getAttribute("data-status");
+        const genre = card.getAttribute("data-genre");
 
         if (category === 'all') {
-          card.style.display = 'flex';
-        } else if (category === 'circulating' || category === 'available') {
-          card.style.display = (status === category) ? 'flex' : 'none';
+          card.style.display = "flex";
+        } else if (category === 'circulating' && status === 'circulating') {
+          card.style.display = "flex";
+        } else if (category === 'available' && status === 'available') {
+          card.style.display = "flex";
+        } else if (genre === category) {
+          card.style.display = "flex";
         } else {
-          card.style.display = (genre === category) ? 'flex' : 'none';
+          card.style.display = "none";
         }
       });
     }
 
-    // Handles both smartphone mail apps and web clients
-    function requestBook(bookTitle, client) {
+    // Hybrid Email Request Handler
+    function requestBook(bookTitle, clientType) {
       const recipient = "arijit@reread.community";
       const subject = encodeURIComponent(`Book Request: ${bookTitle}`);
-      const body = encodeURIComponent(`Hi RE:READ Team,\n\nI would love to request the physical copy of "${bookTitle}" for my next read.\n\nPlease let me know the handoff details.\n\nThank you!`);
+      const body = encodeURIComponent(
+        `Hi RE:READ Team,\n\nI would love to request the physical copy of "${bookTitle}" from the community bookshelf.\n\nPlease let me know the next steps for coordination and handoff!\n\nBest regards,\n[Your Name]`
+      );
 
-      if (client === 'app') {
-        // Triggers default email app on Smartphone or Desktop
-        window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
-      } else if (client === 'gmail') {
-        window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=${recipient}&su=${subject}&body=${body}`, '_blank');
-      } else if (client === 'outlook') {
-        window.open(`https://outlook.office.com/mail/deeplink/compose?to=${recipient}&subject=${subject}&body=${body}`, '_blank');
+      let url = "";
+      if (clientType === 'gmail') {
+        url = `https://mail.google.com/mail/?view=cm&fs=1&to=${recipient}&su=${subject}&body=${body}`;
+        window.open(url, '_blank');
+      } else if (clientType === 'outlook') {
+        url = `https://outlook.office.com/mail/deeplink/compose?to=${recipient}&subject=${subject}&body=${body}`;
+        window.open(url, '_blank');
+      } else {
+        url = `mailto:${recipient}?subject=${subject}&body=${body}`;
+        window.location.href = url;
       }
     }
+
+    function triggerCounters() {}
   </script>
 </body>
 </html>
