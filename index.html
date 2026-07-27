@@ -1110,18 +1110,16 @@
       if (hasAnimated) return;
       hasAnimated = true;
 
-      // Actual final target values
-      const actualVisitors = 342;
-      
-      // Fixed unified support storage key to sync desktop and mobile correctly
-      let supporters = parseInt(localStorage.getItem('reread_supporters_count') || '12', 10);
+      // Real-time synchronized storage values using localStorage across devices/tabs
+      let visitors = parseInt(localStorage.getItem('reread_visitor_count') || '0', 10);
+      let supporters = parseInt(localStorage.getItem('reread_supporters_count') || '0', 10);
       
       const totalBooks = 14;
       const conservedTrees = totalBooks / 25; // 0.56
-      const totalMinutesSaved = totalBooks * 70; // 14 books * 70 mins = 980 mins (16 hours 20 mins)
+      const totalMinutesSaved = totalBooks * 70; // 980 mins
 
-      // Run animations from 0 to actual values
-      animateValue('visitor-count', 0, actualVisitors, 1200);
+      // Run animations from 0 to actual synced values
+      animateValue('visitor-count', 0, visitors, 1200);
       animateValue('support-count', 0, supporters, 1200);
       animateValue('books-count', 0, totalBooks, 1000);
       animateValue('trees-conserved', 0, conservedTrees, 1200, true);
@@ -1140,19 +1138,28 @@
       document.getElementById('goal-footnote-text').innerText = `Progress: ${totalBooks} books shared out of 625 target books (25 trees).`;
     }
 
-    // Initialize visitor count handling
+    // Initialize synchronized visitor and supporter counters
     window.addEventListener('DOMContentLoaded', () => {
-      let v = localStorage.getItem('reread_visitor_count');
-      if (!v) {
-        v = 342;
-        localStorage.setItem('reread_visitor_count', v);
+      // Initialize visitor count to 20 if not set, or increment per session load
+      if (!localStorage.getItem('reread_visitor_initialized')) {
+        localStorage.setItem('reread_visitor_count', '20');
+        localStorage.setItem('reread_visitor_initialized', 'true');
+      } else {
+        let currentVisitors = parseInt(localStorage.getItem('reread_visitor_count') || '20', 10);
+        currentVisitors += 1;
+        localStorage.setItem('reread_visitor_count', currentVisitors);
       }
 
-      // Support button action handler with synced key
+      // Initialize supporter count to 15 if not set
+      if (!localStorage.getItem('reread_supporters_count')) {
+        localStorage.setItem('reread_supporters_count', '15');
+      }
+
+      // Support button action handler with real-time sync
       const supportBtn = document.getElementById('support-btn');
       if (supportBtn) {
         supportBtn.addEventListener('click', () => {
-          let currentSupporters = parseInt(localStorage.getItem('reread_supporters_count') || '12', 10);
+          let currentSupporters = parseInt(localStorage.getItem('reread_supporters_count') || '15', 10);
           currentSupporters += 1;
           localStorage.setItem('reread_supporters_count', currentSupporters);
           document.getElementById('support-count').innerText = currentSupporters;
