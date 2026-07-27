@@ -875,7 +875,7 @@
         <div class="metric-card">
           <div>
             <div class="metric-head"><span>👥</span> Visitors</div>
-            <div class="metric-num" id="visitor-count">0</div>
+            <div class="metric-num" id="visitor-count">20</div>
           </div>
           <div class="metric-desc">Globally synced total site visits.</div>
         </div>
@@ -883,7 +883,7 @@
         <div class="metric-card">
           <div>
             <div class="metric-head"><span>💚</span> Supporters</div>
-            <div class="metric-num" id="support-count">0</div>
+            <div class="metric-num" id="support-count">15</div>
           </div>
           <div class="metric-desc">Globally synchronized community clicks.</div>
         </div>
@@ -891,7 +891,7 @@
         <div class="metric-card">
           <div>
             <div class="metric-head"><span>📚</span> Shared</div>
-            <div class="metric-num" id="books-count">0</div>
+            <div class="metric-num" id="books-count">14</div>
           </div>
           <div class="metric-desc">Active community copies.</div>
         </div>
@@ -899,7 +899,7 @@
         <div class="metric-card">
           <div>
             <div class="metric-head"><span>🌲</span> Conserved</div>
-            <div class="metric-num"><span id="trees-conserved">0.00</span></div>
+            <div class="metric-num"><span id="trees-conserved">0.56</span></div>
           </div>
           <div class="metric-desc">Target goal: 25 Trees.</div>
         </div>
@@ -907,7 +907,7 @@
         <div class="metric-card">
           <div>
             <div class="metric-head"><span>⏳</span> Exposure Saved</div>
-            <div class="metric-num" id="exposure-count" style="font-size: 1.4rem;">0h 0m</div>
+            <div class="metric-num" id="exposure-count" style="font-size: 1.4rem;">16h 20m</div>
           </div>
           <div class="metric-desc">1h 10m detox saved per book.</div>
         </div>
@@ -1062,7 +1062,7 @@
             <div class="request-btn-group">
               <a href="#" class="req-btn req-app" onclick="requestBook('Nature Cure for Children', 'app'); return false;">📱 Mail App</a>
               <a href="#" class="req-btn req-gmail" onclick="requestBook('Nature Cure for Children', 'gmail'); return false;">Gmail</a>
-              <a href="#" class="req-btn req-outlook" onclick="requestBook('Nature Cure for Children', 'outlook'); return false;">Outlook</a>
+              <a href="#" class="req-btn req-outlook" onclick="requestBook('Nature Cure for Children', 'outlook'); return false;">Outlook2</a>
             </div>
           </div>
           <div class="book-footer">
@@ -1077,6 +1077,41 @@
 
   <script>
     let hasAnimated = false;
+
+    // Direct UI updates without zero-start animation resetting
+    function updateMetricsDisplay() {
+      const visitors = parseInt(localStorage.getItem('reread_visitor_count') || '20', 10);
+      const supporters = parseInt(localStorage.getItem('reread_supporters_count') || '15', 10);
+      const totalBooks = 14;
+      const conservedTrees = totalBooks / 25;
+      const totalMinutesSaved = totalBooks * 70;
+
+      const vEl = document.getElementById('visitor-count');
+      const sEl = document.getElementById('support-count');
+      const bEl = document.getElementById('books-count');
+      const tEl = document.getElementById('trees-conserved');
+      const eEl = document.getElementById('exposure-count');
+
+      if (vEl) vEl.innerText = visitors;
+      if (sEl) sEl.innerText = supporters;
+      if (bEl) bEl.innerText = totalBooks;
+      if (tEl) tEl.innerText = conservedTrees.toFixed(2);
+      
+      if (eEl) {
+        const hrs = Math.floor(totalMinutesSaved / 60);
+        const remMins = totalMinutesSaved % 60;
+        eEl.innerText = `${hrs}h ${remMins}m`;
+      }
+
+      // Update goal percentage bar
+      const pText = document.getElementById('goal-percentage-text');
+      const pBar = document.getElementById('goal-progress-bar');
+      const fText = document.getElementById('goal-footnote-text');
+
+      if (pText) pText.innerText = `${conservedTrees.toFixed(2)} / 25 Trees (${(conservedTrees/25*100).toFixed(1)}%)`;
+      if (pBar) pBar.style.width = `${Math.min((conservedTrees/25)*100, 100)}%`;
+      if (fText) fText.innerText = `Progress: ${totalBooks} books shared out of 625 target books (25 trees).`;
+    }
 
     function animateValue(id, start, end, duration, isFloat = false, formatter = null) {
       const obj = document.getElementById(id);
@@ -1110,15 +1145,12 @@
       if (hasAnimated) return;
       hasAnimated = true;
 
-      // Real-time synchronized storage values using localStorage across devices/tabs
-      let visitors = parseInt(localStorage.getItem('reread_visitor_count') || '0', 10);
-      let supporters = parseInt(localStorage.getItem('reread_supporters_count') || '0', 10);
-      
+      const visitors = parseInt(localStorage.getItem('reread_visitor_count') || '20', 10);
+      const supporters = parseInt(localStorage.getItem('reread_supporters_count') || '15', 10);
       const totalBooks = 14;
-      const conservedTrees = totalBooks / 25; // 0.56
-      const totalMinutesSaved = totalBooks * 70; // 980 mins
+      const conservedTrees = totalBooks / 25;
+      const totalMinutesSaved = totalBooks * 70;
 
-      // Run animations from 0 to actual synced values
       animateValue('visitor-count', 0, visitors, 1200);
       animateValue('support-count', 0, supporters, 1200);
       animateValue('books-count', 0, totalBooks, 1000);
@@ -1131,43 +1163,55 @@
         return `${hrs}h ${remMins}m`;
       });
 
-      // Animate progress bar
       const percentage = (conservedTrees / 25) * 100;
       document.getElementById('goal-percentage-text').innerText = `${conservedTrees.toFixed(2)} / 25 Trees (${(conservedTrees/25*100).toFixed(1)}%)`;
       document.getElementById('goal-progress-bar').style.width = `${Math.min((conservedTrees/25)*100, 100)}%`;
       document.getElementById('goal-footnote-text').innerText = `Progress: ${totalBooks} books shared out of 625 target books (25 trees).`;
     }
 
-    // Initialize synchronized visitor and supporter counters
+    // Initialize counters and sync on DOM ready and window focus/storage events
     window.addEventListener('DOMContentLoaded', () => {
-      // Initialize visitor count to 20 if not set, or increment per session load
-      if (!localStorage.getItem('reread_visitor_initialized')) {
+      // Setup visitor count baseline and session check
+      if (!localStorage.getItem('reread_visitor_count')) {
         localStorage.setItem('reread_visitor_count', '20');
-        localStorage.setItem('reread_visitor_initialized', 'true');
-      } else {
+      }
+      
+      // Increment visitor count per device visit session (using sessionStorage so each tab/visit counts uniquely)
+      if (!sessionStorage.getItem('reread_visit_counted')) {
+        sessionStorage.setItem('reread_visit_counted', 'true');
         let currentVisitors = parseInt(localStorage.getItem('reread_visitor_count') || '20', 10);
         currentVisitors += 1;
         localStorage.setItem('reread_visitor_count', currentVisitors);
       }
 
-      // Initialize supporter count to 15 if not set
+      // Setup supporter count baseline
       if (!localStorage.getItem('reread_supporters_count')) {
         localStorage.setItem('reread_supporters_count', '15');
       }
 
-      // Support button action handler with real-time sync
+      // Immediately render correct numbers to avoid empty or 0 display gaps
+      updateMetricsDisplay();
+
+      // Support button handler
       const supportBtn = document.getElementById('support-btn');
       if (supportBtn) {
         supportBtn.addEventListener('click', () => {
           let currentSupporters = parseInt(localStorage.getItem('reread_supporters_count') || '15', 10);
           currentSupporters += 1;
           localStorage.setItem('reread_supporters_count', currentSupporters);
-          document.getElementById('support-count').innerText = currentSupporters;
+          updateMetricsDisplay();
           alert('❤️ Thank you so much for supporting the RE:READ community initiative!');
         });
       }
 
-      // Intersection Observer to trigger counter when scrolling into dashboard
+      // Listen to storage changes across tabs/windows (local device sync)
+      window.addEventListener('storage', (event) => {
+        if (event.key === 'reread_visitor_count' || event.key === 'reread_supporters_count') {
+          updateMetricsDisplay();
+        }
+      });
+
+      // Intersection Observer for animation trigger
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
