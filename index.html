@@ -1035,8 +1035,8 @@
       return val !== null ? parseInt(val, 10) : 15;
     }
 
-    // Smooth counting up animation loop from 0 to actual value
-    function animateValue(elementId, start, end, duration, formatter) {
+    // Smooth counting up animation loop from 0 to actual value (Supports formatted string values like "980h 0m")
+    function animateValue(elementId, startNum, endNum, duration, formatFn) {
       const obj = document.getElementById(elementId);
       if (!obj) return;
       
@@ -1044,26 +1044,27 @@
       const step = (timestamp) => {
         if (!startTimestamp) startTimestamp = timestamp;
         const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-        const currentVal = progress * (end - start) + start;
+        const currentVal = progress * (endNum - startNum) + startNum;
         
-        obj.innerText = formatter ? formatter(currentVal) : Math.floor(currentVal);
+        obj.innerText = formatFn ? formatFn(currentVal) : Math.floor(currentVal);
         
         if (progress < 1) {
           window.requestAnimationFrame(step);
         } else {
-          obj.innerText = formatter ? formatter(end) : end;
+          obj.innerText = formatFn ? formatFn(endNum) : endNum;
         }
       };
       window.requestAnimationFrame(step);
     }
 
-    // Direct render/animate function
+    // Direct render/animate function covering all metrics uniformly
     function updateMetricsDisplay(animate = true) {
       const visitors = getStoredVisitors();
       const supporters = getStoredSupporters();
       const totalBooks = 14;
       const conservedTrees = totalBooks / 25;
       const totalMinutesSaved = totalBooks * 70;
+      const totalHoursSaved = totalMinutesSaved / 60; // used for smooth numeric animation
 
       if (animate) {
         animateValue('visitor-count', 0, visitors, 600);
@@ -1071,12 +1072,12 @@
         animateValue('books-count', 0, totalBooks, 600);
         animateValue('trees-conserved', 0, conservedTrees, 600, (val) => val.toFixed(2));
         
-        const eEl = document.getElementById('exposure-count');
-        if (eEl) {
-          const hrs = Math.floor(totalMinutesSaved / 60);
-          const remMins = totalMinutesSaved % 60;
-          eEl.innerText = `${hrs}h ${remMins}m`;
-        }
+        animateValue('exposure-count', 0, totalHoursSaved, 600, (val) => {
+          const totalMins = Math.round(val * 60);
+          const hrs = Math.floor(totalMins / 60);
+          const remMins = totalMins % 60;
+          return `${hrs}h ${remMins}m`;
+        });
       } else {
         const vEl = document.getElementById('visitor-count');
         const sEl = document.getElementById('support-count');
@@ -1114,7 +1115,6 @@
       const dashElement = document.getElementById('dashboard');
       if (dashElement) {
         dashElement.scrollIntoView({ behavior: 'smooth' });
-        // Trigger counting animation precisely when dashboard is clicked/navigated to
         setTimeout(() => {
           updateMetricsDisplay(true);
         }, 150);
@@ -1136,7 +1136,6 @@
         localStorage.setItem('reread_visitor_count', updatedVisitors);
       }
 
-      // Initial render without animation on fast load, or short animation
       updateMetricsDisplay(false);
 
       const supportBtn = document.getElementById('support-btn');
