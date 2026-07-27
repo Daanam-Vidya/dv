@@ -824,7 +824,7 @@
         <div class="metric-card" onclick="forceRefreshMetrics()">
           <div>
             <div class="metric-head"><span>👥</span> Visitors</div>
-            <div class="metric-num" id="visitor-count">20</div>
+            <div class="metric-num" id="visitor-count">0</div>
           </div>
           <div class="metric-desc">Globally synced total site visits.</div>
         </div>
@@ -832,7 +832,7 @@
         <div class="metric-card" onclick="forceRefreshMetrics()">
           <div>
             <div class="metric-head"><span>💚</span> Supporters</div>
-            <div class="metric-num" id="support-count">15</div>
+            <div class="metric-num" id="support-count">0</div>
           </div>
           <div class="metric-desc">Globally synchronized community clicks.</div>
         </div>
@@ -840,7 +840,7 @@
         <div class="metric-card" onclick="forceRefreshMetrics()">
           <div>
             <div class="metric-head"><span>📚</span> Shared</div>
-            <div class="metric-num" id="books-count">14</div>
+            <div class="metric-num" id="books-count">0</div>
           </div>
           <div class="metric-desc">Active community copies.</div>
         </div>
@@ -848,17 +848,17 @@
         <div class="metric-card" onclick="forceRefreshMetrics()">
           <div>
             <div class="metric-head"><span>🌲</span> Trees conserved</div>
-            <div class="metric-num"><span id="trees-conserved">0.56</span></div>
+            <div class="metric-num"><span id="trees-conserved">0.00</span></div>
           </div>
           <div class="metric-desc">Target goal: 25 Trees.</div>
         </div>
 
         <div class="metric-card" onclick="forceRefreshMetrics()">
           <div>
-            <div class="metric-head"><span>⏳</span> Exposure Saved</div>
-            <div class="metric-num" id="exposure-count" style="font-size: 1.4rem;">16h 20m</div>
+            <div class="metric-head"><span>📵</span> Digital detox hours</div>
+            <div class="metric-num" id="exposure-count" style="font-size: 1.4rem;">0h 0m</div>
           </div>
-          <div class="metric-desc">1h 10m detox saved per book.</div>
+          <div class="metric-desc">Screen-free hours reclaimed.</div>
         </div>
       </div>
     </div>
@@ -1025,7 +1025,6 @@
   </div>
 
   <script>
-    // Universal robust state getters
     function getStoredVisitors() {
       const val = localStorage.getItem('reread_visitor_count');
       return val !== null ? parseInt(val, 10) : 20;
@@ -1036,29 +1035,64 @@
       return val !== null ? parseInt(val, 10) : 15;
     }
 
-    // Direct, immediate rendering function to populate numbers instantly without locking or zero-delays
-    function updateMetricsDisplay() {
+    // Smooth counting up animation loop from 0 to actual value
+    function animateValue(elementId, start, end, duration, formatter) {
+      const obj = document.getElementById(elementId);
+      if (!obj) return;
+      
+      let startTimestamp = null;
+      const step = (timestamp) => {
+        if (!startTimestamp) startTimestamp = timestamp;
+        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+        const currentVal = progress * (end - start) + start;
+        
+        obj.innerText = formatter ? formatter(currentVal) : Math.floor(currentVal);
+        
+        if (progress < 1) {
+          window.requestAnimationFrame(step);
+        } else {
+          obj.innerText = formatter ? formatter(end) : end;
+        }
+      };
+      window.requestAnimationFrame(step);
+    }
+
+    // Direct render/animate function
+    function updateMetricsDisplay(animate = true) {
       const visitors = getStoredVisitors();
       const supporters = getStoredSupporters();
       const totalBooks = 14;
       const conservedTrees = totalBooks / 25;
       const totalMinutesSaved = totalBooks * 70;
 
-      const vEl = document.getElementById('visitor-count');
-      const sEl = document.getElementById('support-count');
-      const bEl = document.getElementById('books-count');
-      const tEl = document.getElementById('trees-conserved');
-      const eEl = document.getElementById('exposure-count');
+      if (animate) {
+        animateValue('visitor-count', 0, visitors, 600);
+        animateValue('support-count', 0, supporters, 600);
+        animateValue('books-count', 0, totalBooks, 600);
+        animateValue('trees-conserved', 0, conservedTrees, 600, (val) => val.toFixed(2));
+        
+        const eEl = document.getElementById('exposure-count');
+        if (eEl) {
+          const hrs = Math.floor(totalMinutesSaved / 60);
+          const remMins = totalMinutesSaved % 60;
+          eEl.innerText = `${hrs}h ${remMins}m`;
+        }
+      } else {
+        const vEl = document.getElementById('visitor-count');
+        const sEl = document.getElementById('support-count');
+        const bEl = document.getElementById('books-count');
+        const tEl = document.getElementById('trees-conserved');
+        const eEl = document.getElementById('exposure-count');
 
-      if (vEl) vEl.innerText = visitors;
-      if (sEl) sEl.innerText = supporters;
-      if (bEl) bEl.innerText = totalBooks;
-      if (tEl) tEl.innerText = conservedTrees.toFixed(2);
-      
-      if (eEl) {
-        const hrs = Math.floor(totalMinutesSaved / 60);
-        const remMins = totalMinutesSaved % 60;
-        eEl.innerText = `${hrs}h ${remMins}m`;
+        if (vEl) vEl.innerText = visitors;
+        if (sEl) sEl.innerText = supporters;
+        if (bEl) bEl.innerText = totalBooks;
+        if (tEl) tEl.innerText = conservedTrees.toFixed(2);
+        if (eEl) {
+          const hrs = Math.floor(totalMinutesSaved / 60);
+          const remMins = totalMinutesSaved % 60;
+          eEl.innerText = `${hrs}h ${remMins}m`;
+        }
       }
 
       // Update goal percentage bar & text
@@ -1071,23 +1105,24 @@
       if (fText) fText.innerText = `Progress: ${totalBooks} books shared out of 625 target books (25 trees).`;
     }
 
-    // Interactive helper when clicking dashboard header or metric cards
     function forceRefreshMetrics() {
-      updateMetricsDisplay();
+      updateMetricsDisplay(true);
     }
 
     function handleDashboardNav(event) {
       event.preventDefault();
-      updateMetricsDisplay();
       const dashElement = document.getElementById('dashboard');
       if (dashElement) {
         dashElement.scrollIntoView({ behavior: 'smooth' });
+        // Trigger counting animation precisely when dashboard is clicked/navigated to
+        setTimeout(() => {
+          updateMetricsDisplay(true);
+        }, 150);
       }
     }
 
     // Initialization on page load
     window.addEventListener('DOMContentLoaded', () => {
-      // Initialize keys if missing
       if (localStorage.getItem('reread_visitor_count') === null) {
         localStorage.setItem('reread_visitor_count', '20');
       }
@@ -1095,47 +1130,39 @@
         localStorage.setItem('reread_supporters_count', '15');
       }
 
-      // Increment visitor per session
       if (!sessionStorage.getItem('reread_visit_counted')) {
         sessionStorage.setItem('reread_visit_counted', 'true');
         const updatedVisitors = getStoredVisitors() + 1;
         localStorage.setItem('reread_visitor_count', updatedVisitors);
       }
 
-      // Run immediate display update
-      updateMetricsDisplay();
+      // Initial render without animation on fast load, or short animation
+      updateMetricsDisplay(false);
 
-      // Support button handler
       const supportBtn = document.getElementById('support-btn');
       if (supportBtn) {
         supportBtn.addEventListener('click', () => {
           const newSupporters = getStoredSupporters() + 1;
           localStorage.setItem('reread_supporters_count', newSupporters);
-          updateMetricsDisplay();
+          updateMetricsDisplay(true);
           alert('❤️ Thank you so much for supporting the RE:READ community initiative!');
         });
       }
 
-      // Sync across browser tabs/windows
       window.addEventListener('storage', (event) => {
         if (event.key === 'reread_visitor_count' || event.key === 'reread_supporters_count') {
-          updateMetricsDisplay();
+          updateMetricsDisplay(false);
         }
       });
 
-      // Polling interval to auto-sync values if local storage changes
-      setInterval(() => {
-        updateMetricsDisplay();
-      }, 1000);
-
-      // Intersection Observer to update display automatically when scrolled into view
+      // Intersection Observer triggers counting animation every time the dashboard scrolls into view
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
-            updateMetricsDisplay();
+            updateMetricsDisplay(true);
           }
         });
-      }, { threshold: 0.1 });
+      }, { threshold: 0.2 });
 
       const dashElement = document.getElementById('dashboard');
       if (dashElement) {
